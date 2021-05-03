@@ -1,4 +1,4 @@
-package net.scanner.entity;
+package net.scanner.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

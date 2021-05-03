@@ -1,6 +1,6 @@
 package net.scanner.service;
 
-import net.scanner.entity.Record;
+import net.scanner.model.Record;
 import net.scanner.repository.RecordRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
