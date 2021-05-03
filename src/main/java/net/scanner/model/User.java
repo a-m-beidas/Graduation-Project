@@ -1,12 +1,10 @@
 package net.scanner.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,8 +20,33 @@ public class User {
      */
     private int databaseToken;
 
+    public User() {
+
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
+
+    public int getDatabaseToken() {
+        return databaseToken;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

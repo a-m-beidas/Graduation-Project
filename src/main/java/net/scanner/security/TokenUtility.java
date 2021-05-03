@@ -3,10 +3,10 @@ package net.scanner.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.bank.controller.AuthenticationController;
-import org.bank.exception.IllegalJWTException;
-import org.bank.model.AuthenticationUserDetails;
-import org.bank.model.User;
+import net.scanner.controller.AuthenticationController;
+import net.scanner.exception.IllegalJWTException;
+import net.scanner.model.AuthenticationUserDetails;
+import net.scanner.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

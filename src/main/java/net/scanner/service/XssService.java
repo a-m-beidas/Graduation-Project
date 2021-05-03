@@ -1,7 +1,6 @@
 package net.scanner.service;
 
 import net.scanner.config.Interceptor;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -107,7 +106,6 @@ public class XssService {
 
     String submitForm(String url, Element form) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        JSONObject json = new JSONObject();
         for (Element element: form.select("input")) {
             if (!element.attr("type").equals("text"))
                 continue;

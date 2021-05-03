@@ -2,8 +2,8 @@ package net.scanner.security;
 
 
 import io.jsonwebtoken.ExpiredJwtException;
-import org.bank.model.AuthenticationUserDetails;
-import org.bank.service.AuthenticationUserDetailsService;
+import net.scanner.model.AuthenticationUserDetails;
+import net.scanner.service.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ import java.io.IOException;
 public class RequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    org.bank.security.TokenUtility tokenUtility;
+    net.scanner.security.TokenUtility tokenUtility;
 
     @Autowired
     private AuthenticationUserDetailsService userDetailsService;

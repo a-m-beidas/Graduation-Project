@@ -1,8 +1,8 @@
 package net.scanner.security;
 
-import org.bank.config.AccessDeniedHandlerImpl;
-import org.bank.config.AuthenticationEntryPointImpl;
-import org.bank.service.AuthenticationUserDetailsService;
+import net.scanner.config.AuthenticationEntryPointImpl;
+import net.scanner.controller.AccessDeniedHandlerImpl;
+import net.scanner.service.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationUserDetailsService userDetailsService;
 
     @Autowired
-    private org.bank.security.RequestFilter requestFilter;
+    private RequestFilter requestFilter;
 
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
@@ -36,7 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 //Permit access to these paths without authentication
                 .antMatchers(HttpMethod.POST,"/register", "/login").permitAll()
-                //Authenticate users according to their role
                 .antMatchers(HttpMethod.GET,"/scan").authenticated()
                 .antMatchers(HttpMethod.GET,"/logout").authenticated()
                 //Otherwise Deny any access even if authenticated
