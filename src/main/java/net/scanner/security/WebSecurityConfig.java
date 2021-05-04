@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/scan").authenticated()
                 .antMatchers(HttpMethod.GET,"/logout").authenticated()
                 //Otherwise Deny any access even if authenticated
-                .anyRequest().denyAll()
+                .anyRequest().permitAll()
             .and()
             .exceptionHandling()
                 .accessDeniedHandler(new AccessDeniedHandlerImpl())
