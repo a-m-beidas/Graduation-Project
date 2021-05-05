@@ -24,34 +24,21 @@ class Login extends React.Component{
 		this.state = {username: '', password: '', response: ''};
 		this.onChangeUsername = this.onChangeUsername.bind(this);
     	this.onChangePassword = this.onChangePassword.bind(this);
-		this.login = this.login.bind(this);
+    	this.login = this.login.bind(this);
 	}
 
     login(event) {
 		event.preventDefault();
-        client({
+        const requestOptions = {
             method: 'POST',
-            path: '/api/login',
-            entity: {"username": this.state.username, "password": this.state.password},
-            headers: {'Content-Type': 'application/json'}})
-            .done(response => {
-                console.log(response);
-        });
-
-
-
-		// console.log(typeof(event))
-		// var cache = []
-		// console.log(JSON.stringify(event, (key, value) => {
-		// 	if (typeof value === 'object' && value !== null) {
-		// 	  // Duplicate reference found, discard key
-		// 	  if (cache.includes(value)) return;
-
-		// 	  // Store value in our collection
-		// 	  cache.push(value);
-		// 	}
-		// 	return value;
-		//   }))
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({"username": this.state.username, "password": this.state.password})
+        };
+        fetch('http://localhost:81/api/login', requestOptions)
+            .then(function(response) {
+                return response.text();
+            })
+            .then(data => this.setState({response: data}))
     }
 
 	onChangeUsername(event) {
@@ -68,7 +55,7 @@ class Login extends React.Component{
 				<form onSubmit={this.login}>
 					Username:<input onChange={this.onChangeUsername} type="text" name="username" value={this.state.username}/><br/>
 					Password:<input onChange={this.onChangePassword} type="password" name="password" value={this.state.password}/><br/>
-					<input onClick={this.login} type="submit" value="Login"/>
+					<input type="submit" value="Login"/>
 				</form>
 				<br/>
 				<div>{this.state.response}</div>

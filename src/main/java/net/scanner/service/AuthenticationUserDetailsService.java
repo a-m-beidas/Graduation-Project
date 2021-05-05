@@ -1,6 +1,7 @@
 package net.scanner.service;
 
 
+import net.scanner.exception.AuthenticationJWTException;
 import net.scanner.model.AuthenticationUserDetails;
 import net.scanner.model.User;
 import net.scanner.repository.UserRepository;
@@ -36,6 +37,9 @@ public class AuthenticationUserDetailsService implements UserDetailsService {
     @Override
     public AuthenticationUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUsername(username);
+        if (user == null) {
+            throw new AuthenticationJWTException("Username not found");
+        }
 //        ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(user.getRoles().size());
         return new AuthenticationUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.getDatabaseToken(), Collections.singleton(new SimpleGrantedAuthority("user")));
     }

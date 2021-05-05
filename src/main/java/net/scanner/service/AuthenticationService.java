@@ -43,8 +43,8 @@ public class AuthenticationService {
             authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         } catch (DisabledException e) {
             throw new AuthenticationJWTException("Disabled user");
-        } catch (BadCredentialsException e) {
-            throw new AuthenticationJWTException("Bad Credentials");
+        } catch (BadCredentialsException  e) {
+            throw new AuthenticationJWTException("Wrong Password");
         }
         AuthenticationUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         return tokenUtility.generateToken(userDetails);

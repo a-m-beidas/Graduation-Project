@@ -1,6 +1,7 @@
 package net.scanner.config;
 
 
+import net.scanner.exception.AuthenticationJWTException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,15 @@ public class MainControllerAdvice {
 
     Logger logger = LoggerFactory.getLogger(MainControllerAdvice.class);
 
+//    @ExceptionHandler
+//    public ResponseEntity<String> genericHandler(Exception e) {
+//        e.printStackTrace();
+//        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+
     @ExceptionHandler
-    public ResponseEntity<String> genericHandler(Exception e) {
+    public ResponseEntity<String> genericHandler(AuthenticationJWTException e) {
         e.printStackTrace();
-        return new ResponseEntity<>("Bad Credentials", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }
