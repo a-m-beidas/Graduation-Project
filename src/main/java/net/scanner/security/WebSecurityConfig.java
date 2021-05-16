@@ -35,9 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
                 //Permit access to these paths without authentication
-                .antMatchers(HttpMethod.POST,"/register", "/login").permitAll()
-                .antMatchers(HttpMethod.GET,"/scan").authenticated()
+                .antMatchers(HttpMethod.POST,"/api/register", "/api/login").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/scan").authenticated()
                 .antMatchers(HttpMethod.GET,"/logout").authenticated()
+                .antMatchers(HttpMethod.GET,"/", "/built/bundle.js").permitAll()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().permitAll()
             .and()
