@@ -4,8 +4,8 @@
 const React = require('react'); // <1>
 const ReactDOM = require('react-dom'); // <2>
 const client = require('./client'); // <3>
-
-
+import { Redirect } from 'react-router-dom'
+import Scan from "./scan"
 class App extends React.Component { // <1>
 
 
@@ -36,9 +36,15 @@ class Login extends React.Component{
         };
         fetch('http://localhost:81/api/login', requestOptions)
             .then(function(response) {
-                return response.text();
+                if (response.ok)
+                    return response.text();
+                else
+                    throw response;
             })
-            .then(data => this.setState({response: data}))
+            .then(token => {
+                localStorage.setItem('bearer-token', token);
+                this.setState({response: token});
+            })
     }
 
 	onChangeUsername(event) {
@@ -50,6 +56,9 @@ class Login extends React.Component{
 	}
 
 	render() {
+	    if (localStorage.getItem('bearer-token')) {
+	        return <Scan/>
+	    }
 		return (
 			<div>
 				<form onSubmit={this.login}>
@@ -57,7 +66,7 @@ class Login extends React.Component{
 					Password:<input onChange={this.onChangePassword} type="password" name="password" value={this.state.password}/><br/>
 					<input type="submit" value="Login"/>
 				</form>
-				<br/>
+				TODO: remove this later
 				<div>{this.state.response}</div>
 			</div>
 		)
