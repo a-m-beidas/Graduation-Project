@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/logout").authenticated()
                 .antMatchers(HttpMethod.GET,"/", "/built/bundle.js").permitAll()
                 //Otherwise Deny any access even if authenticated
-                .anyRequest().permitAll()
+                .anyRequest().denyAll()
             .and()
             .exceptionHandling()
                 .accessDeniedHandler(new AccessDeniedHandlerImpl())
