@@ -14,11 +14,10 @@ public class MainControllerAdvice {
 
     Logger logger = LoggerFactory.getLogger(MainControllerAdvice.class);
 
-//    @ExceptionHandler
-//    public ResponseEntity<String> genericHandler(Exception e) {
-//        e.printStackTrace();
-//        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler
+    public ResponseEntity<String> genericHandler(Exception e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(AuthenticationJWTException e) {

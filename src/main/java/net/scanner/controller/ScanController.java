@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping
+@RequestMapping(path = "api")
 public class ScanController {
 
     @Autowired
