@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const Scan = () => {
-    const [scanURL, setScanURL] = useState("");
-    const [scanResult, setScanResult] = useState("");
+    const [scanURL, setScanURL] = useState("http://localhost/xss/index.php");
+    const [scanResult, setScanResult] = useState([]);
     function scan() {
       event.preventDefault();
       const requestOptions = {
@@ -10,14 +10,16 @@ const Scan = () => {
           headers: { "Content-Type": "application/json",
                      Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
       };
-      var url = new URL('http://localhost:81/api/scan')
+      var url = new URL('http://localhost:81/api/xss')
       url.search = new URLSearchParams({url: scanURL}).toString();
       fetch(url, requestOptions)
           .then(function(response) {
               return response.text();
           })
           .then(result => {
-              setScanResult(result);
+              console.log(typeof(result))
+              console.log(result);
+              setScanResult(JSON.parse(result));
           })
     }
     return (
@@ -26,7 +28,10 @@ const Scan = () => {
               <input type="input"  value={scanURL} onChange={e => setScanURL(e.target.value)} name="url"/>
               <input type="submit" value="Scan"/>
           </form>
-          <div>{scanResult}</div>
+          <div>
+            {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
+            {scanResult.map(line => (<div>{line}<br/></div>))}
+          </div>
       </div>
     )
 }
