@@ -5,7 +5,7 @@ const React = require('react'); // <1>
 const ReactDOM = require('react-dom'); // <2>
 const client = require('./client'); // <3>
 import { Redirect } from 'react-router-dom'
-import Scan from "./scan"
+import XSS from "./xss"
 class App extends React.Component { // <1>
 
 
@@ -57,7 +57,7 @@ class Login extends React.Component{
 
 	render() {
 	    if (localStorage.getItem('bearer-token')) {
-	        return <Scan/>
+	        return <XSS/>
 	    }
 		return (
 			<div>
