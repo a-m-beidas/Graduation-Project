@@ -30,8 +30,8 @@ public class XssService {
 
     String js_script = "<script>alert('hello')</script>";
 
-    public String xss(String url) throws IOException {
-
+    public List<String> xss(String url) throws IOException {
+    List<String> result = new LinkedList<String>();
     // get useful information
     Document doc = Jsoup.connect(url).get();
     Elements forms = doc.select("form");
@@ -39,19 +39,20 @@ public class XssService {
 //    Given a `url`, it prints all XSS vulnerable forms and
 //    returns True if any is vulnerable, False otherwise
 //    get all the forms from the URL
-    System.out.println("[+] Detected " + forms.size() + " forms on {url}.");
+    result.add("[+] Detected " + forms.size() + " forms on {url}.");
     boolean is_vulnerable = false;
     for (Element form: forms) {
         HashMap<String, Object> form_details = getFormDetails(form);
         String response = submitForm(url, form);
-        if (response.contains("hello")) {
-            System.out.println("[+] XSS Detected on {url}");
-            System.out.println("[*] Form details:");
-            System.out.println(form_details);
+        System.out.println(response);
+        if (response.contains("<script>")) {
+            result.add("\n[+] XSS Detected on " + url);
+            result.add("\n[*] Form details:");
+            result.add("\n\t" + form_details);
             is_vulnerable = true;
         }
     }
-    return Boolean.toString(is_vulnerable);
+    return result;
 //        content = submit_form(form_details, url, js_script).content.decode()
 //        if js_script in content:
 //            print("[+] XSS Detected on {url}")

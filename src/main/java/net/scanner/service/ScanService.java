@@ -24,7 +24,7 @@ public class ScanService {
         }
         recordRepository.save(new Record(url));
         //get useful information
-        Document doc = Jsoup.connect("http://localhost/projects/web%20project/").get();
+        Document doc = Jsoup.connect(url).get();
         String str = doc.text();
         System.out.println(str);
 //			if(doc.text().contains("mit")){

@@ -7,16 +7,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping(path = "api")
 public class XssController {
 
     @Autowired
     XssService xssService;
 
     @GetMapping(path = "/xss")
-    ResponseEntity<String> xss(@RequestParam String url) throws IOException {
-        return new ResponseEntity<String>(xssService.xss(url), HttpStatus.OK);
+    List<String> xss(@RequestParam String url) throws IOException {
+        List<String> result = xssService.xss(url);
+        return result;
     }
 }
