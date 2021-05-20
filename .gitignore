@@ -12,3 +12,4 @@ node
 node_modules
 package-lock.json
 src/main/resources/static/
+package.json
