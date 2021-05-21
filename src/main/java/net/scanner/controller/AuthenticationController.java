@@ -2,6 +2,7 @@ package net.scanner.controller;
 
 import net.scanner.model.User;
 import net.scanner.service.AuthenticationService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,11 @@ public class AuthenticationController {
     public ResponseEntity<String> login(@RequestBody User user) throws Exception {
         String token = authenticationService.authenticate(user);
         return new ResponseEntity<String>(token, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.HEAD, path = "/check")
+    public ResponseEntity check() {
+        return ResponseEntity.ok().body("");
     }
 
     @GetMapping(path= "/logout")

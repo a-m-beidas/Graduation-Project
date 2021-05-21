@@ -1,21 +1,3 @@
-'use strict';
-
-
-const React = require('react'); // <1>
-const ReactDOM = require('react-dom'); // <2
-import { Redirect } from 'react-router-dom'
-import XSS from "./xss"
-class App extends React.Component { // <1>
-
-
-
-	render() { // <3>
-		return (
-			<Login/>
-		)
-	}
-}
-
 class Login extends React.Component{
 
 	constructor(props) {
@@ -71,8 +53,3 @@ class Login extends React.Component{
 		)
 	}
 }
-
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-)
