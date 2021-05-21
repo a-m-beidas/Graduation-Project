@@ -2,8 +2,7 @@
 
 
 const React = require('react'); // <1>
-const ReactDOM = require('react-dom'); // <2>
-const client = require('./client'); // <3>
+const ReactDOM = require('react-dom'); // <2
 import { Redirect } from 'react-router-dom'
 import XSS from "./xss"
 class App extends React.Component { // <1>
