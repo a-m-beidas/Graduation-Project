@@ -26,7 +26,7 @@ public class AuthenticationController {
         return ResponseEntity.ok().body("");
     }
 
-    @GetMapping(path= "/logout")
+    @RequestMapping(method = RequestMethod.HEAD, path= "/logout")
     public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorizationHeader) throws ClassNotFoundException {
         authenticationService.logout(authorizationHeader);
         return new ResponseEntity<>("Log out Successful", HttpStatus.OK);
