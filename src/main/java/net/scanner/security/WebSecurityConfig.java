@@ -37,8 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Permit access to these paths without authentication
                 .antMatchers(HttpMethod.POST,"/api/register", "/api/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/scan", "/api/xss").authenticated()
-                .antMatchers(HttpMethod.GET,"/logout").authenticated()
-                .antMatchers(HttpMethod.GET,"/", "/built/bundle.js").permitAll()
+                .antMatchers(HttpMethod.HEAD,"/api/check", "/api/logout").authenticated()
+                .antMatchers(HttpMethod.GET,"/", "/login", "/register", "/main.css", "/favicon.ico", "/built/bundle.js", "/error").permitAll()
+                .antMatchers(HttpMethod.GET,"/scan").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()
