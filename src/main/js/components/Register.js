@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const Register = () => {
-	const [username, onChangeUsername] = useState("http://localhost/xss/index.php");
-    const [password, onChangePassword] = useState([]);
+	const [username, setUsername] = useState("");
+    const [password, setPassword] = useState([]);
 
 	function register(event) {
 		event.preventDefault();
@@ -23,12 +23,17 @@ const Register = () => {
                 setResponse(token);
             })
     }
+
+    const onChangeUsername = (event) => setUsername(event.target.value);
+
+    const onChangePassword = (event) => setPassword(event.target.value);
+
 	return (
 		<div>
-			<form onSubmit={login}>
+			<form onSubmit={register}>
 				Username:<input onChange={onChangeUsername} type="text" name="username" value={username}/><br/>
 				Password:<input onChange={onChangePassword} type="password" name="password" value={password}/><br/>
-				<input type="submit" value="Login"/>
+				<input type="submit" value="Register"/>
 			</form>
 		</div>
 	)

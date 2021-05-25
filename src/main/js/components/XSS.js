@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const XSS = () => {
     const [targetURL, setTargetURL] = useState("http://localhost/xss/index.php");
     const [scanResult, setScanResult] = useState([]);
-    function scan() {
+    function scan(event) {
       event.preventDefault();
       const requestOptions = {
           method: 'GET',
@@ -36,4 +36,4 @@ const XSS = () => {
     )
 }
 
-export default Scan;
+export default XSS;

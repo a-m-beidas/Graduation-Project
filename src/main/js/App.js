@@ -1,28 +1,33 @@
 'use strict';
 
+import React from 'react';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute'
+import LogoutRoute from './LogoutRoute'
+import Home from './components/Home';
+import Login from "./components/Login";
+import Register from "./components/Register";
+import XSS from "./components/XSS";
+import Error from "./components/Error"
 
-const React = require('react'); // <1>
-const ReactDOM = require('react-dom'); // <2
-import { BrowserRouter, Switch } from 'react-router-dom'
-import Login from "./login"
-import XSS from "./xss"
-class App extends React.Component { // <1>
-
-
-	render() { // <3>
-		return (
-			<BrowserRouter>
-                <Switch>
-                   <PublicRoute restricted={false} component={Home} path="/" exact />
-                   <PublicRoute restricted={true} component={SignIn} path="/signin" exact />
-                   <PrivateRoute component={Dashboard} path="/dashboard" exact />
-               </Switch>
-            </BrowserRouter>
-		)
-	}
+const App = () => {
+    return (
+        <Router>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/register">Register</Link></li>
+                <li><Link to="/scan">Scan</Link></li>
+                <li><Link to="/logout">Logout</Link></li>
+            </ul>
+            <Route component={Home} path="/" exact />
+            <Route component={Login} path="/login" exact />
+            <Route component={Register} path="/register" exact />
+            <Route component={Error} path="/error"/>
+            <PrivateRoute component={XSS} path="/scan" exact />
+            <LogoutRoute path="/logout" exact/>
+        </Router>
+    )
 }
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-)
+export default App;

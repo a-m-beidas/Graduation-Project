@@ -1,55 +1,53 @@
-class Login extends React.Component{
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import jwt from "jwt-decode";
 
-	constructor(props) {
-		super(props);
-		this.state = {username: '', password: '', response: ''};
-		this.onChangeUsername = this.onChangeUsername.bind(this);
-    	this.onChangePassword = this.onChangePassword.bind(this);
-    	this.login = this.login.bind(this);
-	}
+const Login = () => {
+	const [username, setUsername] = useState("");
+    const [password, setPassword] = useState([]);
+    const [message, setMessage] = useState("");
+    const history = useHistory();
 
-    login(event) {
+	function login(event) {
 		event.preventDefault();
-        const requestOptions = {
+        setMessage("Logging In...");
+        const config = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({"username": this.state.username, "password": this.state.password})
+            headers: { 'Content-Type': 'application/json' }
         };
-        fetch('http://localhost:81/api/login', requestOptions)
-            .then(function(response) {
-                if (response.ok)
-                    return response.text();
-                else
-                    throw response;
+        const body = JSON.stringify({"username": username, "password": password})
+        axios.post('/api/login', body, config)
+            .then(response => {
+                if (response.status == 200) {
+                    setMessage("Successful login! Redirecting..");
+                    const token = response.data;
+                    const user = jwt(token);
+                    localStorage.setItem("user", JSON.stringify(user));
+                    localStorage.setItem('bearer-token', token);
+                    setTimeout(() => {history.push("/")}, 1000);
+                } else
+                    throw response; 
             })
-            .then(token => {
-                localStorage.setItem('bearer-token', token);
-                this.setState({response: token});
-            })
+            .catch(error_response => {
+                setMessage(error_response.data);
+            });
     }
 
-	onChangeUsername(event) {
-		this.setState({username: event.target.value});
-	}
+    const onChangeUsername = (event) => setUsername(event.target.value);
 
-	onChangePassword(event) {
-		this.setState({password: event.target.value});
-	}
-
-	render() {
-	    if (localStorage.getItem('bearer-token')) {
-	        return <XSS/>
-	    }
-		return (
-			<div>
-				<form onSubmit={this.login}>
-					Username:<input onChange={this.onChangeUsername} type="text" name="username" value={this.state.username}/><br/>
-					Password:<input onChange={this.onChangePassword} type="password" name="password" value={this.state.password}/><br/>
-					<input type="submit" value="Login"/>
-				</form>
-				TODO: remove this later
-				<div>{this.state.response}</div>
-			</div>
-		)
-	}
+    const onChangePassword = (event) => setPassword(event.target.value);
+    
+	return (
+		<div>
+			<form onSubmit={login}>
+				Username:<input onChange={onChangeUsername} type="text" name="username" value={username}/><br/>
+				Password:<input onChange={onChangePassword} type="password" name="password" value={password}/><br/>
+				<input type="submit" value="Login"/>
+			</form>
+            <div>{ message }</div>
+		</div>
+	)
 }
+
+export default Login
