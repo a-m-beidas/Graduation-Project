@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute'
 import LogoutRoute from './LogoutRoute'
 import Home from './components/Home';
-import Login from "./components/Login";
+import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import XSS from "./components/XSS";
 import Error from "./components/Error"
