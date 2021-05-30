@@ -2,11 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({component: Component, ...rest}) => {
-
+const LogoutRoute = (props) => {
     const [isPending, setPending] = useState(true);
     const [isLoggedOut, setLoggedOut] = useState(false);
-
+    const {setLogIn, ...rest} = props;
     function logout() {
         axios.head("/api/logout", {
                 headers : { Authorization: "Bearer " + localStorage.getItem("bearer-token") }
@@ -15,18 +14,19 @@ const PrivateRoute = ({component: Component, ...rest}) => {
                     setLoggedOut(response.status == 200);
                     setPending(false);
                     localStorage.removeItem("bearer-token");
-                    localStorage.removeItem("user")
+                    localStorage.removeItem("user");
+                    setLogIn(false);
                 })
                 .catch(error => { setLoggedOut(false); setPending(false) })
     }
     return (
-        <Route {...rest} render={props => {logout();return(
+        <Route {...rest} render={props => {if (isPending && !isLoggedOut) logout();return(
             isPending ? "..." :
                 isLoggedOut ?
                     <Redirect to="/" />
-                    : <Redirect to="/error" />
+                    : <Redirect render={props => console.log("hello")} to="/error" />
         )}} />
     );
 };
 
-export default PrivateRoute;
+export default LogoutRoute;
