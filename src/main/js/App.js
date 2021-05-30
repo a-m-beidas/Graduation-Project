@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import PrivateRoute from './PrivateRoute'
 import LogoutRoute from './LogoutRoute'
 import Home from './components/Home';
@@ -14,16 +14,15 @@ const App = () => {
     const [isLoggedIn, setLogIn] = useState(localStorage.getItem("bearer-token") != undefined);
     return (
         <Router>
-            <Navbar bg="light">
+            <Navbar bg="light" expand="sm" className="justify-content-start px-4">
                 <Navbar.Brand href="/">
                     <img src="/logo192.png"
-                        width="30"
                         height="30"
-                        className="d-inline-block align-top"
+                        className="d-inline-block align-top px-2"
                         alt="React Bootstrap logo"/>
-                    Home
+                    Demo App
                 </Navbar.Brand>
-                <Nav>
+                <Nav className="ml-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link hidden={isLoggedIn} href="/login">Login</Nav.Link>
                     <Nav.Link hidden={isLoggedIn} href="/register">Register</Nav.Link>
@@ -31,14 +30,19 @@ const App = () => {
                     <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
                 </Nav>
             </Navbar>
-            <Route component={Home} path="/" exact />
-            <Route path="/login" exact render={(props) => (
-                            <LogIn setLogIn={setLogIn} />
-                        )}/>
-            <Route component={Register} path="/register" exact />
-            <Route component={Error} path="/error"/>
-            <PrivateRoute component={XSS} path="/scan" exact />
-            <LogoutRoute setLogIn={setLogIn} path="/logout" exact/>
+            <Container className="px-4" fluid>
+                <Switch>
+                    <Route component={Home} path="/" exact/>
+                    <Route path="/login" exact render={(props) => (
+                                    <LogIn setLogIn={setLogIn} />
+                                )}/>
+                    <Route component={Register} path="/register"/>
+                    <Route component={Error} path="/error"/>
+                    <PrivateRoute component={XSS} path="/scan"/>
+                    <LogoutRoute setLogIn={setLogIn} path="/logout"/>
+                </Switch>
+            </Container>
+
         </Router>
     )
 }
