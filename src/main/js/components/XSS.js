@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Form, Button } from "react-bootstrap";
+
 const XSS = () => {
     const [targetURL, setTargetURL] = useState("http://localhost/xss/index.php");
     const [scanResult, setScanResult] = useState([]);
@@ -17,17 +19,18 @@ const XSS = () => {
               return response.text();
           })
           .then(result => {
-              console.log(typeof(result))
-              console.log(result);
               setScanResult(JSON.parse(result));
           })
     }
     return (
       <div>
-          <form onSubmit={ scan }>
-              <input type="input"  value={targetURL} onChange={e => setTargetURL(e.target.value)} name="url"/>
-              <input type="submit" value="Scan"/>
-          </form>
+          <Form onSubmit={ scan }  style={{width: 300}}>
+				<Form.Group>
+                    <Form.Label>URL</Form.Label>
+                    <Form.Control onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL}/>
+                </Form.Group>
+				<Button type="submit">Scan</Button>
+			</Form>
           <div>
             {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
             {scanResult.map(line => (<div>{line}<br/></div>))}

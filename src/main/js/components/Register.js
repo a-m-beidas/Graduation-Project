@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Form, Button } from "react-bootstrap";
+
 const Register = () => {
 	const [username, setUsername] = useState("");
     const [password, setPassword] = useState([]);
@@ -20,7 +22,6 @@ const Register = () => {
             })
             .then(token => {
                 localStorage.setItem('bearer-token', token);
-                setResponse(token);
             })
     }
 
@@ -29,12 +30,18 @@ const Register = () => {
     const onChangePassword = (event) => setPassword(event.target.value);
 
 	return (
-		<div>
-			<form onSubmit={register}>
-				Username:<input onChange={onChangeUsername} type="text" name="username" value={username}/><br/>
-				Password:<input onChange={onChangePassword} type="password" name="password" value={password}/><br/>
-				<input type="submit" value="Register"/>
-			</form>
+		<div style={{width: 300}}>
+			<Form onSubmit={register}>
+				<Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control onChange={onChangeUsername} type="text" name="username" value={username}/>
+                </Form.Group>
+				<Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control onChange={onChangePassword} type="password" name="password" value={password}/>
+                </Form.Group>
+				<Button type="submit">Register</Button>
+			</Form>
 		</div>
 	)
 }

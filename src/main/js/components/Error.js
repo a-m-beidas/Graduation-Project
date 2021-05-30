@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-
+import { Alert } from 'react-bootstrap';
 const Login = () => {
 	return (
-		<div>
-			<h2>Error</h2>
+		<div style={{width: 300}}>
+		    <Alert variant="danger">
+                Unauthorized
+            </Alert>
 		</div>
 	)
 }
