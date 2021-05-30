@@ -9,7 +9,10 @@ public class Record {
     @Id
     String url;
 
+    public Record() { }
+
     public Record(String url) {
         this.url = url;
     }
+
 }
