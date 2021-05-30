@@ -34,12 +34,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-                //Permit access to these paths without authentication
+                // API
                 .antMatchers(HttpMethod.POST,"/api/register", "/api/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/scan", "/api/xss").authenticated()
                 .antMatchers(HttpMethod.HEAD,"/api/check", "/api/logout").authenticated()
-                .antMatchers(HttpMethod.GET,"/", "/scan", "/login", "/register", "/logout").permitAll()
-                .antMatchers(HttpMethod.GET, "/main.css", "/built/bundle.js", "/built/bundle.map.js", "/error").permitAll()
+                // Web Application, permitAll
+                .antMatchers(HttpMethod.GET,"/", "/scan", "/login", "/register", "/logout", "/error").permitAll()
+                // Webpack
+                .antMatchers(HttpMethod.GET, "/built/bundle.js", "/built/bundle.js.map").permitAll()
+                // Bootstrap
+                .antMatchers(HttpMethod.GET, "/bootstrap.min.css", "/bootstrap.min.css.map").permitAll()
+                // Icons
                 .antMatchers(HttpMethod.GET, "/favicon.ico", "/logo192.png").permitAll()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
