@@ -16,8 +16,15 @@ const LogoutRoute = (props) => {
                     localStorage.removeItem("bearer-token");
                     localStorage.removeItem("user");
                     setLogIn(false);
+                    throw response;
                 })
-                .catch(error => { setLoggedOut(false); setPending(false) })
+                .catch(error => {
+                    setLoggedOut(true);
+                    setPending(false);
+                    localStorage.removeItem("bearer-token");
+                    localStorage.removeItem("user");
+                    setLogIn(false);
+                })
     }
     return (
         <Route {...rest} render={props => {if (isPending && !isLoggedOut) logout();return(
