@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import PrivateRoute from './PrivateRoute'
-import LogoutRoute from './LogoutRoute'
+import PrivateRoute from './PrivateRoute';
+import LogoutRoute from './LogoutRoute';
 import Home from './components/Home';
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import XSS from "./components/XSS";
-import Error from "./components/Error"
+import Crawl from "./components/Crawl";
+import Error from "./components/Error";
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
                     <Nav.Link hidden={isLoggedIn} href="/login">Login</Nav.Link>
                     <Nav.Link hidden={isLoggedIn} href="/register">Register</Nav.Link>
                     <Nav.Link hidden={!isLoggedIn} href="/scan">Scan</Nav.Link>
+                    <Nav.Link hidden={!isLoggedIn} href="/crawl">Crawl</Nav.Link>
                     <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
                 </Nav>
             </Navbar>
@@ -39,6 +41,7 @@ const App = () => {
                     <Route component={Register} path="/register"/>
                     <Route component={Error} path="/error"/>
                     <PrivateRoute component={XSS} path="/scan"/>
+                    <PrivateRoute component={Crawl} path="/crawl"/>
                     <LogoutRoute setLogIn={setLogIn} path="/logout"/>
                 </Switch>
             </Container>
