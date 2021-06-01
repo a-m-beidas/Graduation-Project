@@ -1,6 +1,8 @@
 package net.scanner.service;
 
+import net.scanner.model.Alert;
 import net.scanner.model.Record;
+import net.scanner.model.Scan;
 import net.scanner.repository.RecordRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,22 +23,33 @@ public class ScanService {
     @Autowired
     RecordRepository recordRepository;
 
-    List<String> crawlResult;
-    URI crawlURI;
+    @Autowired
+    XssService xssService;
 
-    public List<String> crawl(String originalURL) throws IOException, URISyntaxException {
+    List<String> crawlResult;
+    URI targetURL;
+
+    public Scan crawl(String targetURL) throws IOException, URISyntaxException {
+        recordRepository.deleteAll();
         crawlResult = new LinkedList<String>();
-        crawlURI = new URI(originalURL);
-        processPage(originalURL);
-        List<String> result = crawlResult;
+        Scan scan = new Scan(targetURL, Scan.ScanType.partial);
+        this.targetURL = new URI(targetURL);
+        processPage(targetURL);
+        List<String> urls = crawlResult;
+        for (String url: urls) {
+            Alert alert = xssService.xss(url);
+            if (alert != null) {
+                scan.addThreat(alert);
+            }
+        }
         crawlResult = null;
-        crawlURI = null;
-        return result;
+        this.targetURL = null;
+        return scan;
     }
 
     public void processPage(String url) throws IOException, URISyntaxException {
         URI uri = new URI(url);
-        if (!uri.getHost().equals(crawlURI.getHost()) || recordRepository.findById(url).isPresent()) {
+        if (!uri.getHost().equals(this.targetURL.getHost()) || recordRepository.findById(url).isPresent()) {
             return;
         }
         recordRepository.save(new Record(url));

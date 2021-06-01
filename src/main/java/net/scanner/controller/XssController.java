@@ -1,5 +1,6 @@
 package net.scanner.controller;
 
+import net.scanner.model.Alert;
 import net.scanner.service.XssService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,8 @@ public class XssController {
     XssService xssService;
 
     @GetMapping(path = "/xss")
-    List<String> xss(@RequestParam String url) throws IOException {
-        List<String> result = xssService.xss(url);
+    Alert xss(@RequestParam String url) throws IOException {
+        Alert result = xssService.xss(url);
         return result;
     }
 }

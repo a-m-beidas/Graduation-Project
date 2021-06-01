@@ -1,6 +1,7 @@
 package net.scanner.service;
 
 import net.scanner.config.Interceptor;
+import net.scanner.model.Alert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,8 +31,8 @@ public class XssService {
 
     String js_script = "<script>alert('hello')</script>";
 
-    public List<String> xss(String url) throws IOException {
-    List<String> result = new LinkedList<String>();
+    public Alert xss(String url) throws IOException {
+    Alert alert = null;
     // get useful information
     Document doc = Jsoup.connect(url).get();
     Elements forms = doc.select("form");
@@ -39,20 +40,17 @@ public class XssService {
 //    Given a `url`, it prints all XSS vulnerable forms and
 //    returns True if any is vulnerable, False otherwise
 //    get all the forms from the URL
-    result.add("[+] Detected " + forms.size() + " forms on {url}.");
     boolean is_vulnerable = false;
     for (Element form: forms) {
         HashMap<String, Object> form_details = getFormDetails(form);
         String response = submitForm(url, form);
         System.out.println(response);
         if (response.contains("<script>")) {
-            result.add("\n[+] XSS Detected on " + url);
-            result.add("\n[*] Form details:");
-            result.add("\n\t" + form_details);
+            alert = new Alert(url, "xss", "Solve it urself", 1);
             is_vulnerable = true;
         }
     }
-    return result;
+    return alert;
 //        content = submit_form(form_details, url, js_script).content.decode()
 //        if js_script in content:
 //            print("[+] XSS Detected on {url}")
@@ -108,7 +106,7 @@ public class XssService {
     String submitForm(String url, Element form) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         for (Element element: form.select("input")) {
-            if (!element.attr("type").equals("text"))
+            if (!element.attr("type").equals("text") && !element.attr("type").equals("password"))
                 continue;
             String name = element.attr("name");
             map.put(name, Collections.singletonList(js_script));

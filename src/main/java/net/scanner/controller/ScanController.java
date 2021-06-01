@@ -1,5 +1,6 @@
 package net.scanner.controller;
 
+import net.scanner.model.Scan;
 import net.scanner.service.ScanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class ScanController {
 
 
     @GetMapping(path = "/scan")
-    public List<String> scanPage(@RequestParam String url) throws IOException, URISyntaxException {
-        List<String> result = scanService.crawl(url);
+    public Scan scanPage(@RequestParam String url) throws IOException, URISyntaxException {
+        Scan result = scanService.crawl(url);
         return result;
     }
 }
