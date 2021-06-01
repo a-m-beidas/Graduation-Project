@@ -33,7 +33,9 @@ const Crawl = () => {
 			</Form>
           <div>
             {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
-            {scanResult.map(line => (<div>{line}<br/></div>))}
+            <pre>
+                { JSON.stringify(scanResult, null, 2) }
+            </pre>
           </div>
       </div>
     )
