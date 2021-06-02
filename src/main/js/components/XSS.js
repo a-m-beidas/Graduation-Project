@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const XSS = () => {
     const [targetURL, setTargetURL] = useState("http://localhost/xss/index.php");
-    const [scanResult, setScanResult] = useState([]);
+    const [xssResult, setXSSResult] = useState([]);
     function xss(event) {
       event.preventDefault();
       const config = {
@@ -15,13 +15,12 @@ const XSS = () => {
       };
       axios.get('/api/xss', config)
           .then(response => {
-            if (response.status != 200) {
-                throw response;
+            if (response.status == 200) {
+                setXSSResult(response.data);
             }
-            setScanResult(response.data);
           })
-          .catch (error_response => {
-            setScanResult(error_response.data);
+          .catch (error => {
+            setXSSResult(error.response.data);
           })
     }
     return (
@@ -34,9 +33,9 @@ const XSS = () => {
 				<Button type="submit">Check URL</Button>
 			</Form>
           <div>
-            {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
+            {/* {xssResult.map(line => (<div>{line}<br/></div>))} */}
             <pre>
-                { JSON.stringify(scanResult, null, 2) }
+                { JSON.stringify(xssResult, null, 2) }
             </pre>
           </div>
       </div>

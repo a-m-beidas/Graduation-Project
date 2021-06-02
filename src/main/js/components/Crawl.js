@@ -15,13 +15,12 @@ const Crawl = () => {
           };
       axios.get('/api/scan', config)
         .then(response => {
-          if (response.status != 200) {
-              throw response;
+          if (response.status == 200) {
+              setScanResult(response.data);
           }
-          setScanResult(response.data);
         })
-        .catch (error_response => {
-          setScanResult(error_response.data);
+        .catch (error => {
+          setScanResult(error.response.data);
         })
     }
     return (
