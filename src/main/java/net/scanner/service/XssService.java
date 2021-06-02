@@ -30,14 +30,13 @@ public class XssService {
     HttpHeaders httpHeaders;
 
     String js_script = "<script>alert('hello')</script>";
-
     public Alert xss(String url) throws IOException {
     Alert alert = null;
+    url = (!url.contains("://")) ? "http://" + url : url;
     // get useful information
     Document doc = Jsoup.connect(url).get();
     url = doc.location();
     Elements forms = doc.select("form");
-
 //    Given a `url`, it prints all XSS vulnerable forms and
 //    returns True if any is vulnerable, False otherwise
 //    get all the forms from the URL

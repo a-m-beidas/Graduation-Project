@@ -30,6 +30,7 @@ public class ScanService {
     URI targetURL;
 
     public Scan crawl(String targetURL) throws IOException, URISyntaxException {
+        targetURL = (!targetURL.contains("://")) ? "http://" + targetURL : targetURL;
         recordRepository.deleteAll();
         crawlResult = new LinkedList<String>();
         Scan scan = new Scan(targetURL, Scan.ScanType.partial);
