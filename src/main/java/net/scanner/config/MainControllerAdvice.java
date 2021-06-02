@@ -16,6 +16,7 @@ public class MainControllerAdvice {
 
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(Exception e) {
+        e.printStackTrace();
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
