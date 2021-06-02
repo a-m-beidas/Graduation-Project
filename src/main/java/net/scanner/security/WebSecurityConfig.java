@@ -4,6 +4,7 @@ import net.scanner.config.AuthenticationEntryPointImpl;
 import net.scanner.controller.AccessDeniedHandlerImpl;
 import net.scanner.service.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -29,10 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        if (activeProfile.equals("dev")) {
+            http.cors();
+        }
         http
-            .cors().and()
             .csrf().disable()
             .authorizeRequests()
                 // API

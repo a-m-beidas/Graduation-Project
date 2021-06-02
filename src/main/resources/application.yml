@@ -22,3 +22,5 @@ spring:
     rest:
       base-path:
           /api
+  profiles:
+    active: dev
