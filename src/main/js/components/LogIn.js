@@ -14,7 +14,6 @@ const Login = (props) => {
 		event.preventDefault();
         setMessage("Logging In...");
         const config = {
-            method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         };
         const body = JSON.stringify({"username": username, "password": password})
