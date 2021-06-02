@@ -35,6 +35,7 @@ public class XssService {
     Alert alert = null;
     // get useful information
     Document doc = Jsoup.connect(url).get();
+    url = doc.location();
     Elements forms = doc.select("form");
 
 //    Given a `url`, it prints all XSS vulnerable forms and
