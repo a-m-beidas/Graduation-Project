@@ -35,7 +35,7 @@ public class RequestFilter extends OncePerRequestFilter {
         String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
         String token = null;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ") && !requestTokenHeader.equals("Bearer null")) {
             try {
                 token = requestTokenHeader.substring(7);
                 username = tokenUtility.getUsernameFromToken(token);
