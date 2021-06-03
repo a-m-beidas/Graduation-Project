@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from 'axios';
 
 const Crawl = () => {
-    const [targetURL, setTargetURL] = useState("http://192.168.56.101/bWAPP/login.php");
+    const [targetURL, setTargetURL] = useState("localhost:8080");
     const [scanResult, setScanResult] = useState([]);
     function scan(event) {
       event.preventDefault();
@@ -35,7 +35,7 @@ const Crawl = () => {
           <div>
             {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
             <pre>
-                { JSON.stringify(scanResult, null, 2) }
+                { scanResult.length == 0 ? "" : JSON.stringify(scanResult, null, 2) }
             </pre>
           </div>
       </div>

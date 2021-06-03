@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from 'axios';
 
 const XSS = () => {
-    const [targetURL, setTargetURL] = useState("http://localhost/xss/index.php");
+    const [targetURL, setTargetURL] = useState("localhost/xss");
     const [xssResult, setXSSResult] = useState([]);
     function xss(event) {
       event.preventDefault();
@@ -35,7 +35,7 @@ const XSS = () => {
           <div>
             {/* {xssResult.map(line => (<div>{line}<br/></div>))} */}
             <pre>
-                { JSON.stringify(xssResult, null, 2) }
+            { xssResult.length == 0 ? "" : JSON.stringify(xssResult, null, 2) }
             </pre>
           </div>
       </div>
