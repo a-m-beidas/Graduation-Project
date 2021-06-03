@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import jwt from "jwt-decode";
 import { useHistory } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 
 const Login = (props) => {
 	const [username, setUsername] = useState("");
     const [password, setPassword] = useState([]);
-    const [message, setMessage] = useState("");
+    const [status, setStatus] = useState('');
     const history = useHistory();
     const setLogIn = props.setLogIn;
 	function login(event) {
 		event.preventDefault();
-        setMessage("Logging In...");
+        setStatus('p');
         const config = {
             headers: { 'Content-Type': 'application/json' }
         };
@@ -20,7 +20,7 @@ const Login = (props) => {
         axios.post('/api/login', body, config)
             .then(response => {
                 if (response.status === 200) {
-                    setMessage("Successful login! Redirecting..");
+                    setStatus('s');
                     const token = response.data;
                     const user = jwt(token);
                     localStorage.setItem("user", JSON.stringify(user));
@@ -30,7 +30,7 @@ const Login = (props) => {
                     throw response;
             })
             .catch(error_response => {
-                setMessage(error_response.data);
+                setStatus(error_response.data);
             });
     }
 
@@ -50,8 +50,9 @@ const Login = (props) => {
                     <Form.Control onChange={onChangePassword} type="password" name="password" value={password}/>
                 </Form.Group>
 				<Button type="submit">Login</Button>
-			</Form>
-            <div>{ message }</div>
+			</Form><br/><br/>
+            <div>{ status == 'p' || status == 's' ? 
+                    <Spinner animation={status == 'p' ? "border": "grow"} /> : status}</div>
 		</div>
 	)
 }
