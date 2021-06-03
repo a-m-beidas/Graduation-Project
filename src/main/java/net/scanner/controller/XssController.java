@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ public class XssController {
     XssService xssService;
 
     @GetMapping(path = "/xss")
-    Alert xss(@RequestParam String url) throws IOException {
+    Alert xss(@RequestParam String url) throws IOException, URISyntaxException {
         Alert result = xssService.xss(url);
         return result;
     }

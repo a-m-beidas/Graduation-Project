@@ -18,6 +18,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 @Service
@@ -30,7 +32,7 @@ public class XssService {
     HttpHeaders httpHeaders;
 
     String js_script = "<script>alert('hello')</script>";
-    public Alert xss(String url) throws IOException {
+    public Alert xss(String url) throws IOException, URISyntaxException {
     Alert alert = null;
     url = (!url.contains("://")) ? "http://" + url : url;
     // get useful information
@@ -46,7 +48,8 @@ public class XssService {
         String response = submitForm(url, form);
         System.out.println(response);
         if (response.contains("<script>")) {
-            alert = new Alert(url, "xss", "Solve it urself", 1);
+            URI uri = new URI(url);
+            alert = new Alert(uri.getPath(), "xss", "It isn’t that they cannot find the solution. It is that they cannot see the problem.", 1);
             is_vulnerable = true;
         }
     }
