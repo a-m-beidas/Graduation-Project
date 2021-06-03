@@ -9,7 +9,15 @@ const Home = () => {
         user = JSON.parse(user);
         setUsername(user.sub);
     });
-    return (<h1>Welcome {username}</h1>);
+    return (
+    <div>   
+        <h1>
+            Welcome {username}!
+        </h1>
+        <br/>
+        <h2>Dashboard here</h2>
+    </div> 
+    );
 }
 
 export default Home
