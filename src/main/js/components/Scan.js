@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button } from "react-bootstrap";
+import Report from "./Report";
 import axios from 'axios';
 
-const Crawl = () => {
+const Scan = () => {
     const [targetURL, setTargetURL] = useState("localhost:8080");
     const [scanResult, setScanResult] = useState([]);
     function scan(event) {
@@ -15,8 +16,10 @@ const Crawl = () => {
           };
       axios.get('/api/scan', config)
         .then(response => {
+          console.log(response.data)
+
           if (response.status == 200) {
-              setScanResult(response.data);
+            setScanResult(response.data);
           }
         })
         .catch (error => {
@@ -35,11 +38,11 @@ const Crawl = () => {
           <div>
             {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
             <pre>
-                { scanResult.length == 0 ? "" : JSON.stringify(scanResult, null, 2) }
+                { scanResult.length == 0 ? "" : <Report result={scanResult}/> }
             </pre>
           </div>
       </div>
     )
 }
 
-export default Crawl;
+export default Scan;
