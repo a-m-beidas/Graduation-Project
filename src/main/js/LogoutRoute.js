@@ -31,7 +31,10 @@ const LogoutRoute = (props) => {
             isPending ? "..." :
                 isLoggedOut ?
                     <Redirect to="/" />
-                    : <Redirect render={props => console.log("hello")} to="/error" />
+                    : <Redirect to={{
+                        pathname: "/error",
+                        state: { message: "Unauthorized" }
+                      }} />
         )}} />
     );
 };

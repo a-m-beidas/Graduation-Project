@@ -11,15 +11,25 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         axios.head("/api/check", {
                 headers : { Authorization: "Bearer " + localStorage.getItem("bearer-token") }
             })
-                .then(response => { setLoggedIn(response.status == 200); setPending(false) })
+                .then(response => {
+                    if (response.status == 200) {
+                        setLoggedIn(true);
+                        setPending(false);
+                    } else {
+                        throw response;
+                    }
+                })
                 .catch(error => { setLoggedIn(false); setPending(false) })
     }
     return (
-        <Route {...rest} render={props => {authorize();return(
+        <Route {...rest} render={props => {if (isPending && !isLoggedIn) authorize();return(
             isPending ? "..." :
                 isLoggedIn ?
                     <Component {...props} />
-                    : <Redirect to="/error" />
+                    : <Redirect to={{
+                        pathname: "/error",
+                        state: { message: "Unauthorized" }
+                      }} />
         )}} />
     );
 };

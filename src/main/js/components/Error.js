@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-bootstrap';
-const Login = () => {
+const Error = (props) => {
+	if (props.location.state != undefined)
+		var message = props.location.state.message;
 	return (
 		<div style={{width: 300}}>
 		    <Alert variant="danger">
-                Unauthorized
+                { message == undefined ? "General Error" : message }
             </Alert>
 		</div>
 	)
 }
 
-export default Login
+export default Error;
