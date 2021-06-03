@@ -32,6 +32,7 @@ const App = () => {
                     <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
                 </Nav>
             </Navbar>
+            <br/>
             <Container className="px-4" fluid>
                 <Switch>
                     <Route component={Home} path="/" exact/>
@@ -40,7 +41,7 @@ const App = () => {
                                 )}/>
                     <Route component={Register} path="/register"/>
                     <Route component={Error} path="/error"/>
-                    <PrivateRoute component={XSS} path="/scan"/>
+                    <PrivateRoute component={XSS} path="/xss"/>
                     <PrivateRoute component={Scan} path="/scan"/>
                     <LogoutRoute setLogIn={setLogIn} path="/logout"/>
                 </Switch>

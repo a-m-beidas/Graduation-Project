@@ -35,6 +35,7 @@ const Scan = () => {
                 </Form.Group>
 				<Button type="submit">Begin Scan</Button>
 			</Form>
+      <br/>
           <div>
             {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
             <pre>

@@ -32,6 +32,7 @@ const XSS = () => {
                 </Form.Group>
 				<Button type="submit">Check URL</Button>
 			</Form>
+      <br/> 
           <div>
             {/* {xssResult.map(line => (<div>{line}<br/></div>))} */}
             <pre>
