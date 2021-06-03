@@ -7,7 +7,7 @@ import Home from './components/Home';
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import XSS from "./components/XSS";
-import Crawl from "./components/Crawl";
+import Crawl from "./components/Scan";
 import Error from "./components/Error";
 
 const App = () => {
