@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/api/scan", "/api/xss").authenticated()
                 .antMatchers(HttpMethod.HEAD,"/api/check", "/api/logout").authenticated()
                 // Web Application, permitAll
-                .antMatchers(HttpMethod.GET,"/", "/scan", "/crawl", "/login", "/register", "/logout", "/error").permitAll()
+                .antMatchers(HttpMethod.GET,"/", "/xss", "/scan", "/login", "/register", "/logout", "/error").permitAll()
                 // Webpack
                 .antMatchers(HttpMethod.GET, "/built/bundle.js", "/built/bundle.js.map").permitAll()
                 // Bootstrap
