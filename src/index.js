@@ -1,1 +1,1 @@
-import "../graduation/src/main/js/index";
+import '../Graduation-Project/src/main/js/index';

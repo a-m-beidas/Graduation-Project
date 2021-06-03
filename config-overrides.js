@@ -2,7 +2,7 @@ const {alias, aliasJest} = require('react-app-rewire-alias')
 
 
 const aliasMap = {
-  example: 'graduation/src/main/js'
+  example: 'Graduation-Project/src/main/js'
 }
 
 module.exports = alias(aliasMap)
