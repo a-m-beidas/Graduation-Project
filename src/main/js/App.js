@@ -15,7 +15,7 @@ const App = () => {
     const [isLoggedIn, setLogIn] = useState(localStorage.getItem("bearer-token") != undefined);
     return (
         <Router>
-            <Navbar bg="light" expand="sm" className="justify-content-start px-4">
+            <Navbar bg="light" expand="sm" className="d-flex justify-content-start px-4">
                 <Navbar.Brand href="/">
                     <img src="/logo192.png"
                         height="30"
@@ -23,12 +23,12 @@ const App = () => {
                         alt="React Bootstrap logo"/>
                     Demo App
                 </Navbar.Brand>
-                <Nav className="ml-auto">
+                <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link hidden={isLoggedIn} href="/login">Login</Nav.Link>
                     <Nav.Link hidden={isLoggedIn} href="/register">Register</Nav.Link>
-                    <Nav.Link hidden={!isLoggedIn} href="/scan">Scan</Nav.Link>
-                    <Nav.Link hidden={!isLoggedIn} href="/crawl">Crawl</Nav.Link>
+                    <Nav.Link hidden={!isLoggedIn} href="/scan">XSS</Nav.Link>
+                    <Nav.Link hidden={!isLoggedIn} href="/crawl">Scan</Nav.Link>
                     <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
                 </Nav>
             </Navbar>
