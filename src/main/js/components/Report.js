@@ -27,7 +27,7 @@ const Report = (props) => {
 
     return(
     <div>
-        <Container fluid ref={ref}>
+        <Container style={{paddingLeft: "0px"}} fluid ref={ref}>
             <br/>
             <h2>Report</h2>
             <br/>
@@ -51,7 +51,7 @@ const Report = (props) => {
             </Card>
         </Container>
         <br/>
-        <ReactToPdf filename={"Report"} targetRef={ref} options={options}>
+        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options}>
           {({toPdf}) =>  (
             <Button onClick={toPdf}>To PDF</Button>
           )}
