@@ -1,16 +1,18 @@
 import React from 'react';
 import { Container, Card, Badge, Button, ListGroup } from 'react-bootstrap';
+import ReactToPdf from 'react-to-pdf'
 
 export const Alert = (props) => {
+
     return(
         <ListGroup.Item>
             <Card.Title >
-                <div  class="p-4 d-flex justify-content-between">
+                <div className="p-4 d-flex justify-content-between">
                 {props.alert.url}
                 <Badge pill variant="danger">{props.alert.type}</Badge>
                 </div>
             </Card.Title>
-            <Card.Text class="p-4">
+            <Card.Text className="p-4">
                 Solution:<br/>
                 {props.alert.description}
             </Card.Text>
@@ -18,27 +20,42 @@ export const Alert = (props) => {
 }
 
 const Report = (props) => {
+
+    const ref = React.createRef();
+    const options = {
+    };
+
     return(
     <div>
-        <h2>Report</h2>
-        <Card  style={{width: 700}}>
-            <ListGroup variant="flush">
-                <ListGroup.Item>
-                    <Card.Header style={{"background-color": "1px solid rgba(0,0,0,.25)"}}>
-                        <Card.Title >
-                            <div  class="px-2 d-flex justify-content-between">
-                            {props.result.targetURL}
-                            <Badge variant="secondary">{props.result.type + " scan"}</Badge>
-                            </div>
-                        </Card.Title>
-                        <Card.Text class="p-4">
-                            Done in: {' ' + props.result.date}
-                        </Card.Text>
-                    </Card.Header>
-                </ListGroup.Item>
-                { props.result.alerts.map(alert => <Alert alert={alert}/>) }
-            </ListGroup>
-        </Card>
+        <Container fluid ref={ref}>
+            <br/>
+            <h2>Report</h2>
+            <br/>
+            <Card style={{maxWidth: 700}}>
+                <ListGroup variant="flush">
+                    <ListGroup.Item>
+                        <Card.Header style={{"backgroundColor": "1px solid rgba(0,0,0,.25)"}}>
+                            <Card.Title>
+                                <div className="px-2 d-flex justify-content-between">
+                                {props.result.targetURL}
+                                <Badge variant="secondary">{props.result.type + " scan"}</Badge>
+                                </div>
+                            </Card.Title>
+                            <Card.Text className="p-4">
+                                Done in: {' ' + props.result.date}
+                            </Card.Text>
+                        </Card.Header>
+                    </ListGroup.Item>
+                    { props.result.alerts.map(alert => <Alert alert={alert}/>) }
+                </ListGroup>
+            </Card>
+        </Container>
+        <br/>
+        <ReactToPdf filename={"Report"} targetRef={ref} options={options}>
+          {({toPdf}) =>  (
+            <Button onClick={toPdf}>To PDF</Button>
+          )}
+        </ReactToPdf>
     </div>)
 }
 
