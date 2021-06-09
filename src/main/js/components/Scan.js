@@ -1,11 +1,41 @@
 import React, { useState } from 'react';
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import Report from "./Report";
 import axios from 'axios';
 
 const Scan = () => {
+     
     const [targetURL, setTargetURL] = useState("localhost:8080");
-    const [scanResult, setScanResult] = useState([]);
+    const [scanResult, setScanResult] = useState({
+      "id": 0,
+      "targetURL": "http://localhost:8080",
+      "type": "partial",
+      "date": "2021-06-03",
+      "alerts": [
+      {
+      "id": 0,
+      "url": "http://localhost:8080/login.php",
+      "type": "xss",
+      "description": "Solve it urself",
+      "severity": 1
+      },
+      {
+      "id": 0,
+      "url": "http://localhost:8080/user_new.php",
+      "type": "xss",
+      "description": "Solve it urself",
+      "severity": 1
+      },
+      {
+      "id": 0,
+      "url": "http://localhost:8080/login.php",
+      "type": "xss",
+      "description": "Solve it urself",
+      "severity": 1
+      }
+      ]
+      });
+
     function scan(event) {
       event.preventDefault();
       const config = {
@@ -28,20 +58,14 @@ const Scan = () => {
     }
     return (
       <div>
-          <Form onSubmit={ scan }  style={{width: 300}}>
-				<Form.Group>
-                    <Form.Label>URL</Form.Label>
-                    <Form.Control onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL}/>
-                </Form.Group>
-				<Button type="submit">Begin Scan</Button>
-			</Form>
-      <br/>
-          <div>
-            {/* {scanResult.map(line => (<div>{line}<br/></div>))} */}
-            <pre>
-                { scanResult.length == 0 ? "" : <Report result={scanResult}/> }
-            </pre>
-          </div>
+        <Form onSubmit={ scan }  style={{maxWidth: 300}}>
+          <Form.Group>
+            <Form.Label>URL</Form.Label>
+            <Form.Control onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL}/>
+          </Form.Group>
+          <Button type="submit">Begin Scan</Button>
+        </Form>
+        { scanResult.length == 0 ? "" : <Report result={scanResult}/> }
       </div>
     )
 }
