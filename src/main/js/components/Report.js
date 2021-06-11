@@ -1,59 +1,105 @@
-import React from 'react';
-import { Container, Card, Badge, Button, ListGroup } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
 import ReactToPdf from 'react-to-pdf'
 
+const severity = {
+    1: {
+        color: "danger",
+        text: "High"
+    },
+    2: {
+        color: "warning",
+        text: "Medium"
+    },
+    3: {
+        color: "info",
+        text: "Low"
+    }
+}
 export const Alert = (props) => {
-
+    const [open, setOpen] = useState(false);
+    const onPrint = props.onPrint;
     return(
-        <ListGroup.Item>
-            <Card.Title >
-                <div className="p-4 d-flex justify-content-between">
-                {props.alert.url}
-                <Badge pill variant="danger">{props.alert.type}</Badge>
+        <div style={{borderBottom: "1.2px solid"}}>
+            <Container className="d-flex justify-content-between">
+                <div className="d-flex align-items-center">
+                    <Badge pill style={{width: "6rem", fontSize: "120%", borderRadius: "0.5rem", fontWeight: 400, color: "white"}} variant={severity[props.alert.severity].color}>
+                        {severity[props.alert.severity].text}
+                    </Badge>
                 </div>
-            </Card.Title>
-            <Card.Text className="p-4">
-                Solution:<br/>
-                {props.alert.description}
-            </Card.Text>
-        </ListGroup.Item>)
+                <Container className="d-flex justify-content-center text-left">
+                    <div>
+                        <h5>Reflected cross site scripting</h5>
+                        <div style={{marginBottom: "1rem"}} className="d-flex">
+                            {props.alert.url}
+                        </div>
+                    </div>
+                </Container>
+                <Container style={{width: "40%", visibility: onPrint ? "hidden": "visible"}} 
+                           className="d-flex align-items-center justify-content-between">
+                    <div>
+                        <Button style={{backgroundColor: 'unset', borderColor: 'white', color: 'black'}}
+                                onClick={() => setOpen(!open)}>
+                            View
+                        </Button>
+                    </div>
+                    <div>
+                        <Button style={{backgroundColor: 'unset', borderColor: 'white', color: 'black'}}>
+                            Export
+                        </Button>
+                    </div>
+                </Container>
+            </Container>
+            <Collapse in={open || onPrint}>
+                
+                <div style={{textAlign: "left", paddingLeft: "1rem"}}>
+                    <br/><br/>
+                    (((Information, more details about the alert)))
+                    <br/><br/>
+                </div>
+            </Collapse>
+        </div>
+        )
 }
 
 const Report = (props) => {
-
+    const [onPrint, setOnPrint] = useState(false);
     const ref = React.createRef();
     const options = {
     };
 
-    return(
+    const issuePrint = () => {
+        setOnPrint(true);
+    };
+
+    const completePrint = () => {
+        setOnPrint(false);
+    };
+    return( 
     <div>
-        <Container style={{paddingLeft: "0px"}} fluid ref={ref}>
+        <Container style={{paddingLeft: "0px", maxWidth: 700}} fluid ref={ref}>
             <br/>
-            <h2>Report</h2>
             <br/>
-            <Card style={{maxWidth: 700}}>
                 <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        <Card.Header style={{"backgroundColor": "1px solid rgba(0,0,0,.25)"}}>
-                            <Card.Title>
-                                <div className="px-2 d-flex justify-content-between">
-                                {props.result.targetURL}
-                                <Badge variant="secondary">{props.result.type + " scan"}</Badge>
-                                </div>
-                            </Card.Title>
-                            <Card.Text className="p-4">
-                                Done in: {' ' + props.result.date}
-                            </Card.Text>
-                        </Card.Header>
-                    </ListGroup.Item>
-                    { props.result.alerts.map(alert => <Alert alert={alert}/>) }
+                    <Card.Header style={{"backgroundColor": "1px solid rgba(0,0,0,.25)"}}>
+                        <Card.Title>
+                            <div className="px-2 d-flex justify-content-between">
+                            {props.result.targetURL}
+                            <Badge variant="secondary">{props.result.type + " scan"}</Badge>
+                            </div>
+                        </Card.Title>
+                        <Card.Text className="p-4">
+                            <div style={{textAlign: "end"}}>Done in: {' ' + props.result.date}</div>
+                        </Card.Text>
+                    </Card.Header>
+                    <br/>
+                    { props.result.alerts.map(alert => <Alert onPrint={onPrint} alert={alert}/>) }
                 </ListGroup>
-            </Card>
         </Container>
         <br/>
-        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options}>
+        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
           {({toPdf}) =>  (
-            <Button onClick={toPdf}>To PDF</Button>
+            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
           )}
         </ReactToPdf>
     </div>)
