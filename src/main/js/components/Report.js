@@ -22,7 +22,7 @@ export const Alert = (props) => {
     const onPrint = props.onPrint;
     return(
         <div style={{borderBottom: "1.2px solid"}}>
-            <Container className="d-flex justify-content-between">
+            <Container fluid className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
                     <Badge pill style={{width: "6rem", fontSize: "120%", borderRadius: "0.5rem", fontWeight: 400, color: "white"}} variant={severity[props.alert.severity].color}>
                         {severity[props.alert.severity].text}

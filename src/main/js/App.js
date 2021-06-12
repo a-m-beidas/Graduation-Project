@@ -33,7 +33,7 @@ const App = () => {
                 </Nav>
             </Navbar>
             <br/>
-            <Container className="px-4" fluid>
+            <Container className="px-4 d-flex align-items-start" fluid>
                 <Switch>
                     <Route component={Home} path="/" exact/>
                     <Route path="/login" exact render={(props) => (

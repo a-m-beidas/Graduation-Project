@@ -24,14 +24,14 @@ const Scan = () => {
       "url": "http://localhost:8080/user_new.php",
       "type": "xss",
       "description": "Solve it urself",
-      "severity": 1
+      "severity": 2
       },
       {
       "id": 0,
-      "url": "http://localhost:8080/login.php",
+      "url": "http://localhost:8080/contact.php",
       "type": "xss",
       "description": "Solve it urself",
-      "severity": 1
+      "severity": 3
       }
       ]
       });
