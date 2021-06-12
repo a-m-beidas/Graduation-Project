@@ -1,8 +1,7 @@
 var path = require('path');
 
 module.exports = {
-    entry: './src/main/js/app.js',
-    devtool: 'sourcemaps',
+    entry: './src/main/js/index.js',
     cache: true,
     mode: 'development',
     output: {
@@ -20,6 +19,10 @@ module.exports = {
                         presets: ["@babel/preset-env", "@babel/preset-react"]
                     }
                 }]
+            },
+            {
+                test: /\.css$/,
+                use: [ 'style-loader', 'css-loader']
             }
         ]
     }
