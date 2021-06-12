@@ -18,6 +18,7 @@ const severity = {
 }
 export const Alert = (props) => {
     const [open, setOpen] = useState(false);
+    const ref = React.createRef();
     const onPrint = props.onPrint;
     return(
         <div style={{borderBottom: "1.2px solid"}}>
@@ -31,7 +32,7 @@ export const Alert = (props) => {
                     <div>
                         <h5>Reflected cross site scripting</h5>
                         <div style={{marginBottom: "1rem"}} className="d-flex">
-                            {props.alert.url}
+                            {'~' + props.alert.url}
                         </div>
                     </div>
                 </Container>
@@ -50,9 +51,8 @@ export const Alert = (props) => {
                     </div>
                 </Container>
             </Container>
-            <Collapse in={open || onPrint}>
-                
-                <div style={{textAlign: "left", paddingLeft: "1rem"}}>
+            <Collapse nodeRef={ref} in={open || onPrint}>
+                <div ref={ref} style={{textAlign: "left", paddingLeft: "1rem"}}>
                     <br/><br/>
                     (((Information, more details about the alert)))
                     <br/><br/>
@@ -88,12 +88,13 @@ const Report = (props) => {
                             <Badge variant="secondary">{props.result.type + " scan"}</Badge>
                             </div>
                         </Card.Title>
-                        <Card.Text className="p-4">
-                            <div style={{textAlign: "end"}}>Done in: {' ' + props.result.date}</div>
+                        <Card.Text style={{textAlign: "end"}}>
+                            <br/><br/><br/>
+                            Done in: {' ' + props.result.date}
                         </Card.Text>
                     </Card.Header>
                     <br/>
-                    { props.result.alerts.map(alert => <Alert onPrint={onPrint} alert={alert}/>) }
+                    { props.result.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
                 </ListGroup>
         </Container>
         <br/>
