@@ -39,21 +39,26 @@ const Login = (props) => {
     const onChangePassword = (event) => setPassword(event.target.value);
 
 	return (
-		<div style={{width: 300}}>
-			<Form onSubmit={login}>
-				<Form.Group>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control onChange={onChangeUsername} type="text" name="username" value={username}/>
-                </Form.Group>
-				<Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={onChangePassword} type="password" name="password" value={password}/>
-                </Form.Group>
-				<Button type="submit">Login</Button>
-			</Form><br/><br/>
-            <div>{ status == 'p' || status == 's' ? 
-                    <Spinner animation={status == 'p' ? "border": "grow"} /> : status}</div>
-		</div>
+		<div className="d-flex justify-content-start">
+            <div className="form-app">
+                <Form onSubmit={login}>
+                    <Form.Group>
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control onChange={onChangeUsername} type="text" name="username" value={username}/>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control onChange={onChangePassword} type="password" name="password" value={password}/>
+                    </Form.Group>
+                    <Button type="submit">Login</Button>
+                </Form><br/><br/>
+                <div>{ status == 'p' || status == 's' ? 
+                        <Spinner animation={status == 'p' ? "border": "grow"} /> : status}</div>
+            </div>
+            <div className="sm-hidden  px-4">
+                <img width="500" src="default-placeholder.png"/>
+            </div>
+        </div>
 	)
 }
 

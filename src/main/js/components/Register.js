@@ -30,7 +30,7 @@ const Register = () => {
     const onChangePassword = (event) => setPassword(event.target.value);
 
 	return (
-		<div style={{width: 300}}>
+		<div className="form-app">
 			<Form onSubmit={register}>
 				<Form.Group>
                     <Form.Label>Username</Form.Label>

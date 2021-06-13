@@ -21,10 +21,10 @@ export const Alert = (props) => {
     const ref = React.createRef();
     const onPrint = props.onPrint;
     return(
-        <div style={{borderBottom: "1.2px solid"}}>
+        <div className="alert-main-div-app">
             <Container fluid className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
-                    <Badge pill style={{width: "6rem", fontSize: "120%", borderRadius: "0.5rem", fontWeight: 400, color: "white"}} variant={severity[props.alert.severity].color}>
+                    <Badge pill variant={severity[props.alert.severity].color} className="alert-badge-app">
                         {severity[props.alert.severity].text}
                     </Badge>
                 </div>
@@ -39,20 +39,19 @@ export const Alert = (props) => {
                 <Container style={{width: "40%", visibility: onPrint ? "hidden": "visible"}} 
                            className="d-flex align-items-center justify-content-between">
                     <div>
-                        <Button style={{backgroundColor: 'unset', borderColor: 'white', color: 'black'}}
-                                onClick={() => setOpen(!open)}>
+                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
                             View
                         </Button>
                     </div>
                     <div>
-                        <Button style={{backgroundColor: 'unset', borderColor: 'white', color: 'black'}}>
+                        <Button className="alert-bottom-app">
                             Export
                         </Button>
                     </div>
                 </Container>
             </Container>
             <Collapse nodeRef={ref} in={open || onPrint}>
-                <div ref={ref} style={{textAlign: "left", paddingLeft: "1rem"}}>
+                <div ref={ref} className="alert-transition-app">
                     <br/><br/>
                     (((Information, more details about the alert)))
                     <br/><br/>
@@ -81,7 +80,7 @@ const Report = (props) => {
             <br/>
             <br/>
                 <ListGroup variant="flush">
-                    <Card.Header style={{"backgroundColor": "1px solid rgba(0,0,0,.25)"}}>
+                    <Card.Header className="scan-header-app">
                         <Card.Title>
                             <div className="px-2 d-flex justify-content-between">
                             {props.result.targetURL}

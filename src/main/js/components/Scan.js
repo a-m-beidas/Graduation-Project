@@ -58,7 +58,7 @@ const Scan = () => {
     }
     return (
       <div>
-        <Form onSubmit={ scan }  style={{maxWidth: 300}}>
+        <Form onSubmit={ scan } className="form-app">
           <Form.Group>
             <Form.Label>URL</Form.Label>
             <Form.Control onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL}/>

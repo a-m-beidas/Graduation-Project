@@ -25,7 +25,7 @@ const XSS = () => {
     }
     return (
       <div>
-          <Form onSubmit={ xss }  style={{width: 300}}>
+          <Form onSubmit={ xss } className="form-app">
 				<Form.Group>
                     <Form.Label>URL</Form.Label>
                     <Form.Control onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL}/>

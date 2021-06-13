@@ -4,7 +4,7 @@ const Error = (props) => {
 	if (props.location.state != undefined)
 		var message = props.location.state.message;
 	return (
-		<div style={{width: 300}}>
+		<div className="form-app">
 		    <Alert variant="danger">
                 { message == undefined ? "General Error" : message }
             </Alert>

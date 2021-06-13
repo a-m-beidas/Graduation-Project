@@ -1,0 +1,35 @@
+@media (max-width: 890px) {
+    .sm-hidden {
+        display: none !important;
+      }
+}
+
+.form-app {
+    width: 300px
+}
+
+.alert-badge-app {
+    width: 6rem;
+    font-size: 120%;
+    border-radius: .5rem;
+    font-weight: 400;
+    color: white;
+}
+
+.alert-bottom-app {
+    background-color: unset;
+    border-color: white;
+    color: black
+}
+
+.alert-transition-app {
+    text-align: left;
+    padding-left: 1rem;
+}
+.alert-header-app {
+    background-color: 1px solid rgba(0,0,0,.25)
+}
+
+.alert-main-div-app {
+    border-bottom: 1.2px solid;
+}
