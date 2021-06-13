@@ -4,14 +4,31 @@
       }
 }
 
+.responsive-font {
+    --rate: 2;
+    font-size: calc(var(--fontsize) + var(--rate) * (1vw - 7.78px));
+}
+
+.alert-badge-width {
+    --rate-width: 10;
+    width: calc(100px + var(--rate-width) * (1vw - 7.78px));
+}
+
+@media (min-width: 778px) {
+    .responsive-font {
+        font-size: var(--fontsize);
+    }
+    .alert-badge-width {
+        width: 100px;
+    }
+}
+
 .form-app {
     width: 300px
 }
 
 .alert-badge-app {
-    width: 6rem;
-    font-size: 120%;
-    border-radius: .5rem;
+    border-radius: calc(.5rem - 0.3vw);
     font-weight: 400;
     color: white;
 }
@@ -19,7 +36,7 @@
 .alert-bottom-app {
     background-color: unset;
     border-color: white;
-    color: black
+    color: black;
 }
 
 .alert-transition-app {

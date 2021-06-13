@@ -21,22 +21,28 @@ export const Alert = (props) => {
     const ref = React.createRef();
     const onPrint = props.onPrint;
     return(
-        <div className="alert-main-div-app">
+        <div className="my-2 alert-main-div-app">
             <Container fluid className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
-                    <Badge pill variant={severity[props.alert.severity].color} className="alert-badge-app">
+                    <Badge pill variant={severity[props.alert.severity].color}
+                           className="alert-badge-app alert-badge-width responsive-font"
+                           style={{"--fontsize": "20px"}}>
                         {severity[props.alert.severity].text}
                     </Badge>
                 </div>
                 <Container className="d-flex justify-content-center text-left">
                     <div>
-                        <h5>Reflected cross site scripting</h5>
-                        <div style={{marginBottom: "1rem"}} className="d-flex">
-                            {'~' + props.alert.url}
+                        <h5 className="responsive-font" style={{"--fontsize": "18px"}}>
+                            Reflected cross site scripting
+                        </h5>
+                        <div className="d-flex">
+                            <p className="responsive-font" style={{"--fontsize": "14px"}}>
+                                {'~' + props.alert.url}
+                            </p>
                         </div>
                     </div>
                 </Container>
-                <Container style={{width: "40%", visibility: onPrint ? "hidden": "visible"}} 
+                <div style={{visibility: onPrint ? "hidden": "visible"}} 
                            className="d-flex align-items-center justify-content-between">
                     <div>
                         <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
@@ -48,7 +54,7 @@ export const Alert = (props) => {
                             Export
                         </Button>
                     </div>
-                </Container>
+                </div>
             </Container>
             <Collapse nodeRef={ref} in={open || onPrint}>
                 <div ref={ref} className="alert-transition-app">
@@ -76,7 +82,7 @@ const Report = (props) => {
     };
     return( 
     <div>
-        <Container style={{paddingLeft: "0px", maxWidth: 700}} fluid ref={ref}>
+        <Container style={{paddingLeft: "0px", marginLeft: "0px", maxWidth: 700}} fluid ref={ref}>
             <br/>
             <br/>
                 <ListGroup variant="flush">
