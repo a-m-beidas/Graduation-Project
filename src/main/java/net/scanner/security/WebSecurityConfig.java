@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Bootstrap
                 .antMatchers(HttpMethod.GET, "/bootstrap.min.css", "/bootstrap.min.css.map").permitAll()
                 // Icons
-                .antMatchers(HttpMethod.GET, "/favicon.ico", "/logo192.png").permitAll()
+                .antMatchers(HttpMethod.GET, "/favicon.ico", "/logo192.png", "/default-placeholder.png").permitAll()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()
