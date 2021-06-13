@@ -46,12 +46,16 @@ export const Alert = (props) => {
                            className="d-flex align-items-center justify-content-between">
                     <div>
                         <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
-                            View
+                            <p className="responsive-font" style={{"--fontsize": "17px"}}>
+                                View
+                            </p>
                         </Button>
                     </div>
                     <div>
                         <Button className="alert-bottom-app">
-                            Export
+                            <p className="responsive-font" style={{"--fontsize": "17px"}}>
+                                Export
+                            </p>
                         </Button>
                     </div>
                 </div>
