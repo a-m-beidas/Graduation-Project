@@ -24,7 +24,7 @@ function capitalize(string) {
 
 const Report = (props) => {
     const [onPrint, setOnPrint] = useState(false);
-    const ref = React.createRef();
+    const ref = React.useRef();
     const options = {
     };
 
@@ -46,9 +46,11 @@ const Report = (props) => {
                         <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(props.result.type)}</Badge> Scan Report
                     </Card.Title>
                     <Card.Text>
-                        <strong>Target URL: </strong>{props.result.targetURL}<br/>
-                        <strong>Done by: </strong>{jwt("sub")}<br/>
-                        <strong>Done in: </strong>{props.result.date}
+                        <div>
+                            <strong>Target URL: </strong>{props.result.targetURL}<br/>
+                            <strong>Done by: </strong>{jwt("sub")}<br/>
+                            <strong>Done in: </strong>{props.result.date}
+                        </div>
                     </Card.Text>
                 </Card.Header>
                 <br/>
@@ -66,7 +68,7 @@ const Report = (props) => {
 
 export const Alert = (props) => {
     const [open, setOpen] = useState(false);
-    const ref = React.createRef();
+    const ref = React.useRef();
     const onPrint = props.onPrint;
     return(
         <div className="my-2 alert-main-div-app">
@@ -93,7 +95,8 @@ export const Alert = (props) => {
                 <div style={{visibility: onPrint ? "hidden": "visible"}} 
                            className="d-flex align-items-center justify-content-between">
                     <div>
-                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
+                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}
+                                aria-controls="a">
                             <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                 View
                             </p>
@@ -108,8 +111,8 @@ export const Alert = (props) => {
                     </div>
                 </div>
             </Container>
-            <Collapse nodeRef={ref} in={open || onPrint}>
-                <div ref={ref} className="alert-transition-app">
+            <Collapse  in={open || onPrint}>
+                <div id="a" ref={ref} className="alert-transition-app">
                     <br/><br/>
                     (((Information, more details about the alert)))
                     <br/><br/>
