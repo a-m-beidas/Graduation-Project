@@ -46,11 +46,9 @@ const Report = (props) => {
                         <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(props.result.type)}</Badge> Scan Report
                     </Card.Title>
                     <Card.Text>
-                        <div>
-                            <strong>Target URL: </strong>{props.result.targetURL}<br/>
-                            <strong>Done by: </strong>{jwt("sub")}<br/>
-                            <strong>Done in: </strong>{props.result.date}
-                        </div>
+                        <strong>Target URL: </strong>{props.result.targetURL}<br/>
+                        <strong>Done by: </strong>{jwt("sub")}<br/>
+                        <strong>Done in: </strong>{props.result.date}
                     </Card.Text>
                 </Card.Header>
                 <br/>
@@ -95,8 +93,7 @@ export const Alert = (props) => {
                 <div style={{visibility: onPrint ? "hidden": "visible"}} 
                            className="d-flex align-items-center justify-content-between">
                     <div>
-                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}
-                                aria-controls="a">
+                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
                             <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                 View
                             </p>
@@ -111,8 +108,8 @@ export const Alert = (props) => {
                     </div>
                 </div>
             </Container>
-            <Collapse  in={open || onPrint}>
-                <div id="a" ref={ref} className="alert-transition-app">
+            <Collapse in={open || onPrint}>
+                <div ref={ref} className="alert-transition-app">
                     <br/><br/>
                     (((Information, more details about the alert)))
                     <br/><br/>
