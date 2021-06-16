@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
-import ReactToPdf from 'react-to-pdf'
+import ReactToPdf from 'react-to-pdf';
+import jwt from '../utils/JWTPayload';
 
 const severity = {
     1: {
@@ -16,6 +17,53 @@ const severity = {
         text: "Low"
     }
 }
+
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+const Report = (props) => {
+    const [onPrint, setOnPrint] = useState(false);
+    const ref = React.createRef();
+    const options = {
+    };
+
+    const issuePrint = () => {
+        setOnPrint(true);
+    };
+
+    const completePrint = () => {
+        setOnPrint(false);
+    };
+    return( 
+    <div>
+        <Container style={{paddingLeft: "0px", marginLeft: "0px", maxWidth: 700}} fluid ref={ref}>
+            <br/>
+            <br/>
+            <ListGroup variant="flush">
+                <Card.Header className="scan-header-app">
+                    <Card.Title>
+                        <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(props.result.type)}</Badge> Scan Report
+                    </Card.Title>
+                    <Card.Text>
+                        <strong>Target URL: </strong>{props.result.targetURL}<br/>
+                        <strong>Done by: </strong>{jwt("sub")}<br/>
+                        <strong>Done in: </strong>{props.result.date}
+                    </Card.Text>
+                </Card.Header>
+                <br/>
+            </ListGroup>
+            { props.result.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
+        </Container>
+        <br/>
+        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
+          {({toPdf}) =>  (
+            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
+          )}
+        </ReactToPdf>
+    </div>)
+}
+
 export const Alert = (props) => {
     const [open, setOpen] = useState(false);
     const ref = React.createRef();
@@ -70,51 +118,5 @@ export const Alert = (props) => {
         </div>
         )
 }
-
-const Report = (props) => {
-    const [onPrint, setOnPrint] = useState(false);
-    const ref = React.createRef();
-    const options = {
-    };
-
-    const issuePrint = () => {
-        setOnPrint(true);
-    };
-
-    const completePrint = () => {
-        setOnPrint(false);
-    };
-    return( 
-    <div>
-        <Container style={{paddingLeft: "0px", marginLeft: "0px", maxWidth: 700}} fluid ref={ref}>
-            <br/>
-            <br/>
-                <ListGroup variant="flush">
-                    <Card.Header className="scan-header-app">
-                        <Card.Title>
-                            <div className="px-2 d-flex justify-content-between">
-                            {props.result.targetURL}
-                            <Badge variant="secondary">{props.result.type + " scan"}</Badge>
-                            </div>
-                        </Card.Title>
-                        <Card.Text style={{textAlign: "end"}}>
-                            <br/><br/><br/>
-                            Done in: {' ' + props.result.date}
-                        </Card.Text>
-                    </Card.Header>
-                    <br/>
-                    { props.result.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
-                </ListGroup>
-        </Container>
-        <br/>
-        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
-          {({toPdf}) =>  (
-            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
-          )}
-        </ReactToPdf>
-    </div>)
-}
-
-
 
 export default Report

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import jwt from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Spinner } from "react-bootstrap";
 
@@ -22,8 +21,6 @@ const Login = (props) => {
                 if (response.status === 200) {
                     setStatus('s');
                     const token = response.data;
-                    const user = jwt(token);
-                    localStorage.setItem("user", JSON.stringify(user));
                     localStorage.setItem('bearer-token', token);
                     setTimeout(() => {history.push("/"); setLogIn(true)}, 1000);
                 } else

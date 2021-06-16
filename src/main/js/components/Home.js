@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import jwt from '../utils/JWTPayload';
 
 const Home = () => {
     const[username, setUsername] = useState(", sign in");
     useEffect(() => {
-        var user = localStorage.getItem("user");
-        if (!user)
+        const clientName = jwt("sub");
+        console.log("hello")
+        if (!clientName)
             return;
-        user = JSON.parse(user);
-        setUsername(user.sub);
+        setUsername(clientName);
     });
     return (
     <div>   
