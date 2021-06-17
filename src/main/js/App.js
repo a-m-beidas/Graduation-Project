@@ -8,6 +8,8 @@ import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import XSS from "./components/XSS";
 import Scan from "./components/Scan";
+import Report from "./components/Report";
+import AlertExport from './components/AlertExport'
 import Error from "./components/Error";
 
 const App = () => {
@@ -43,6 +45,8 @@ const App = () => {
                     <Route component={Error} path="/error"/>
                     <PrivateRoute component={XSS} path="/xss"/>
                     <PrivateRoute component={Scan} path="/scan"/>
+                    <PrivateRoute component={Report} path="/report"/>
+                    <PrivateRoute component={AlertExport} path="/alert"/>
                     <LogoutRoute setLogIn={setLogIn} path="/logout"/>
                 </Switch>
             </Container>

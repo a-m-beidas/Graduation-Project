@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button, Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import Report from "./Report";
 import axios from 'axios';
 
 const Scan = () => {
      
     const [targetURL, setTargetURL] = useState("localhost:8080");
+    const history = useHistory();
+    const [requestMessage, setRequestMessage] = useState("")
     const [scanResult, setScanResult] = useState({
       "id": 0,
       "targetURL": "http://localhost:8080",
@@ -44,16 +47,21 @@ const Scan = () => {
           params:
             { url: targetURL }
           };
+      if (scanResult.id !== undefined) {
+        history.push({
+          pathname: '/report',
+          state: { report: scanResult }
+        });
+        return;
+      }
       axios.get('/api/scan', config)
         .then(response => {
-          console.log(response.data)
-
           if (response.status == 200) {
-            setScanResult(response.data);
+            
           }
         })
         .catch (error => {
-          setScanResult(error.response.data);
+          setRequestMessage(error.response.data);
         })
     }
     return (
@@ -65,7 +73,7 @@ const Scan = () => {
           </Form.Group>
           <Button type="submit">Begin Scan</Button>
         </Form>
-        { scanResult.length == 0 ? "" : <Report result={scanResult}/> }
+        { requestMessage }
       </div>
     )
 }

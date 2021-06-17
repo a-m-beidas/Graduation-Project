@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { useHistory } from "react-router-dom";
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
 import ReactToPdf from 'react-to-pdf';
 import jwt from '../utils/JWTPayload';
+
 
 const severity = {
     1: {
@@ -23,6 +25,7 @@ function capitalize(string) {
 }
 
 const Report = (props) => {
+    const report = props.location.state.report;
     const [onPrint, setOnPrint] = useState(false);
     const ref = React.useRef();
     const options = {
@@ -35,25 +38,23 @@ const Report = (props) => {
     const completePrint = () => {
         setOnPrint(false);
     };
-    return( 
+    return(
     <div>
         <Container style={{paddingLeft: "0px", marginLeft: "0px", maxWidth: 700}} fluid ref={ref}>
-            <br/>
-            <br/>
             <ListGroup variant="flush">
                 <Card.Header className="scan-header-app">
                     <Card.Title>
-                        <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(props.result.type)}</Badge> Scan Report
+                        <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(report.type)}</Badge> Scan Report
                     </Card.Title>
                     <Card.Text>
-                        <strong>Target URL: </strong>{props.result.targetURL}<br/>
+                        <strong>Target URL: </strong>{report.targetURL}<br/>
                         <strong>Done by: </strong>{jwt("sub")}<br/>
-                        <strong>Done in: </strong>{props.result.date}
+                        <strong>Done in: </strong>{report.date}
                     </Card.Text>
                 </Card.Header>
                 <br/>
             </ListGroup>
-            { props.result.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
+            { report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
         </Container>
         <br/>
         <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
@@ -65,17 +66,25 @@ const Report = (props) => {
 }
 
 export const Alert = (props) => {
+    const alert = props.alert;
     const [open, setOpen] = useState(false);
     const ref = React.useRef();
     const onPrint = props.onPrint;
+    let history = useHistory();
+    const exportAlert = () => {
+        history.push({
+            pathname: '/alert',
+            state: { alert: alert }
+        });
+    }
     return(
         <div className="my-2 alert-main-div-app">
             <Container fluid className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
-                    <Badge pill variant={severity[props.alert.severity].color}
+                    <Badge pill variant={severity[alert.severity].color}
                            className="alert-badge-app alert-badge-width responsive-font"
                            style={{"--fontsize": "20px"}}>
-                        {severity[props.alert.severity].text}
+                        {severity[alert.severity].text}
                     </Badge>
                 </div>
                 <Container className="d-flex justify-content-center text-left">
@@ -85,7 +94,7 @@ export const Alert = (props) => {
                         </h5>
                         <div className="d-flex">
                             <p className="responsive-font" style={{"--fontsize": "14px"}}>
-                                {'~' + props.alert.url}
+                                {'~' + alert.url}
                             </p>
                         </div>
                     </div>
@@ -100,7 +109,7 @@ export const Alert = (props) => {
                         </Button>
                     </div>
                     <div>
-                        <Button className="alert-bottom-app">
+                        <Button className="alert-bottom-app" onClick={exportAlert}>
                             <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                 Export
                             </p>
