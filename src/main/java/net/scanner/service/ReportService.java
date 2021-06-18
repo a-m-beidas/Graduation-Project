@@ -17,7 +17,7 @@ public class ReportService {
     @Autowired
     ScanRepository scanRepository;
 
-    public Scan getScan(String scanId, String authorizationHeader) throws ClassNotFoundException {
+    public Scan getScan(int scanId, String authorizationHeader) throws ClassNotFoundException {
         int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
         Optional<Scan> scan = scanRepository.findById(scanId);
         return validateScan(scan, userId);

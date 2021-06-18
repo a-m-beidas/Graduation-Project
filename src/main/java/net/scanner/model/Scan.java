@@ -29,6 +29,10 @@ public class Scan {
     @OneToMany(cascade= CascadeType.ALL)
     private List<Alert> alerts;
 
+    public Scan() {
+
+    }
+
     public Scan(int userId, String targetURL, ScanType type) {
         this.userId = userId;
         this.targetURL = targetURL;
