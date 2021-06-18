@@ -5,7 +5,6 @@ const Home = () => {
     const[username, setUsername] = useState(", sign in");
     useEffect(() => {
         const clientName = jwt("sub");
-        console.log("hello")
         if (!clientName)
             return;
         setUsername(clientName);

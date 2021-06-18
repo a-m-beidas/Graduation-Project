@@ -1,9 +1,6 @@
 package net.scanner.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -21,16 +18,19 @@ public class Scan {
     @GeneratedValue
     private int id;
 
+    private int userId;
+
     private String targetURL;
 
     private ScanType type;
 
     private Date date;
 
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL)
     private List<Alert> alerts;
 
-    public Scan(String targetURL, ScanType type) {
+    public Scan(int userId, String targetURL, ScanType type) {
+        this.userId = userId;
         this.targetURL = targetURL;
         this.type = type;
         date = Date.valueOf(LocalDate.now());
@@ -44,6 +44,8 @@ public class Scan {
     public int getId() {
         return id;
     }
+
+    public int getUserId() { return userId; }
 
     public String getTargetURL() {
         return targetURL;

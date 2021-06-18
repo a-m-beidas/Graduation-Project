@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import Report from "./Report";
 import axios from 'axios';
 
 const Scan = () => {
      
-    const [targetURL, setTargetURL] = useState("localhost:8080");
+    const [targetURL, setTargetURL] = useState("example");
     const history = useHistory();
     const [requestMessage, setRequestMessage] = useState("")
     const [scanResult, setScanResult] = useState({
-      "id": 0,
+      "id": 1,
+      "userId": 24,
       "targetURL": "http://localhost:8080",
       "type": "partial",
       "date": "2021-06-03",
@@ -37,8 +37,7 @@ const Scan = () => {
       "severity": 3
       }
       ]
-      });
-
+    });
     function scan(event) {
       event.preventDefault();
       const config = {
@@ -46,8 +45,8 @@ const Scan = () => {
             { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') },
           params:
             { url: targetURL }
-          };
-      if (scanResult.id !== undefined) {
+      };
+      if (targetURL === "example") {
         history.push({
           pathname: '/report',
           state: { report: scanResult }
@@ -57,7 +56,10 @@ const Scan = () => {
       axios.get('/api/scan', config)
         .then(response => {
           if (response.status == 200) {
-            
+            history.push({
+              pathname: '/report?id=' + response.data.id,
+              state: { report: response.data }
+            });
           }
         })
         .catch (error => {
