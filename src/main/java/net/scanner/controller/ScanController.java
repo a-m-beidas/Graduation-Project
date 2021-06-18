@@ -2,6 +2,7 @@ package net.scanner.controller;
 
 import net.scanner.model.Alert;
 import net.scanner.model.Scan;
+import net.scanner.service.ReportService;
 import net.scanner.service.ScanService;
 import net.scanner.service.XssService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class ScanController {
     @Autowired
     XssService xssService;
 
+    @Autowired
+    ReportService reportService;
+
     @GetMapping(path = "/scan")
-    public Scan scanPage(@RequestParam String url) throws IOException, URISyntaxException {
-        Scan result = scanService.crawl(url);
+    public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestParam String url) throws IOException, URISyntaxException, ClassNotFoundException {
+        Scan result = scanService.scan(url, authorizationHeader);
         return result;
     }
 
@@ -33,5 +37,11 @@ public class ScanController {
     Alert xss(@RequestParam String url) throws IOException, URISyntaxException {
         Alert result = xssService.xss(url);
         return result;
+    }
+
+    @GetMapping("/report")
+    public Scan report(@RequestHeader("Authorization") String authorizationHeader, @RequestParam String id) throws ClassNotFoundException {
+        Scan scan = reportService.getScan(id, authorizationHeader);
+        return scan;
     }
 }

@@ -46,6 +46,7 @@ const App = () => {
                     <PrivateRoute component={XSS} path="/xss"/>
                     <PrivateRoute component={Scan} path="/scan"/>
                     <PrivateRoute component={Report} path="/report"/>
+                    <PrivateRoute component={Report} path="/report:id"/>
                     <PrivateRoute component={AlertExport} path="/alert"/>
                     <LogoutRoute setLogIn={setLogIn} path="/logout"/>
                 </Switch>

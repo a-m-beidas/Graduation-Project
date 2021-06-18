@@ -4,6 +4,8 @@ import net.scanner.model.Alert;
 import net.scanner.model.Record;
 import net.scanner.model.Scan;
 import net.scanner.repository.RecordRepository;
+import net.scanner.repository.ScanRepository;
+import net.scanner.security.TokenUtility;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,16 +26,23 @@ public class ScanService {
     RecordRepository recordRepository;
 
     @Autowired
+    ScanRepository scanRepository;
+
+    @Autowired
     XssService xssService;
+
+    @Autowired
+    TokenUtility tokenUtility;
 
     List<String> crawlResult;
     URI targetURL;
 
-    public Scan crawl(String targetURL) throws IOException, URISyntaxException {
+    public Scan scan(String targetURL, String authorizationHeader) throws IOException, URISyntaxException, ClassNotFoundException {
+        int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
         targetURL = (!targetURL.contains("://")) ? "http://" + targetURL : targetURL;
         recordRepository.deleteAll();
         crawlResult = new LinkedList<String>();
-        Scan scan = new Scan(targetURL, Scan.ScanType.partial);
+        Scan scan = new Scan(userId, targetURL, Scan.ScanType.partial);
         this.targetURL = new URI(targetURL);
         processPage(targetURL);
         List<String> urls = crawlResult;
@@ -45,6 +54,7 @@ public class ScanService {
         }
         crawlResult = null;
         this.targetURL = null;
+        scanRepository.save(scan);
         return scan;
     }
 
