@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
 import ReactToPdf from 'react-to-pdf';
 import jwt from '../utils/JWTPayload';
@@ -27,16 +27,23 @@ function capitalize(string) {
 
 const Report = (props) => {
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
+    const [status, setStatus] = useState("");
     const config = {
         headers:
           { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
     };
-    if (report !== undefined) {
+    if (report.targetURL === undefined) {
         axios.get('/api/report' + props.location.search, config)
             .then(response => {
-                if (response.status == 200) {
+                if (response.status === 200) {
                     setReport(response.data);
+                    setStatus({value: response.status});
+                } else {
+                    throw response;
                 }
+            })
+            .catch(error => {
+                setStatus({value: error.response.status, text: error.response.data})
             });
     }
     const [onPrint, setOnPrint] = useState(false);
@@ -52,22 +59,29 @@ const Report = (props) => {
         setOnPrint(false);
     };
     return(
+    <>
+    {
+    status.value === undefined ? "..."
+        :
+    status.value !== 200 ?
+    <Redirect to={{pathname: "/error", state: { message: status.text }}} />
+        :
     <div>
         <Container style={{paddingLeft: "0px", marginLeft: "0px", maxWidth: 700}} fluid ref={ref}>
             <ListGroup variant="flush">
                 <Card.Header className="scan-header-app">
                     <Card.Title>
-                        <Badge style={{fontSize: "1.25rem"}} variant="secondary">{report.targetURL === undefined ? "": capitalize(report.type)}</Badge> Scan Report
+                        <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(report.type)}</Badge> Scan Report
                     </Card.Title>
                     <Card.Text>
-                        <strong>Target URL: </strong>{report.targetURL === undefined ? "": report.targetURL}<br/>
+                        <strong>Target URL: </strong>{report.targetURL}<br/>
                         <strong>Done by: </strong>{jwt("sub")}<br/>
-                        <strong>Done in: </strong>{report.targetURL === undefined ? "": report.date}
+                        <strong>Done in: </strong>{report.date}
                     </Card.Text>
                 </Card.Header>
                 <br/>
             </ListGroup>
-            { report.targetURL === undefined ? "": report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
+            { report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
         </Container>
         <br/>
         <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
@@ -75,7 +89,8 @@ const Report = (props) => {
             <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
           )}
         </ReactToPdf>
-    </div>)
+    </div>}
+    </>)
 }
 
 export const Alert = (props) => {

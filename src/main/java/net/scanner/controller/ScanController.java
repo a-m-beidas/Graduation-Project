@@ -40,7 +40,7 @@ public class ScanController {
     }
 
     @GetMapping("/report")
-    public Scan report(@RequestHeader("Authorization") String authorizationHeader, @RequestParam int id) throws ClassNotFoundException {
+    public Scan report(@RequestHeader("Authorization") String authorizationHeader, @RequestParam int id) throws Exception {
         Scan scan = reportService.getScan(id, authorizationHeader);
         return scan;
     }

@@ -28,7 +28,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
                     <Component {...props} />
                     : <Redirect to={{
                         pathname: "/error",
-                        state: { message: "Unauthorized" }
+                        state: { message: "Unauthorized: login" }
                       }} />
         )}} />
     );

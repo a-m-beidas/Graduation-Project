@@ -17,16 +17,16 @@ public class ReportService {
     @Autowired
     ScanRepository scanRepository;
 
-    public Scan getScan(int scanId, String authorizationHeader) throws ClassNotFoundException {
+    public Scan getScan(int scanId, String authorizationHeader) throws Exception {
         int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
         Optional<Scan> scan = scanRepository.findById(scanId);
         return validateScan(scan, userId);
     }
 
-    Scan validateScan(Optional<Scan> scanOptional, int userIdToken) {
-        Scan scan = scanOptional.orElseThrow(() -> new Error("not found"));
+    Scan validateScan(Optional<Scan> scanOptional, int userIdToken) throws Exception {
+        Scan scan = scanOptional.orElseThrow(() -> new Exception("Report not found"));
         if (scan.getUserId() != userIdToken)
-            throw new Error("not the corresponding user");
+            throw new Exception("Unauthorized: not the corresponding user");
         return scan;
     }
 }
