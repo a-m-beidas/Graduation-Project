@@ -4,12 +4,10 @@ from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup as bs
 
-
 def get_all_forms(url):
     """Given a `url`, it returns all forms from the HTML content"""
     soup = bs(requests.get(url).content, "html.parser")
     return soup.find_all("form")
-
 
 def get_form_details(form):
     """
@@ -31,7 +29,6 @@ def get_form_details(form):
     details["method"] = method
     details["inputs"] = inputs
     return details
-
 
 def submit_form(form_details, url, value):
     """
@@ -65,7 +62,6 @@ def submit_form(form_details, url, value):
         # GET request
         return requests.get(target_url, params=data)
 
-
 def scan_xss(url):
     """
     Given a `url`, it prints all XSS vulnerable forms and
@@ -88,7 +84,6 @@ def scan_xss(url):
             is_vulnerable = True
             # won't break because we want to print available vulnerable forms
     return is_vulnerable
-
 
 if __name__ == "__main__":
     # url = "https://xss-game.appspot.com/level1/frame"
