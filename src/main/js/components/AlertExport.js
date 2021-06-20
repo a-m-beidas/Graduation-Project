@@ -3,15 +3,15 @@ import './AlertExport.js.css';
 
 const severity = {
     1: {
-        color: "danger",
+        color: "#e53935",
         text: "High"
     },
     2: {
-        color: "warning",
+        color: "yellow",
         text: "Medium"
     },
     3: {
-        color: "info",
+        color: "blue",
         text: "Low"
     }
 }
@@ -33,12 +33,11 @@ const AlertExport = (props) => {
         "references": ["http://projects.webappsec.org/Cross-Site-Scripting", "http://cwe.mitre.org/data/definitions/79.html"]
     });
     return (
-        <div>
+        <div className="export">
             <section class="header">
                 <h1>{alert.type}</h1>
-                <div class="buttons">
-                    <p id="severity" class="rectangle">{severity[alert.severity].text}</p>
-
+                <div id="button">
+                    <p id="severity" style={{"--primary-color": severity[alert.severity].color}} class="rectangle">{severity[alert.severity].text}</p>
                     <p id="export">Export</p>
                 </div>
 

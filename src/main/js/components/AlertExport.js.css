@@ -4,17 +4,17 @@
     font-weight: normal;
   }
   
-  :root {
-    --primary-color: #e53935;
+.export {
     --grey-color: #7a7a7a;
   }
   
-  p {
+.export p {
     /* font-size: 36px;
     line-height: 42px; */
   }
   /* Reflected cross site scripting */
-  h1 {
+  
+.export h1 {
     /* Reflected cross site scripting */
   
     /* position: absolute; */
@@ -32,14 +32,14 @@
     color: #e53935;
   }
   
-  .buttons {
+.export #button {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
   }
   
   /* High */
-  #severity {
+.export  #severity {
     /* position: absolute; */
     width: 203px;
     height: 61px;
@@ -59,16 +59,16 @@
     line-height: 42px;
   }
   
-  .severity-box {
+.export #severity {
     align-content: center;
     align-items: center;
   }
   
-  section {
+.export section {
     margin: auto 65px;
   }
   
-  h2 {
+.export h2 {
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
@@ -76,48 +76,47 @@
     line-height: 56px;
   }
   
-  p,
-  pre {
+.export p,  pre {
     font-size: 24px;
     line-height: 28px;
   
     color: #000000;
   }
   
-  table {
+.export table {
     width: 900px;
     justify-content: space-between;
   }
   
-  tbody {
+.export tbody {
     display: flex;
     flex-wrap: wrap;
   }
   
-  tr {
+.export tr {
     display: flex;
     flex-direction: column;
     /* padding-right: 30px; */
   }
   
-  tr:nth-child(3) {
+.export tr:nth-child(3) {
     padding-left: 60px;
   }
   
-  tr:nth-child(even) p {
+.export tr:nth-child(even) p {
     color: var(--grey-color);
   }
   
-  td {
+.export td {
     display: flex;
     height: 60px;
     /* max-width: 500px; */
   }
   
-  td p {
+.export td p {
     padding-right: 20px;
   }
   
-  hr {
+.export hr {
     border: 1px solid #000000;
   }
