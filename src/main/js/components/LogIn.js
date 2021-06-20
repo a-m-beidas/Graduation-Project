@@ -37,6 +37,9 @@ const Login = (props) => {
 
 	return (
 		<div className="d-flex justify-content-start">
+            <div className="sm-hidden  px-4">
+                <img width="500" src="default-placeholder.png"/>
+            </div>
             <div className="form-app">
                 <Form onSubmit={login}>
                     <Form.Group>
@@ -51,9 +54,6 @@ const Login = (props) => {
                 </Form><br/><br/>
                 <div>{ status == 'p' || status == 's' ? 
                         <Spinner animation={status == 'p' ? "border": "grow"} /> : status}</div>
-            </div>
-            <div className="sm-hidden  px-4">
-                <img width="500" src="default-placeholder.png"/>
             </div>
         </div>
 	)
