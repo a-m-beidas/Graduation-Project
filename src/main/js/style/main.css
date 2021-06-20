@@ -23,8 +23,34 @@
     }
 }
 
+.div-scan {
+    text-align: center;
+    background: #cecece
+}
+
+.grey-control-scan {
+    background-color: #cecece
+}
+
+.grey-control-scan {
+    background-color: #cecece
+}
+
 .form-app {
-    width: 300px
+    width: 700px;
+    display: inline-block;
+}
+
+.form-control {
+    width: 80%;
+}
+
+.form-on-button {
+    position: absolute;
+    width: 24%;
+    font-size: 0.8rem;
+    right: 0.8%;
+    bottom: 7%
 }
 
 .alert-badge-app {
