@@ -105,7 +105,7 @@ const Scan = () => {
           <Form.Group style={{backgroundColor: "white"}}>
             <div className="d-flex px-2 justify-content-between">
               <h4>Session ID</h4>
-              <Switch onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops2(!cops2)} checked={cops2}/>
+              <Switch height={20} width={45} onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops2(!cops2)} checked={cops2}/>
             </div>
             <Collapse in={cops2}>
               <div className="py-4">
@@ -120,7 +120,7 @@ const Scan = () => {
           <Form.Group style={{backgroundColor: "white"}}>
             <div className="d-flex px-2 justify-content-between">
               <h4>Cookie</h4>
-              <Switch onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops3(!cops3)} checked={cops3}/>
+              <Switch height={20} width={45} onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops3(!cops3)} checked={cops3}/>
             </div>
             <Collapse in={cops3}>
               <div className="py-4">
