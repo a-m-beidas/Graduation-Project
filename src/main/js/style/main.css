@@ -25,7 +25,8 @@
 
 .div-scan {
     text-align: center;
-    background: #cecece
+    background: #cecece;
+    max-width: 800px
 }
 
 .grey-control-scan {
@@ -38,7 +39,7 @@
 
 
 .form-control {
-    width: 80%;
+    width: 256px;
 }
 
 .form-on-button {
@@ -73,12 +74,12 @@
     border-bottom: 1.2px solid;
 }
 
-.btn {
+.btn-app {
     background: rgba(228, 72, 35);
     border-color: rgba(228, 72, 35);
 }
 
-.btn:hover {
+.btn-app:hover {
     background: rgba(228, 72, 35);
     border-color: rgba(228, 72, 35);
 }

@@ -51,7 +51,7 @@ const Scan = () => {
       if (targetURL === "example") {
         history.push({
           pathname: '/report',
-          state: { report: scanResult }
+          state: { report: scanResult, status: {value: 200} }
         });
         return;
       }
@@ -60,7 +60,7 @@ const Scan = () => {
           if (response.status == 200) {
             history.push({
               pathname: '/report?id=' + response.data.id,
-              state: { report: response.data }
+              state: { report: response.data, status: {value: 200} }
             });
           }
         })

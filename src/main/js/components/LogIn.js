@@ -44,11 +44,11 @@ const Login = (props) => {
                 <Form onSubmit={login}>
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
-                        <Form.Control style={{width: "256px"}} onChange={onChangeUsername} type="text" name="username" value={username}/>
+                        <Form.Control onChange={onChangeUsername} type="text" name="username" value={username}/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control style={{width: "256px"    }} onChange={onChangePassword} type="password" name="password" value={password}/>
+                        <Form.Control onChange={onChangePassword} type="password" name="password" value={password}/>
                     </Form.Group>
                     <Button type="submit">Login</Button>
                     <div>{ status == 'p' || status == 's' ? 

@@ -26,8 +26,9 @@ function capitalize(string) {
 }
 
 const Report = (props) => {
+    console.log(props);
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState(props.location.state === undefined ? "" : props.location.state.status);
     const config = {
         headers:
           { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
