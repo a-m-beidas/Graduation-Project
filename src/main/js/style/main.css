@@ -26,7 +26,7 @@
 .div-scan {
     text-align: center;
     background: #cecece;
-    max-width: 600px
+    width: 600px
 }
 
 .div-scan0 {
@@ -43,7 +43,7 @@
 
 
 .form-control {
-    width: 256px;
+    width: 400px;
 }
 
 .form-on-button {
