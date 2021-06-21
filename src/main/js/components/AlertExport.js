@@ -40,9 +40,7 @@ const AlertExport = (props) => {
                     <p id="severity" style={{"--primary-color": severity[alert.severity].color}} class="rectangle">{severity[alert.severity].text}</p>
                     <p id="export">Export</p>
                 </div>
-
                 <section class="info">
-
                     <table>
                         <tbody>
                             <tr>
@@ -50,7 +48,6 @@ const AlertExport = (props) => {
                                 <td><p>Method</p></td>
                                 <td><p>Parameter</p></td>
                             </tr>
-
                             <tr>
                                 <td><p>{alert.path}</p></td>
                                 <td><p>{alert.method}</p></td>
@@ -68,11 +65,8 @@ const AlertExport = (props) => {
                             </tr>
                         </tbody>
                     </table>
-
                 </section>
-
             </section>
-
             <section class="description">
                 <h2>
                     Description
@@ -80,16 +74,18 @@ const AlertExport = (props) => {
                 <hr/>
                 <text>{alert.description.split("\n").map(line => {return <>{line}<br/></>})}</text>
             </section>
-
-            <section class="how">
+            <section>
                 <h2>How To Fix IT</h2>
                 <hr/>
-                <text>{alert.fix.split("\n").map(line => {return <>{line}<br/></>})}</text>
-
+                <div id="how">
+                    <text>{alert.fix.split("\n").map(line => {return <>{line}<br/></>})}</text>
+                </div>
                 <h2>References</h2>
-
-                { alert.references.map(ref => {return <><a href={ref}>{ref}</a><br/></> })}
-                </section>
+                <hr/>
+                <ul id="references">
+                    { alert.references.map(ref => {return <li><a href={ref}>{ref}</a></li> })}
+                </ul>
+            </section>
         </div>
     )
 }
