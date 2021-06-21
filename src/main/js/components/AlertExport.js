@@ -36,7 +36,7 @@ const AlertExport = (props) => {
         <div className="export">
             <section class="header">
                 <h1>{alert.type}</h1>
-                <div id="button">
+                <div id="button" className="py-5">
                     <p id="severity" style={{"--primary-color": severity[alert.severity].color}} class="rectangle">{severity[alert.severity].text}</p>
                     <p id="export">Export</p>
                 </div>
