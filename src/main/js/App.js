@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import PrivateRoute from './PrivateRoute';
 import LogoutRoute from './LogoutRoute';
@@ -17,22 +17,25 @@ const App = () => {
     const [isLoggedIn, setLogIn] = useState(localStorage.getItem("bearer-token") != undefined);
     return (
         <Router>
-            <Navbar bg="light" expand="sm" className="px-4">
+            <Navbar bg="light" expand="sm" className="px-4 justify-content-between">
                 <Navbar.Brand href="/">
                     <img src="/logo192.png"
                         height="30"
                         className="d-inline-block align-top px-2"
                         alt="React Bootstrap logo"/>
-                    Demo App
+                    Vulnerability Scanner
                 </Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link hidden={isLoggedIn} href="/login">Login</Nav.Link>
-                    <Nav.Link hidden={isLoggedIn} href="/register">Register</Nav.Link>
-                    <Nav.Link hidden={!isLoggedIn} href="/xss">XSS</Nav.Link>
-                    <Nav.Link hidden={!isLoggedIn} href="/scan">Scan</Nav.Link>
-                    <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
-                </Nav>
+                <Navbar.Toggle aria-controls="navbarScroll"/>
+                <Navbar.Collapse id="navbarScroll">
+                    <Nav style={{textAlign: "right"}}>
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link hidden={isLoggedIn} href="/login">Login</Nav.Link>
+                        <Nav.Link hidden={isLoggedIn} href="/register">Register</Nav.Link>
+                        <Nav.Link hidden={!isLoggedIn} href="/xss">XSS</Nav.Link>
+                        <Nav.Link hidden={!isLoggedIn} href="/scan">Scan</Nav.Link>
+                        <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
             <br/>
             <Container className="px-4" fluid>

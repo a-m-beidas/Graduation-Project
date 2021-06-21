@@ -36,10 +36,6 @@
     background-color: #cecece
 }
 
-.form-app {
-    width: 700px;
-    display: inline-block;
-}
 
 .form-control {
     width: 80%;
@@ -75,4 +71,14 @@
 
 .alert-main-div-app {
     border-bottom: 1.2px solid;
+}
+
+.btn {
+    background: rgba(228, 72, 35);
+    border-color: rgba(228, 72, 35);
+}
+
+.btn:hover {
+    background: rgba(228, 72, 35);
+    border-color: rgba(228, 72, 35);
 }
