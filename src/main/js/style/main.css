@@ -26,7 +26,11 @@
 .div-scan {
     text-align: center;
     background: #cecece;
-    max-width: 800px
+    max-width: 600px
+}
+
+.div-scan0 {
+    
 }
 
 .grey-control-scan {
