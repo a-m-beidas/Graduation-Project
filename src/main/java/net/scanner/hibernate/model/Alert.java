@@ -1,4 +1,4 @@
-package core.model;
+package net.scanner.hibernate.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

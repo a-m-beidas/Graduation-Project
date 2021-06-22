@@ -1,6 +1,6 @@
-package core.repository;
+package net.scanner.hibernate.repository;
 
-import core.model.Scan;
+import net.scanner.hibernate.model.Scan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScanRepository extends JpaRepository<Scan, Integer> {

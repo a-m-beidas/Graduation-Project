@@ -1,6 +1,6 @@
-package core.repository;
+package net.scanner.hibernate.repository;
 
-import core.model.Record;
+import net.scanner.hibernate.model.Record;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RecordRepository extends JpaRepository<Record, String> {

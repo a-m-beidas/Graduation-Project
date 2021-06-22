@@ -1,4 +1,4 @@
-package net.scanner.repository;
+package net.scanner.hibernate.repository;
 
 import net.scanner.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,4 @@
-package core.model;
-
-import core.model.Alert;
+package net.scanner.hibernate.model;
 
 import javax.persistence.*;
 import java.sql.Date;
