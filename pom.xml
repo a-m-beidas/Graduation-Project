@@ -11,8 +11,8 @@
     <groupId>net.scanner</groupId>
     <artifactId>scanner</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Vulnerability net.scanner.Scanner</name>
-    <description>Vulnerability net.scanner.Scanner</description>
+    <name>Vulnerability net.scanner.GraduationProject</name>
+    <description>Vulnerability net.scanner.GraduationProject</description>
 
     <properties>
         <java.version>11</java.version>

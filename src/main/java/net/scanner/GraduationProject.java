@@ -2,15 +2,13 @@ package net.scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
 
 
 @SpringBootApplication
-public class Scanner {
+public class GraduationProject {
 
     public static void main(String[] args) {
-        SpringApplication.run(Scanner.class, args);
+        SpringApplication.run(GraduationProject.class, args);
     }
 
 }
