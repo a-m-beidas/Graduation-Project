@@ -21,7 +21,7 @@ public class ScanController {
     ReportService reportService;
 
     @GetMapping(path = "/scan")
-    public JsonNode scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestParam String url) throws IOException, URISyntaxException, ClassNotFoundException {
+    public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestParam String url) throws IOException, URISyntaxException, ClassNotFoundException {
         return scanService.scan(url, authorizationHeader);
     }
 

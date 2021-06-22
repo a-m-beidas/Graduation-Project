@@ -1,7 +1,5 @@
 package net.scanner.core;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.scanner.core.active.XSS;
 import net.scanner.hibernate.model.Record;
 import net.scanner.hibernate.model.Scan;
@@ -13,7 +11,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
@@ -38,15 +35,12 @@ public class Scanner {
     List<String> crawlResult;
     URI targetURL;
 
-    @Autowired
-    ObjectMapper objectMapper;
-
     public Scanner() {
         System.out.println("heree");
     }
 
     // TODO should model.Scanner be in the backend, or core?
-    public JsonNode scan(String targetURL, int userId) throws IOException, URISyntaxException, ClassNotFoundException {
+    public Scan scan(String targetURL, int userId) throws IOException, URISyntaxException, ClassNotFoundException {
         targetURL = (!targetURL.contains("://")) ? "http://" + targetURL : targetURL;
         recordRepository.deleteAll();
         crawlResult = new LinkedList<String>();
@@ -63,7 +57,7 @@ public class Scanner {
         crawlResult = null;
         this.targetURL = null;
         scanRepository.save(scan);
-        return objectMapper.valueToTree(scan);
+        return scan;
     }
 
     public void processPage(String url) throws IOException, URISyntaxException {
@@ -86,11 +80,5 @@ public class Scanner {
                 processPage(link.attr("abs:href"));
         }
         return;
-    }
-
-    @Bean
-    private ObjectMapper POJO_2_JSON() {
-        System.out.println("here");
-        return new ObjectMapper();
     }
 }
