@@ -1,6 +1,6 @@
-package net.scanner.repository;
+package core.repository;
 
-import net.scanner.model.Record;
+import core.model.Record;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RecordRepository extends JpaRepository<Record, String> {

@@ -1,4 +1,6 @@
-package net.scanner.model;
+package core.model;
+
+import core.model.Alert;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -33,7 +35,7 @@ public class Scan {
 
     }
 
-    public Scan(int userId, String targetURL, ScanType type) {
+    public Scan(Integer userId, String targetURL, ScanType type) {
         this.userId = userId;
         this.targetURL = targetURL;
         this.type = type;
@@ -65,5 +67,9 @@ public class Scan {
 
     public List<Alert> getAlerts() {
         return alerts;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
