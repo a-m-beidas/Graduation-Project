@@ -1,7 +1,7 @@
 package net.scanner.service;
 
-import net.scanner.model.Scan;
-import net.scanner.repository.ScanRepository;
+import net.scanner.hibernate.model.Scan;
+import net.scanner.hibernate.repository.ScanRepository;
 import net.scanner.security.TokenUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
