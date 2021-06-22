@@ -1,6 +1,6 @@
 package core;
 
-import core.model.Alert;
+import net.scanner.hibernate.model.Alert;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

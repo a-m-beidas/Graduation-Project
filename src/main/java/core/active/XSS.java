@@ -2,7 +2,7 @@ package core.active;
 
 import core.ActiveScanner;
 import net.scanner.config.Interceptor;
-import core.model.Alert;
+import net.scanner.hibernate.model.Alert;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
