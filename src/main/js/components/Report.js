@@ -81,7 +81,7 @@ const Report = (props) => {
                 </Card.Header>
                 <br/>
             </ListGroup>
-            { report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
+            { report.alerts.map((alert, index) => { alert.date = report.date;return <Alert key={index} onPrint={onPrint} alert={alert}/>}) }
         </Container>
         <br/>
         <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
@@ -123,7 +123,7 @@ export const Alert = (props) => {
                         </h5>
                         <div className="d-flex">
                             <p className="responsive-font" style={{"--fontsize": "14px"}}>
-                                {'~' + alert.url}
+                                {'~' + alert.path}
                             </p>
                         </div>
                     </div>

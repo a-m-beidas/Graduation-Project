@@ -48,7 +48,7 @@ public class XSS implements ActiveScanner {
             System.out.println(response);
             if (response.contains("<script>")) {
                 URI uri = new URI(url);
-                alert = new Alert(uri.getPath(), "xss", "It isn’t that they cannot find the solution. It is that they cannot see the problem.", 1);
+                alert = Alert.createAlert(uri.getPath(), "POST", "username");
                 is_vulnerable = true;
             }
         }
