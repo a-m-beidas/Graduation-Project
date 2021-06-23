@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
 import ReactToPdf from 'react-to-pdf';
@@ -28,6 +28,9 @@ function capitalize(string) {
 const Report = (props) => {
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
     const [status, setStatus] = useState(props.location.state === undefined ? "" : props.location.state.status);
+    useEffect(() => {
+        report.alerts.map((alert, index) => {alert.date = report.date; alert.path = report.targetURL + alert.path})
+    }, [report]);
     const config = {
         headers:
           { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
@@ -81,7 +84,7 @@ const Report = (props) => {
                 </Card.Header>
                 <br/>
             </ListGroup>
-            { report.alerts.map((alert, index) => { alert.date = report.date;return <Alert key={index} onPrint={onPrint} alert={alert}/>}) }
+            { report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
         </Container>
         <br/>
         <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
@@ -102,7 +105,7 @@ export const Alert = (props) => {
     const exportAlert = () => {
 
         history.push({
-            pathname: '/alert?id=' + alert.id,
+            pathname: '/alert',
             state: { alert: alert }
         });
     }
@@ -123,7 +126,7 @@ export const Alert = (props) => {
                         </h5>
                         <div className="d-flex">
                             <p className="responsive-font" style={{"--fontsize": "14px"}}>
-                                {'~' + alert.path}
+                                {alert.path}
                             </p>
                         </div>
                     </div>

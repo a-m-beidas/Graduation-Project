@@ -18,18 +18,18 @@ const Scan = () => {
       "date": "2021-06-03",
       "alerts": [
       {
-      "id": 0,
-      "url": "http://localhost:8080/login.php",
-      "type": "xss",
-      "description": "Solve it urself",
-      "severity": 1
+        "id": 0,
+        "url": "http://localhost:8080/login.php",
+        "type": "xss",
+        "description": "Solve it urself",
+        "severity": 1
       },
       {
-      "id": 0,
-      "url": "http://localhost:8080/user_new.php",
-      "type": "xss",
-      "description": "Solve it urself",
-      "severity": 2
+        "id": 0,
+        "url": "http://localhost:8080/user_new.php",
+        "type": "xss",
+        "description": "Solve it urself",
+        "severity": 2
       },
       {
       "id": 0,

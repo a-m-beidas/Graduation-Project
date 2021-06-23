@@ -52,7 +52,7 @@ public class Alert {
 
 
     public static Alert createAlert(String path, String method, String parameter) {
-        return new Alert(path, "xss", descriptionValue, fixValue, 1, method, cweidValue, wascidValue, parameter, referencesValue);
+        return new Alert(path, "Reflected cross site scripting", descriptionValue, fixValue, 1, method, cweidValue, wascidValue, parameter, referencesValue);
     }
 
     private Alert(String path, String type, String description, String fix, int severity, String method, int cweid, String wascid, String parameter, List<String> references) {
@@ -66,10 +66,6 @@ public class Alert {
         this.wascid = wascid;
         this.parameter = parameter;
         this.references = references;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getPath() {
