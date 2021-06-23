@@ -61,14 +61,19 @@ const Scan = () => {
               <Collapse in={cops1}>
                 <div className="py-4">
                   <div className="d-flex px-2 justify-content-between">
-                      <Form.Label>Username</Form.Label>
-                      <Form.Control className="grey-control-scan" style={{width: "70%"}}/>
-                    </div>
-                    <br/>
-                    <div className="d-flex px-2 justify-content-between">
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control className="grey-control-scan" style={{width: "70%"}}/>
-                    </div>
+                    <Form.Label>Login URL</Form.Label>
+                    <Form.Control className="grey-control-scan" style={{width: "70%"}}/>
+                  </div>
+                  <br/>
+                  <div className="d-flex px-2 justify-content-between">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control className="grey-control-scan" style={{width: "70%"}}/>
+                  </div>
+                  <br/>
+                  <div className="d-flex px-2 justify-content-between">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control className="grey-control-scan" style={{width: "70%"}}/>
+                  </div>
                 </div>
               </Collapse>
             </Form.Group>
