@@ -17,21 +17,8 @@ const severity = {
 }
 
 const AlertExport = (props) => {
-
-    const [alert, setAlert] = useState({
-        "id": 0,
-        "path": "http://localhost:8080/contact.php",
-        "type": "Reflected cross site scripting",
-        "description": "Reflected attacks are those where the injected script is reflected off the web server, such as in an error message, search result, or any other response that includes some or all of the input sent to the server as part of the request. Reflected attacks are delivered to victims via another route, such as in an e-mail message, or on some other website. When a user is tricked into clicking on a malicious link, submitting a specially crafted form, or even just browsing to a malicious site, the injected code travels to the vulnerable web site, which reflects the attack back to the user’s browser. The browser then executes the code because it came from a \“trusted\” server. Reflected XSS is also sometimes referred to as Non-Persistent or Type-II XSS.\n\n More information about Cross-Site Scripting can be found here.",
-        "fix": "vulnerable example code:\n1: print (\"Hello\"  .  $_GET[\"name\"]);\n\nproof of concept:\n\n\npatch:\nEncode all user tainted data with PHP buildin functions before embedding the data into the output.\nMake sure to set the parameter ENT_QUOTES to avoid an eventhandler injections to existing\nHTML attributes and specify the correct charset.\n\n1: print (\"Hello\"  .  htmlentities($_GET\"nam\"],  ENT_QUOTES, \"utf-8\");\nrelated securing functions:\nhtmlentities\nhtmlspecialchars\nhighlight_string",
-        "severity": 1,
-        "method": "POST",
-        "cweid": 20,
-        "wascid": "WASC-08",
-        "parameter": "username",
-        "date": "20/5/2021",
-        "references": ["http://projects.webappsec.org/Cross-Site-Scripting", "http://cwe.mitre.org/data/definitions/79.html"]
-    });
+    console.log(props);
+    const [alert, setAlert] = useState(props.location.state.alert);
     return (
         <div className="export">
             <section class="header">

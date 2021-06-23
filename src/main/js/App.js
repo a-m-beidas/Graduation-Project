@@ -50,7 +50,7 @@ const App = () => {
                     <PrivateRoute component={Scan} path="/scan"/>
                     <PrivateRoute component={Report} path="/report"/>
                     <PrivateRoute component={Report} path="/report:id"/>
-                    <PrivateRoute component={AlertExport} path="/alert"/>
+                    <PrivateRoute component={AlertExport} path="/alert:id"/>
                     <LogoutRoute setLogIn={setLogIn} path="/logout"/>
                 </Switch>
             </Container>
