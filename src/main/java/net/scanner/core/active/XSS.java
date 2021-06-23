@@ -13,6 +13,7 @@ import org.springframework.http.*;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
+@Component
 public class XSS implements ActiveScanner {
 
     @Autowired
