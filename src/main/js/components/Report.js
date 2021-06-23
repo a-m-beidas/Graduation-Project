@@ -126,7 +126,7 @@ export const Alert = (props) => {
                         </h5>
                         <div className="d-flex">
                             <p className="responsive-font" style={{"--fontsize": "14px"}}>
-                                {alert.path}
+                                {'~' + alert.path}
                             </p>
                         </div>
                     </div>
