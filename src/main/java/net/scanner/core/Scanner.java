@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-// TODO as a crawler
 @Configuration
 public class Scanner {
 
@@ -23,7 +22,7 @@ public class Scanner {
 
     @Autowired
     ScanRepository scanRepository;
-
+    // TODO multi-threading
     public Scan scan(String targetURL, int userId) throws IOException, URISyntaxException, ClassNotFoundException {
         Scan scan = new Scan(userId, targetURL, Scan.ScanType.partial);
         List<String> urls = spider.crawl(targetURL);
