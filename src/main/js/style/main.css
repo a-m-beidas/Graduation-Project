@@ -49,9 +49,9 @@
 .form-on-button {
     position: absolute;
     width: 24%;
-    font-size: 0.8rem;
+    font-size: 12px;
     right: 0.6%;
-    bottom: 6.7%
+    bottom: 7.3%
 }
 
 .alert-badge-app {
