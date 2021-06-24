@@ -7,7 +7,7 @@ import axios from 'axios';
 const Scan = () => {
      
     const [targetURL, setTargetURL] = useState("example");
-    const [loginURL, setLoginURL] = useState();
+    const [loginURL, setLoginPath] = useState();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const history = useHistory();
@@ -30,7 +30,7 @@ const Scan = () => {
       let body = undefined;
       body = {targetURL: targetURL}
       if (cops1) {
-        body.username = username; body.password = password; body.loginURL = loginURL;
+        body.username = username; body.password = password; body.loginURL = targetURL + "/" + loginURL;
       }
       axios.post('/api/scan', body, config)
         .then(response => {
@@ -68,7 +68,7 @@ const Scan = () => {
                 <div className="py-4">
                   <div className="d-flex px-2 justify-content-between">
                     <Form.Label>Login URL</Form.Label>
-                    <Form.Control className="grey-control-scan" onChange={e => setLoginURL(e.target.value)} style={{width: "70%"}}/>
+                    <Form.Control className="grey-control-scan" onChange={e => setLoginPath(e.target.value)} style={{width: "70%"}}/>
                   </div>
                   <br/>
                   <div className="d-flex px-2 justify-content-between">

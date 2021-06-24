@@ -28,7 +28,7 @@ public class Interceptor implements ClientHttpRequestInterceptor {
         log.info("URI         : {}", request.getURI());
         log.info("Method      : {}", request.getMethod());
         log.info("Headers     : {}", request.getHeaders() );
-        log.info("Request body: {}", new String(body, "UTF-8"));
+//        log.info("Request body: {}", new String(body, "UTF-8"));
         log.info("==========================request end================================================");
     }
 
@@ -45,7 +45,7 @@ public class Interceptor implements ClientHttpRequestInterceptor {
         log.info("Status code  : {}", response.getStatusCode());
         log.info("Status text  : {}", response.getStatusText());
         log.info("Headers      : {}", response.getHeaders());
-        log.info("Response body: {}", inputStringBuilder.toString());
+//        log.info("Response body: {}", inputStringBuilder.toString());
         log.info("=======================response end=================================================");
     }
 

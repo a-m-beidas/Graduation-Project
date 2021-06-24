@@ -62,15 +62,17 @@ public class Scanner {
 
     public void targetLogin(Credentials urlObject) throws IOException {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.put("username", Collections.singletonList(urlObject.getUsername()));
+        map.put("login", Collections.singletonList(urlObject.getUsername()));
         map.put("password", Collections.singletonList(urlObject.getPassword()));
         map.put("security_level", Collections.singletonList(0 + ""));
         map.put("form", Collections.singletonList("submit"));
         HttpEntity<MultiValueMap> request = new HttpEntity<MultiValueMap>(map, httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(urlObject.getLoginURL(), HttpMethod.POST, request, String.class);
-        System.out.println();
+        for (String cookieSet: response.getHeaders().get("Set-Cookie")) {
+            httpHeaders.add("Cookie", cookieSet.split(";|"));
+        }
     }
-
+//    PHPSESSID=cee90dd7c2f4eb69a1864741929b98a5; security_level=0
     @Bean
     RestTemplate setTemplate() {
         RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
