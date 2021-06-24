@@ -1,9 +1,8 @@
 package net.scanner.backend.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import net.scanner.hibernate.model.Scan;
 import net.scanner.backend.service.ReportService;
 import net.scanner.backend.service.ScanService;
+import net.scanner.hibernate.model.Scan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +19,8 @@ public class ScanController {
     @Autowired
     ReportService reportService;
 
-    @GetMapping(path = "/scan")
-    public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestParam String url) throws IOException, URISyntaxException, ClassNotFoundException {
+    @PostMapping(path = "/scan")
+    public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestBody String url) throws IOException, URISyntaxException, ClassNotFoundException {
         return scanService.scan(url, authorizationHeader);
     }
 
