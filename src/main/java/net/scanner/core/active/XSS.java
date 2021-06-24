@@ -45,7 +45,7 @@ public class XSS implements ActiveScanner {
         for (Element form: forms) {
             HashMap<String, Object> form_details = getFormDetails(form);
             String response = submitForm(url, form);
-            System.out.println(response);
+//            System.out.println(response);
             if (response.contains("<script>")) {
                 URI uri = new URI(url);
                 alert = Alert.createAlert(uri.getPath(), "POST", "username");

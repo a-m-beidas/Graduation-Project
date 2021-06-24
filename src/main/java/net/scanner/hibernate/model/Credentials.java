@@ -19,7 +19,8 @@ public class Credentials {
     private String targetURL;
 
     public Credentials(String loginURL, String username, String password, String targetURL) {
-        this.loginURL = loginURL;
+        this.loginURL = targetURL + "/" + loginURL;
+        this.loginURL = (!this.loginURL.contains("://")) ? "http://" + this.loginURL : this.loginURL;
         this.username = username;
         this.password = password;
         this.targetURL = targetURL;

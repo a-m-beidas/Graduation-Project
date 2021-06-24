@@ -69,10 +69,11 @@ public class Scanner {
         HttpEntity<MultiValueMap> request = new HttpEntity<MultiValueMap>(map, httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(urlObject.getLoginURL(), HttpMethod.POST, request, String.class);
         for (String cookieSet: response.getHeaders().get("Set-Cookie")) {
-            httpHeaders.add("Cookie", cookieSet.split(";|"));
+            httpHeaders.remove("Cookie");
+            httpHeaders.add("Cookie", cookieSet);
         }
+        System.out.println(response.getHeaders().get("Set-Cookie"));
     }
-//    PHPSESSID=cee90dd7c2f4eb69a1864741929b98a5; security_level=0
     @Bean
     RestTemplate setTemplate() {
         RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
