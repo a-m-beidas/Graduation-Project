@@ -2,6 +2,7 @@ package net.scanner.backend.controller;
 
 import net.scanner.backend.service.ReportService;
 import net.scanner.backend.service.ScanService;
+import net.scanner.hibernate.model.Credentials;
 import net.scanner.hibernate.model.Scan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class ScanController {
     ReportService reportService;
 
     @PostMapping(path = "/scan")
-    public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestBody String url) throws IOException, URISyntaxException, ClassNotFoundException {
-        return scanService.scan(url, authorizationHeader);
+    public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Credentials url) throws IOException, URISyntaxException, ClassNotFoundException {
+        return scanService.scan(url.getTargetURL(), authorizationHeader);
     }
 
     @GetMapping("/report")

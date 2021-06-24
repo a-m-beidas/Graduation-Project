@@ -28,8 +28,9 @@ const Scan = () => {
         return;
       }
       let body = undefined;
+      body = {targetURL: targetURL}
       if (cops1) {
-        body = {url: targetURL, loginURL: loginURL, username: username, password: password }
+        body.username = username; body.password = password; body.loginURL = loginURL;
       }
       axios.post('/api/scan', body, config)
         .then(response => {
