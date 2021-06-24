@@ -19,10 +19,9 @@ const App = () => {
         <Router>
             <Navbar bg="light" expand="sm" className="px-4 justify-content-between">
                 <Navbar.Brand href="/">
-                    <img src="/logo192.png"
+                    <img src="images/logo.png"
                         height="30"
-                        className="d-inline-block align-top px-2"
-                        alt="React Bootstrap logo"/>
+                        className="d-inline-block align-top px-2"/>
                     Vulnerability Scanner
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll"/>

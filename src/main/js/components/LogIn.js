@@ -38,7 +38,7 @@ const Login = (props) => {
 	return (
 		<div className="d-flex justify-content-start">
             <div className="sm-hidden  px-4">
-                <img width="500" src="LogIn.png"/>
+                <img width="500" src="images/LogIn.png"/>
             </div>
             <div style={{width: "100%"}} className="d-flex flax-wrap justify-content-around flex-column">
                 <Form onSubmit={login}>

@@ -43,7 +43,7 @@ const Scan = () => {
       <div className="d-flex justify-content-center">
           <div className="px-4 div-scan">
           <div>
-              <Image roundedCircle width="250" src="astronaut.jpg"/>
+              <Image roundedCircle width="250" src="images/astronaut.jpg"/>
           </div><br/>
           <Form onSubmit={ scan } className="form-app">
             <Form.Group style={{position: "relative"}} className="d-flex justify-content-between">
