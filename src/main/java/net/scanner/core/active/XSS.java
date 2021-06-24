@@ -96,22 +96,4 @@ public class XSS implements ActiveScanner {
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
         return response.getBody();
     }
-
-
-    @Bean
-    RestTemplate setTemplate() {
-        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add(new Interceptor());
-        restTemplate.setInterceptors(interceptors);
-        return restTemplate;
-    }
-
-    @Bean
-    HttpHeaders setHttpHeaders() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        return httpHeaders;
-    }
 }
