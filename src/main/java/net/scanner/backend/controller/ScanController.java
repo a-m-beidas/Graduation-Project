@@ -22,7 +22,7 @@ public class ScanController {
 
     @PostMapping(path = "/scan")
     public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Credentials url) throws IOException, URISyntaxException, ClassNotFoundException {
-        return scanService.scan(url.getTargetURL(), authorizationHeader);
+        return scanService.scan(url, authorizationHeader);
     }
 
     @GetMapping("/report")

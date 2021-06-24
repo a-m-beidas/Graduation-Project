@@ -18,10 +18,11 @@ public class Credentials {
     @Transient
     private String targetURL;
 
-    public Credentials(String loginURL, String username, String password) {
+    public Credentials(String loginURL, String username, String password, String targetURL) {
         this.loginURL = loginURL;
         this.username = username;
         this.password = password;
+        this.targetURL = targetURL;
     }
 
     public int getId() {
