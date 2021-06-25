@@ -6,18 +6,20 @@ logging:
   level:
     root: INFO
 spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/crawler?useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    data: classpath:schema.sql
+    initialization-mode: always
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
       order_inserts: true
       order_updatest: true
       jdbc:
         batch_size: 4
     generate-ddl: true
     show-sql: true
-  datasource:
-    url: jdbc:mysql://localhost:3306/crawler?useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
   data:
     rest:
       base-path:

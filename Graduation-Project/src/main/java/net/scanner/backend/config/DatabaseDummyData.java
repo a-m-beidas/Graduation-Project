@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 
-@SpringBootConfiguration
 public class DatabaseDummyData {
 
     @Autowired
