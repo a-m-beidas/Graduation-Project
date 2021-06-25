@@ -5,7 +5,7 @@ import ReactToPdf from 'react-to-pdf';
 import jwt from '../utils/JWTPayload';
 import axios from 'axios';
 
-
+شسيشسيشسي
 const severity = {
     1: {
         color: "danger",
@@ -32,10 +32,6 @@ function capitalize(string) {
 const Report = (props) => {
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
     const [status, setStatus] = useState(props.location.state === undefined ? "" : props.location.state.status);
-    useEffect(() => {
-        if (report.alert !== undefined)
-            report.alerts.map((alert, index) => {alert.date = report.date; alert.path = report.targetURL + alert.path})
-    }, [report]);
     const config = {
         headers:
           { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
@@ -75,9 +71,29 @@ const Report = (props) => {
     <Redirect to={{pathname: "/error", state: { message: status.text }}} />
         :
     <div>
-        <Container style={{paddingLeft: "0px", marginLeft: "0px", maxWidth: 700}} fluid ref={ref}>
-            <ListGroup variant="flush">
-                <Card.Header className="scan-header-app">
+        <Container style={{paddingLeft: "0px", marginLeft: "0px"}} fluid ref={ref}>
+            <div className="px-4 py-4">
+                <div className="d-flex justify-content-between">
+                    <div>
+                        <h3>Test.com</h3>
+                        <h4><a href={report.targetURL}>{report.targetURL}</a></h4>
+                    </div>
+                    <div>
+                    <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
+                        {({toPdf}) =>  (
+                            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
+                        )}
+                    </ReactToPdf>
+                    </div>
+                </div>
+                <div className="d-flex justify-content-between px-4">
+                    <div style={{textAlign:"center"}}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="danger" >{report.count.high}</Badge></div>High Severities</div>
+                    <div style={{textAlign:"center"}}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="warning" >{report.count.medium}</Badge></div>Medium Severities</div>
+                    <div style={{textAlign:"center"}}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="info" >{report.count.low}</Badge></div>Low Severities</div>
+                </div>
+            </div>
+            {/* <ListGroup variant="flush">
+                <Card.Header classNam   e="scan-header-app">
                     <Card.Title>
                         <Badge style={{fontSize: "1.25rem"}} variant="secondary">{capitalize(report.type)}</Badge> Scan Report
                     </Card.Title>
@@ -88,7 +104,7 @@ const Report = (props) => {
                     </Card.Text>
                 </Card.Header>
                 <br/>
-            </ListGroup>
+            </ListGroup> */}
             { report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
             { report.alerts.length == 0 ?
                 [<h2>No Threats Found!</h2>, <br/>,
@@ -98,11 +114,6 @@ const Report = (props) => {
             }
         </Container>
         <br/>
-        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
-          {({toPdf}) =>  (
-            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
-          )}
-        </ReactToPdf>
     </div>}
     </>)
 }

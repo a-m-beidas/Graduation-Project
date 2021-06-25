@@ -4,6 +4,34 @@ import Switch from 'react-switch';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
+const severity = {
+  1: {
+      text: "high"
+  },
+  2: {
+      text: "medium"
+  },
+  3: {
+      text: "low"
+  },
+  4: {
+      text: "secure"
+  }
+}
+
+const processReport = (report) => {
+  if (report.alerts === undefined)
+      return;
+  report.count = {high: 0, medium: 0, low: 0}
+  report.alerts.map((alert, index) => {
+      alert.date = report.date;
+      alert.path = report.targetURL + alert.path
+      ++report.count[severity[alert.severity].text]
+  })
+  console.log(report)
+  return report;
+}
+
 const Scan = () => {
      
     const [targetURL, setTargetURL] = useState("example");
@@ -23,7 +51,7 @@ const Scan = () => {
       if (targetURL === "example") {
         history.push({
           pathname: '/report',
-          state: { report: scanResult, status: {value: 200} }
+          state: { report: processReport(scanResult), status: {value: 200} }
         });
         return;
       }
@@ -37,7 +65,7 @@ const Scan = () => {
           if (response.status == 200) {
             history.push({
               pathname: '/report?id=' + response.data.id,
-              state: { report: response.data, status: {value: 200} }
+              state: { report: processReport(response.data), status: {value: 200} }
             });
           }
         })

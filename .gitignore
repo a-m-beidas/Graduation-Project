@@ -1,7 +1,13 @@
 /*
-!Graduation-Project
 !public
 !src
 !package.json
 !config-overrides.js
 !.gitignore
+!Graduation-Project
+Graduation-Project/.idea
+Graduation-Project/node
+Graduation-Project/node_modules
+Graduation-Project/package-lock.json
+Graduation-Project/scanner.iml
+Graduation-Project/target
