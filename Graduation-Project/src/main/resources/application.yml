@@ -1,0 +1,26 @@
+server:
+  port: 81
+jwt:
+  secret: Graduation-Project-Scanner
+logging:
+  level:
+    root: INFO
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      order_inserts: true
+      order_updatest: true
+      jdbc:
+        batch_size: 4
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/crawler?useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+  data:
+    rest:
+      base-path:
+          /api
+  profiles:
+    active: dev
