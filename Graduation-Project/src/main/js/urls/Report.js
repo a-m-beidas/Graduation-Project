@@ -5,7 +5,7 @@ import ReactToPdf from 'react-to-pdf';
 import jwt from '../utils/JWTPayload';
 import axios from 'axios';
 
-شسيشسيشسي
+
 const severity = {
     1: {
         color: "danger",
