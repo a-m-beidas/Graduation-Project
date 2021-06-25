@@ -29,16 +29,20 @@ public class Scan {
     @OneToMany(cascade= CascadeType.ALL)
     private List<Alert> alerts;
 
+    @Transient
+    private List<String> urls;
+
     public Scan() {
 
     }
 
-    public Scan(Integer userId, String targetURL, ScanType type) {
+    public Scan(Integer userId, String targetURL, ScanType type, List<String> urls) {
         this.userId = userId;
         this.targetURL = targetURL;
         this.type = type;
         date = Date.valueOf(LocalDate.now());
         alerts = new LinkedList<Alert>();
+        this.urls = urls;
     }
 
     public void addThreat(Alert alert) {
@@ -66,6 +70,8 @@ public class Scan {
     public List<Alert> getAlerts() {
         return alerts;
     }
+
+    public List<String> getUrls() { return urls; }
 
     public void setUserId(Integer userId) {
         this.userId = userId;

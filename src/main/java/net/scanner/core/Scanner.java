@@ -48,8 +48,8 @@ public class Scanner {
         if (urlObject.getUsername() != null && urlObject.getPassword() != null)
             targetLogin(urlObject);
         String targetURL = urlObject.getTargetURL();
-        Scan scan = new Scan(userId, urlObject.getTargetURL(), Scan.ScanType.partial);
         List<String> urls = spider.crawl(targetURL);
+        Scan scan = new Scan(userId, urlObject.getTargetURL(), Scan.ScanType.partial, urls);
         for (String url : urls) {
             Alert alert = xss.executeScan(url);
             if (alert != null) {

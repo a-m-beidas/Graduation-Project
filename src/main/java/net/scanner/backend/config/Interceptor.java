@@ -27,8 +27,9 @@ public class Interceptor implements ClientHttpRequestInterceptor {
         log.info("===========================request begin================================================");
         log.info("URI         : {}", request.getURI());
         log.info("Method      : {}", request.getMethod());
-        log.info("Headers     : {}", request.getHeaders() );
-//        log.info("Request body: {}", new String(body, "UTF-8"));
+        log.info("Cookies     : {}", request.getHeaders().get("Cookie"));
+        if (body.length != 0)
+            log.info("Request body: {}", new String(body, "UTF-8"));
         log.info("==========================request end================================================");
     }
 

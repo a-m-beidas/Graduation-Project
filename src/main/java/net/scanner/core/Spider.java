@@ -48,16 +48,16 @@ public class Spider {
     }
 
     public void crawl_rec(String url) throws IOException, URISyntaxException {
-        System.out.println(url);
         URI uri = new URI(url);
-        if (!uri.getHost().equals(this.targetURL.getHost()) || recordRepository.findById(url).isPresent()) {
+        if (!uri.getHost().equals(this.targetURL.getHost()) || recordRepository.findById(url).isPresent())
             return;
-        }
+        if (uri.getPath().contains("logout"))
+            return;
+        // TODO application needs to specify the logout url
         recordRepository.save(new Record(url));
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-        Document doc = Jsoup.parse(response.getBody());
-        System.out.println(doc);
+        Document doc = Jsoup.parse(response.getBody(), url);
         crawlResult.add(doc.location());
         Elements questions = doc.select("a[href]");
         for (Element link : questions) {

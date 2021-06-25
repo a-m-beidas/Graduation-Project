@@ -38,14 +38,18 @@ public class XSS implements ActiveScanner {
     public Alert executeScan(String url) throws IOException, URISyntaxException {
         Alert alert = null;
         url = (!url.contains("://")) ? "http://" + url : url;
-        Document doc = Jsoup.connect(url).get();
+        HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<String> response_get = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        Document doc = Jsoup.parse(response_get.getBody(), url);
         url = doc.location();
         Elements forms = doc.select("form");
         boolean is_vulnerable = false;
         for (Element form: forms) {
             HashMap<String, Object> form_details = getFormDetails(form);
             String response = submitForm(url, form);
-//            System.out.println(response);
+            if (response == null) {
+                continue;
+            }
             if (response.contains("<script>")) {
                 URI uri = new URI(url);
                 alert = Alert.createAlert(uri.getPath(), "POST", "username");
