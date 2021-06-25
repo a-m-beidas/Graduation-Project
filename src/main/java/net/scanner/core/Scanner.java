@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,6 +56,9 @@ public class Scanner {
             if (alert != null) {
                 scan.addThreat(alert);
             }
+        }
+        for (int i = 0; i < urls.size(); i++) {
+            urls.set(i, new URL(urls.get(i)).getPath());
         }
         scanRepository.save(scan);
         return scan;

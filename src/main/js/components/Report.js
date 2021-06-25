@@ -18,6 +18,10 @@ const severity = {
     3: {
         color: "info",
         text: "Low"
+    },
+    4: {
+        color: "success",
+        text: "Secure"
     }
 }
 
@@ -29,7 +33,8 @@ const Report = (props) => {
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
     const [status, setStatus] = useState(props.location.state === undefined ? "" : props.location.state.status);
     useEffect(() => {
-        report.alerts.map((alert, index) => {alert.date = report.date; alert.path = report.targetURL + alert.path})
+        if (report.alert !== undefined)
+            report.alerts.map((alert, index) => {alert.date = report.date; alert.path = report.targetURL + alert.path})
     }, [report]);
     const config = {
         headers:
@@ -85,6 +90,12 @@ const Report = (props) => {
                 <br/>
             </ListGroup>
             { report.alerts.map((alert, index) => <Alert key={index} onPrint={onPrint} alert={alert}/>) }
+            { report.alerts.length == 0 ?
+                [<h2>No Threats Found!</h2>, <br/>,
+                <h4>Visited Urls:</h4>, <br/>,
+                report.urls.map((url, index) => <Alert key={index} onPrint={onPrint} alert={{"path": url, "type":"Secure", "severity":4}}/>)]
+                : ""
+            }
         </Container>
         <br/>
         <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
@@ -149,7 +160,7 @@ export const Alert = (props) => {
                     </div>
                 </div>
             </Container>
-            <Collapse in={open || onPrint}>
+            <Collapse in={open}>
                 <div ref={ref} className="alert-transition-app">
                     <br/><br/>
                     (((Information, more details about the alert)))

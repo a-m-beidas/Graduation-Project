@@ -33,7 +33,7 @@ public class Scan {
     private List<String> urls;
 
     public Scan() {
-
+        urls = new LinkedList<String>();
     }
 
     public Scan(Integer userId, String targetURL, ScanType type, List<String> urls) {
