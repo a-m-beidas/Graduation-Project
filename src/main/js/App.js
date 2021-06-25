@@ -29,7 +29,6 @@ const App = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link hidden={isLoggedIn} href="/login">Login</Nav.Link>
                         <Nav.Link hidden={isLoggedIn} href="/register">Register</Nav.Link>
-                        <Nav.Link hidden={!isLoggedIn} href="/xss">XSS</Nav.Link>
                         <Nav.Link hidden={!isLoggedIn} href="/scan">Scan</Nav.Link>
                         <Nav.Link hidden={!isLoggedIn} href="/logout">Logout</Nav.Link>
                     </Nav>

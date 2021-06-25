@@ -166,12 +166,33 @@
     line-height: 56px;
   }
 
-.export p, a, text,  pre {
+.export p {
     font-size: 24px;
     line-height: 28px;
   
     color: #000000;
   }
+
+.export a {
+    font-size: 24px;
+    line-height: 28px;
+  
+    color: #000000;
+}
+
+.export text {
+    font-size: 24px;
+    line-height: 28px;
+  
+    color: #000000;
+}
+
+.export pre {
+    font-size: 24px;
+    line-height: 28px;
+  
+    color: #000000;
+}
 
 .export #how {
   margin-left: 40px;
