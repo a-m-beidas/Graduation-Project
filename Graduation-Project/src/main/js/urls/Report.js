@@ -8,12 +8,13 @@ import axios from 'axios';
 
   const processReport = (report) => {
     if (report.alerts === undefined)
-      return;
+        return;
     report.count = { high: 0, medium: 0, low: 0 }
     report.alerts.map((alert, index) => {
-      alert.date = report.date;
-      alert.path = report.targetURL + alert.path
-      ++report.count[severity[alert.severity].text]
+        alert.date = report.date;
+        if (!alert.path.startsWith(report.targetURL))
+            alert.path = report.targetURL + alert.path
+        ++report.count[severity[alert.severity].text]
     })
     return;
   }
