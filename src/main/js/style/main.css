@@ -87,3 +87,130 @@
     background: rgba(228, 72, 35);
     border-color: rgba(228, 72, 35);
 }
+
+* {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+  }
+  
+.export {
+    --grey-color: #7a7a7a;
+  }
+  
+.export p {
+    /* font-size: 36px;
+    line-height: 42px; */
+  }
+  /* Reflected cross site scripting */
+  
+.export h1 {
+    /* Reflected cross site scripting */
+  
+    /* position: absolute; */
+    width: 607px;
+    height: 56px;
+    left: 93px;
+    top: 198px;
+  
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 56px;
+  
+    color: #e53935;
+  }
+  
+.export #button {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  /* High */
+.export  #severity {
+    /* position: absolute; */
+    width: 203px;
+    height: 61px;
+  
+    /* left: 157px; */
+    /* top: 298px; */
+    margin-right: 40px;
+  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    background: var(--primary-color);
+    color: #ffffff;
+  
+    font-size: 36px;
+    line-height: 42px;
+  }
+  
+.export #severity {
+    align-content: center;
+    align-items: center;
+  }
+  
+.export section {
+    margin: auto 65px;
+  }
+  
+.export h2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 56px;
+  }
+
+.export p, a, text,  pre {
+    font-size: 24px;
+    line-height: 28px;
+  
+    color: #000000;
+  }
+
+.export #how {
+  margin-left: 40px;
+}
+
+.export table {
+    width: 900px;
+    justify-content: space-between;
+  }
+  
+.export tbody {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.export tr {
+    display: flex;
+    flex-direction: column;
+    /* padding-right: 30px; */
+  }
+  
+.export tr:nth-child(3) {
+    padding-left: 60px;
+  }
+  
+.export tr:nth-child(even) p {
+    color: var(--grey-color);
+  }
+  
+.export td {
+    display: flex;
+    height: 60px;
+    /* max-width: 500px; */
+  }
+  
+.export td p {
+    padding-right: 20px;
+  }
+  
+.export hr {
+    border: 1px solid #000000;
+  }

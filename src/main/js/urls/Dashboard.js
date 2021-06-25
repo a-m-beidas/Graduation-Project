@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import jwt from '../utils/JWTPayload';
 
-const Home = () => {
+const Dashboard = () => {
     const[username, setUsername] = useState(", sign in");
     useEffect(() => {
         const clientName = jwt("sub");
@@ -20,4 +20,4 @@ const Home = () => {
     );
 }
 
-export default Home
+export default Dashboard

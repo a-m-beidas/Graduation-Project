@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import PrivateRoute from './PrivateRoute';
-import LogoutRoute from './LogoutRoute';
-import Home from './components/Home';
-import LogIn from "./components/LogIn";
-import Register from "./components/Register";
-import XSS from "./components/XSS";
-import Scan from "./components/Scan";
-import Report from "./components/Report";
-import AlertExport from './components/AlertExport'
-import Error from "./components/Error";
+import PrivateRoute from './routes/PrivateRoute';
+import LogoutRoute from './routes/LogoutRoute';
+import Home from './urls/Dashboard';
+import LogIn from "./urls/LogIn";
+import Register from "./urls/Register";
+import Scan from "./urls/Scan";
+import Report from "./urls/Report";
+import Alert from './urls/Alert'
+import Error from "./urls/Error";
 
 const App = () => {
 
@@ -45,11 +44,10 @@ const App = () => {
                                 )}/>
                     <Route component={Register} path="/register"/>
                     <Route component={Error} path="/error"/>
-                    <PrivateRoute component={XSS} path="/xss"/>
                     <PrivateRoute component={Scan} path="/scan"/>
                     <PrivateRoute component={Report} path="/report"/>
                     <PrivateRoute component={Report} path="/report:id"/>
-                    <PrivateRoute component={AlertExport} path="/alert"/>
+                    <PrivateRoute component={Alert} path="/alert"/>
                     <LogoutRoute setLogIn={setLogIn} path="/logout"/>
                 </Switch>
             </Container>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './AlertExport.js.css';
 
 const severity = {
     1: {
@@ -16,7 +15,7 @@ const severity = {
     }
 }
 
-const AlertExport = (props) => {
+const Alert = (props) => {
     console.log(props);
     const [alert, setAlert] = useState(props.location.state.alert);
     return (
@@ -77,4 +76,4 @@ const AlertExport = (props) => {
     )
 }
 
-export default AlertExport;
+export default Alert;
