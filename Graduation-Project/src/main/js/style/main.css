@@ -1,7 +1,7 @@
 @media (max-width: 890px) {
   .sm-hidden {
-      display: none !important;
-    }
+    display: none !important;
+  }
 }
 
 .responsive-font {
@@ -16,39 +16,36 @@
 
 @media (min-width: 778px) {
   .responsive-font {
-      font-size: var(--fontsize);
+    font-size: var(--fontsize);
   }
   .alert-badge-width {
-      width: 100px;
+    width: 100px;
   }
 }
 
 .div-scan {
   text-align: center;
   background: #cecece;
-  width: 600px
+  width: 600px;
 }
 
-
-.severity-badge{
+.severity-badge {
   height: 130px;
   width: 130px;
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
-  justify-content: space-around ;
+  justify-content: space-around;
   font-size: 15px;
-
 }
 
 .grey-control-scan {
-  background-color: #cecece
+  background-color: #cecece;
 }
 
 .grey-control-scan {
-  background-color: #cecece
+  background-color: #cecece;
 }
-
 
 .form-control {
   width: 400px;
@@ -59,11 +56,11 @@
   width: 24%;
   font-size: 12px;
   right: 0.6%;
-  bottom: 7.3%
+  bottom: 7.3%;
 }
 
 .alert-badge-app {
-  border-radius: calc(.5rem - 0.3vw);
+  border-radius: calc(0.5rem - 0.3vw);
   font-weight: 400;
   color: white;
 }
@@ -79,7 +76,7 @@
   padding-left: 1rem;
 }
 .alert-header-app {
-  background-color: 1px solid rgba(0,0,0,.25)
+  background-color: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .alert-main-div-app {
@@ -137,7 +134,7 @@
 }
 
 /* High */
-.export  #severity {
+.export #severity {
   /* position: absolute; */
   width: 203px;
   height: 61px;
@@ -203,7 +200,7 @@
 }
 
 .export #how {
-margin-left: 40px;
+  margin-left: 40px;
 }
 
 .export table {
@@ -242,4 +239,46 @@ margin-left: 40px;
 
 .export hr {
   border: 1px solid #000000;
+}
+
+.card {
+  /* shadowOffset: {
+      width: 0,
+      height: 1,
+  },
+  shadowOpacity: 0.22,
+  shadowRadius: 2.22,
+  
+  elevation: 3, */
+
+  width: 300px;
+  height: 250px;
+  /* background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 6px 8px #000;
+  border-radius: 11px;
+  opacity: 1; */
+
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.14);
+  border-radius: 4px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dashboard-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.left {
+  width: 800px;
+  height: 350px;
+}
+
+.right {
+  width: 350px;
+  height: 350px;
 }
