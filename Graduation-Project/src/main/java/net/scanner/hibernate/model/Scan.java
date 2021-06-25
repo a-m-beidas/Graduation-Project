@@ -45,8 +45,8 @@ public class Scan {
         this.urls = urls;
     }
 
-    public void addThreat(Alert alert) {
-        alerts.add(alert);
+    public void addAlerts(List<Alert> alerts) {
+        this.alerts.addAll(alerts);
     }
 
     public int getId() {
