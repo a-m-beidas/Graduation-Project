@@ -2,6 +2,7 @@ import { color } from 'd3-color';
 import { Container, Card, Badge, Button, ListGroup } from 'react-bootstrap';
 import DonutChart from './DonutChart';
 import TargetList from './TargetList';
+import Tableau from './Tableau';
 
 const colors = {
     high: '#E53935', medium: '#FFBA69', low: "#59AEE6"
@@ -58,7 +59,11 @@ export const Dashboard = () => {
             </div>
             <p>test</p>
 
-            <h3>Sites needing attention</h3>
+            <Tableau />
+
+            <p>test</p>
+
+            <h3>Sites Needing Attention</h3>
             <TargetList colors='colors' />
         </div >
     )
