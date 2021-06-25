@@ -6,22 +6,38 @@ import jwt from '../utils/JWTPayload';
 import axios from 'axios';
 
 
+  const processReport = (report) => {
+    if (report.alerts === undefined)
+      return;
+    report.count = { high: 0, medium: 0, low: 0 }
+    report.alerts.map((alert, index) => {
+      alert.date = report.date;
+      alert.path = report.targetURL + alert.path
+      ++report.count[severity[alert.severity].text]
+    })
+    return;
+  }
+
 const severity = {
     1: {
         color: "danger",
-        text: "High"
+        text: "High",
+        text: "high"
     },
     2: {
         color: "warning",
-        text: "Medium"
+        text: "Medium",
+        text: "medium"
     },
     3: {
         color: "info",
-        text: "Low"
+        text: "Low",
+        text: "low"
     },
     4: {
         color: "success",
-        text: "Secure"
+        text: "Secure",
+        text: "secure"
     }
 }
 
@@ -70,7 +86,9 @@ const Report = (props) => {
     status.value !== 200 ?
     <Redirect to={{pathname: "/error", state: { message: status.text }}} />
         :
+    
     <div>
+        {processReport(report)}
         <Container style={{paddingLeft: "0px", marginLeft: "0px"}} fluid ref={ref}>
             <div className="px-4 py-4">
                 <div className="d-flex justify-content-between">
