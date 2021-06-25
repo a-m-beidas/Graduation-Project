@@ -61,6 +61,10 @@ public class Scanner {
     }
 
     public void targetLogin(Credentials urlObject) throws IOException {
+        HttpHeaders headerProbe = restTemplate.headForHeaders(urlObject.getLoginURL());
+        if (headerProbe.get("Set-Cookie") != null) {
+            httpHeaders.put("Cookie", headerProbe.get("Set-Cookie"));
+        }
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.put("login", Collections.singletonList(urlObject.getUsername()));
         map.put("password", Collections.singletonList(urlObject.getPassword()));
@@ -68,12 +72,10 @@ public class Scanner {
         map.put("form", Collections.singletonList("submit"));
         HttpEntity<MultiValueMap> request = new HttpEntity<MultiValueMap>(map, httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(urlObject.getLoginURL(), HttpMethod.POST, request, String.class);
-        for (String cookieSet: response.getHeaders().get("Set-Cookie")) {
-            httpHeaders.remove("Cookie");
-            httpHeaders.add("Cookie", cookieSet);
-        }
+        httpHeaders.put("Cookie", response.getHeaders().get("Set-Cookie"));
         System.out.println(response.getHeaders().get("Set-Cookie"));
     }
+
     @Bean
     RestTemplate setTemplate() {
         RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));

@@ -7,7 +7,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,6 +25,12 @@ public class Spider {
 
     @Autowired
     RecordRepository recordRepository;
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
+    HttpHeaders httpHeaders;
 
     List<String> crawlResult;
     URI targetURL;
@@ -37,12 +48,16 @@ public class Spider {
     }
 
     public void crawl_rec(String url) throws IOException, URISyntaxException {
+        System.out.println(url);
         URI uri = new URI(url);
         if (!uri.getHost().equals(this.targetURL.getHost()) || recordRepository.findById(url).isPresent()) {
             return;
         }
         recordRepository.save(new Record(url));
-        Document doc = Jsoup.connect(url).get();
+        HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        Document doc = Jsoup.parse(response.getBody());
+        System.out.println(doc);
         crawlResult.add(doc.location());
         Elements questions = doc.select("a[href]");
         for (Element link : questions) {
