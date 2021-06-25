@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #e53935;
+  --grey-color: #7a7a7a;
+}
+
 @media (max-width: 890px) {
   .sm-hidden {
     display: none !important;
@@ -25,8 +30,8 @@
 
 .div-scan {
   text-align: center;
-  background: #cecece;
-  width: 600px;
+  background: var(--grey-color);
+  width: 600x;
 }
 
 .severity-badge {
