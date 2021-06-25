@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Configuration
@@ -52,9 +53,9 @@ public class Scanner {
         List<String> urls = spider.crawl(targetURL);
         Scan scan = new Scan(userId, urlObject.getTargetURL(), Scan.ScanType.partial, urls);
         for (String url : urls) {
-            Alert alert = xss.executeScan(url);
-            if (alert != null) {
-                scan.addThreat(alert);
+            List<Alert> alerts = xss.executeScan(url);
+            if (!alerts.isEmpty()) {
+                scan.addAlerts(alerts);
             }
         }
         for (int i = 0; i < urls.size(); i++) {
