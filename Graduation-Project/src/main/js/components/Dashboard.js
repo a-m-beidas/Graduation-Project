@@ -35,54 +35,40 @@ const colorSev = {
 }
 
 
-export const Dashboard = () => {
+export const Dashboard = (allReports) => {
     return (
         <div>
             <h2>Dashboard overview</h2>
             <p>test</p>
-
             <div className="dashboard-section">
                 <div className="card" > 
                     <div>
                         <SeverityPieChart data={severity.high} color={colorSev.high}/>
                     </div>
                 </div>
-
                 <div className="card">
                     <div>
                         <SeverityPieChart data={severity.medium} color={colorSev.medium}/>
                     </div>
                 </div>
-
-
                 <div className="card">
                     <div>
                         <SeverityPieChart data={severity.low} color={colorSev.low}/>
                     </div>
                 </div>
-
-
             </div >
-
             <p>test</p>
-
-
             <div className="dashboard-section">
                 <div className="card left">
                     <p>test</p>
-
                 </div>
                 <div className="card right">
                     <DonutChart data={donutData} />
                 </div>
-
             </div>
             <p>test</p>
-
             <Tableau />
-
             <p>test</p>
-
             <h3>Sites Needing Attention</h3>
             <TargetList colors='colors' />
         </div >

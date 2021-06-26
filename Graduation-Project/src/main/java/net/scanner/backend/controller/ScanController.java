@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api")
@@ -23,6 +24,11 @@ public class ScanController {
     @PostMapping(path = "/scan")
     public Scan scanPage(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Credentials url) throws IOException, URISyntaxException, ClassNotFoundException {
         return scanService.scan(url, authorizationHeader);
+    }
+
+    @GetMapping("/reports")
+    public List<Scan> reports(@RequestHeader("Authorization") String authorizationHeader) throws Exception {
+        return reportService.getAllScans(authorizationHeader);
     }
 
     @GetMapping("/report")
