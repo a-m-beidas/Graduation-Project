@@ -3,11 +3,26 @@
   --grey-color: #7a7a7a;
 }
 
+* {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* @media (min-width: 778px) {
+  .responsive-font {
+    font-size: var(--fontsize);
+  }
+  .alert-badge-width {
+    width: 100px;
+  }
+}
+
 @media (max-width: 890px) {
   .sm-hidden {
     display: none !important;
   }
-}
+} */
 
 .responsive-font {
   --rate: 2;
@@ -17,15 +32,6 @@
 .alert-badge-width {
   --rate-width: 10;
   width: calc(100px + var(--rate-width) * (1vw - 7.78px));
-}
-
-@media (min-width: 778px) {
-  .responsive-font {
-    font-size: var(--fontsize);
-  }
-  .alert-badge-width {
-    width: 100px;
-  }
 }
 
 /* scan page */
@@ -54,14 +60,20 @@
   width: 147px;
   height: 55px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
+  border: 0;
 }
 
-.scan-btn:hover {
+.scan-btn:hover,
+.scan-btn:focus {
+  background-color: var(--grey-color);
+  border: 0 white;
+  box-shadow: none !important;
+}
+
+button:active {
   background-color: var(--primary-color);
 }
 
@@ -79,8 +91,6 @@
 }
 
 .scan-label {
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
@@ -138,12 +148,6 @@
   border-color: rgba(228, 72, 35);
 }
 
-* {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-}
-
 .export {
   --grey-color: #7a7a7a;
 }
@@ -163,8 +167,6 @@
   left: 93px;
   top: 198px;
 
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 300;
   font-size: 48px;
   line-height: 56px;
@@ -209,8 +211,6 @@
 }
 
 .export h2 {
-  font-family: Roboto;
-  font-style: normal;
   font-weight: 500;
   font-size: 32px;
   line-height: 56px;
@@ -327,4 +327,44 @@
 .right {
   width: 350px;
   height: 350px;
+}
+
+.nav-style {
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.login-btn {
+  /* position: absolute; */
+  width: 387px;
+  height: 82px;
+  /* left: 748px;
+  top: 482px; */
+
+  background: #e44923;
+  border-radius: 10px;
+
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #ffffff;
+  border: 0;
+}
+
+.login-btn:hover {
+  background: #e86028;
+  border: 0;
+}
+
+.login-btn:active {
+  background: #e86028;
+  border: 0;
+}
+
+.login-label {
+  margin-right: 40px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 }

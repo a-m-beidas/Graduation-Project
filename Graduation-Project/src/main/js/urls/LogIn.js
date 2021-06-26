@@ -4,25 +4,25 @@ import { useHistory } from "react-router-dom";
 import { Form, Button, Spinner } from "react-bootstrap";
 
 const Login = (props) => {
-	const [username, setUsername] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState([]);
     const [status, setStatus] = useState('');
     const history = useHistory();
     const setLogIn = props.setLogIn;
-	function login(event) {
-		event.preventDefault();
+    function login(event) {
+        event.preventDefault();
         setStatus('p');
         const config = {
             headers: { 'Content-Type': 'application/json' }
         };
-        const body = JSON.stringify({"username": username, "password": password})
+        const body = JSON.stringify({ "username": username, "password": password })
         axios.post('/api/login', body, config)
             .then(response => {
                 if (response.status === 200) {
                     setStatus('s');
                     const token = response.data;
                     localStorage.setItem('bearer-token', token);
-                    setTimeout(() => {history.push("/"); setLogIn(true)}, 1000);
+                    setTimeout(() => { history.push("/"); setLogIn(true) }, 1000);
                 } else
                     throw response;
             })
@@ -35,29 +35,36 @@ const Login = (props) => {
 
     const onChangePassword = (event) => setPassword(event.target.value);
 
-	return (
-		<div className="d-flex justify-content-start">
+    return (
+        <div className="d-flex justify-content-start">
             <div className="sm-hidden  px-4">
-                <img width="500" src="images/LogIn.png"/>
+                <img width="500" src="images/LogIn.png" />
             </div>
-            <div style={{width: "100%"}} className="d-flex flax-wrap justify-content-around flex-column">
-                <Form onSubmit={login}>
-                    <Form.Group>
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control onChange={onChangeUsername} type="text" name="username" value={username}/>
+            <div style={{ width: "100%" }} className="d-flex flax-wrap justify-content-around flex-column">
+                <Form onSubmit={login} style={{ alignSelf: "center" }}>
+                    <Form.Group >
+                        <div style={{ display: "flex", width: "540px", height: "44px" }}>
+                            <Form.Label className="login-label">Username</Form.Label>
+                            <Form.Control style={{ width: "356px" }} placeholder="Enter your email" onChange={onChangeUsername} type="text" name="username" value={username} />
+                        </div>
                     </Form.Group>
+
                     <Form.Group>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control onChange={onChangePassword} type="password" name="password" value={password}/>
+                        <div style={{ display: "flex", width: "540px", height: "44px" }}>
+                            <Form.Label className="login-label">Password</Form.Label>
+                            <Form.Control style={{ width: "356px", }} placeholder="Enter your password" onChange={onChangePassword} type="password" name="password" value={password} />
+                        </div>
                     </Form.Group>
-                    <Button type="submit">Login</Button>
-                    <div>{ status == 'p' || status == 's' ? 
-                        <Spinner animation={status == 'p' ? "border": "grow"} /> : status}
-                </div>
+                    <div style={{ display: "flex", marginLeft: "40px" }}>
+                        <Button className="login-btn" type="submit">Login</Button>
+                    </div>
+                    <div>{status == 'p' || status == 's' ?
+                        <Spinner animation={status == 'p' ? "border" : "grow"} /> : status}
+                    </div>
                 </Form>
             </div>
         </div>
-	)
+    )
 }
 
 export default Login

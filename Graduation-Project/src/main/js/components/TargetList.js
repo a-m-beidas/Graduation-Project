@@ -23,22 +23,22 @@ const TargetList = (props) => {
             </thead>
             <tbody>
                 {reports.map(report =>
-                <> 
-                <tr>
-                    <td>{report.targetURL}</td>
-                    <td>{report.type}</td>
-                    <td>
-                        <div style={{ display: 'flex' }}>
-                            <SeverityShape color={colors.high} severityValue={report.count[2].value} />
-                            <SeverityShape color={colors.medium} severityValue={report.count[1].value} />
-                            <SeverityShape color={colors.low} severityValue={report.count[0].value} />
-                        </div>
-                    </td>
-                    <td>1/5/2021</td>
-                    <td><Button href={"/report?id=" + report.id}>View</Button></td>
+                    <>
+                        <tr>
+                            <td>{report.targetURL}</td>
+                            <td>{report.type}</td>
+                            <td>
+                                <div style={{ display: 'flex' }}>
+                                    <SeverityShape color={colors.high} severityValue={report.count[2].value} />
+                                    <SeverityShape color={colors.medium} severityValue={report.count[1].value} />
+                                    <SeverityShape color={colors.low} severityValue={report.count[0].value} />
+                                </div>
+                            </td>
+                            <td>1/5/2021</td>
+                            <td><Button href={"/report?id=" + report.id}>View</Button></td>
 
-                </tr>
-                </>)}
+                        </tr>
+                    </>)}
             </tbody>
         </Table>
 
