@@ -5,7 +5,7 @@ import SeverityPieChart from './SeverityPieChart';
 import TargetList from './TargetList';
 import Tableau from './Tableau';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const colors = {
     high: '#E53935', medium: '#FFBA69', low: "#59AEE6"
@@ -37,8 +37,10 @@ const colorSev = {
 }
 
 
-export const Dashboard = (allReports) => {
+export const Dashboard = () => {
     
+    const [reports, setReports] = useState({});
+
     useEffect(() => {
         const config = {
             headers:
@@ -48,7 +50,7 @@ export const Dashboard = (allReports) => {
         axios.get('/api/reports', config)
         .then(response => {
             if (response.status === 200) {
-                console.log(response.data)
+                setReports(response.data)
             } else {
                 throw response;
             }
@@ -89,7 +91,7 @@ export const Dashboard = (allReports) => {
             <Tableau />
             <p>test</p>
             <h3>Sites Needing Attention</h3>
-            <TargetList colors='colors' />
+            <TargetList reports={reports} colors='colors' />
         </div >
     )
 }
