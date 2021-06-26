@@ -93,30 +93,31 @@ export const Dashboard = () => {
         <div style={{ margin: "50px 50px", }}>
             <h2>Dashboard overview</h2>
             <div className="dashboard-section">
-                {
-                    reports.length === 0 ? "" :
-                        <>
-                            <div className="card" >
-                                <div>
-                                    <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
-                                </div>
+                {reports.length !== 0 ?
+                    <>
+                        <div className="card" >
+                            <div>
+                                <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
                             </div>
-                            <div className="card">
-                                <div>
-                                    <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium} />
-                                </div>
+                        </div>
+                        <div className="card">
+                            <div>
+                                <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium} />
                             </div>
-                            <div className="card">
-                                <div>
-                                    <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
-                                </div>
+                        </div>
+                        <div className="card">
+                            <div>
+                                <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
                             </div>
-                        </>
+                        </div>
+                    </>
+                    : "Nothing yet"
                 }
             </div >
             <br />
             <div className="dashboard-section">
                 <div className="card left">
+                    {/* <Tableau /> */}
                 </div>
                 <div className="card right">
                     {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-const colors = ['#E53935', '#FFBA69', "#59AEE6"];
+const colors = ['#FFBA69', '#E53935', "#59AEE6"];
 
 class DonutChart extends Component {
 
@@ -8,7 +8,6 @@ class DonutChart extends Component {
         super(props);
         this.chRef = React.createRef();
     }
-
 
     // Chart load after component Mount
     componentDidMount() {

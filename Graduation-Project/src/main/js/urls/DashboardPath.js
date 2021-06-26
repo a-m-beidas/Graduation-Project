@@ -13,10 +13,9 @@ const DashboardPath = () => {
     });
     return (
         <div >
-            <h1>
+            <h1 style={{ margin: "20px 50px", }}>
                 Welcome {username}!
             </h1>
-            <br />
             <Dashboard />
         </div>
     );

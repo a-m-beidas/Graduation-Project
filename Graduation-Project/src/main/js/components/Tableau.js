@@ -3,7 +3,7 @@ const { tableau } = window;
 
 const Tableau = () => {
     const ref = useRef(null)
-    const url = "https://public.tableau.com/views/Grad_16225677211890/Sheet43";
+    const url = "https://public.tableau.com/views/Grad_16225677211890/Dashboard2";
 
 
     function initViz() {
@@ -15,10 +15,13 @@ const Tableau = () => {
     }, [])
 
     return (
-        <div>
-            <h2>Hello</h2>
-            <div ref={ref}></div>
-        </div>
+        <>
+            <div id="tableau" ref={ref}></div>
+            <script>
+                document.getElementById("tableau").style.width = "300px";
+                document.getElementById("tableau").style.height = "300px";
+            </script>
+        </>
     )
 }
 
