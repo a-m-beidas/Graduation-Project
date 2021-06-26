@@ -77,11 +77,11 @@ public class Alert {
     }
 
     public String getDescription() {
-        return description;
+        return descriptionValue;
     }
 
     public String getFix() {
-        return fix;
+        return fixValue;
     }
 
     public int getSeverity() {
@@ -93,11 +93,11 @@ public class Alert {
     }
 
     public int getCweid() {
-        return cweid;
+        return cweidValue;
     }
 
     public String getWascid() {
-        return wascid;
+        return wascidValue;
     }
 
     public String getParameter() {
@@ -106,6 +106,6 @@ public class Alert {
 
 
     public List<String> getReferences() {
-        return references;
+        return referencesValue;
     }
 }

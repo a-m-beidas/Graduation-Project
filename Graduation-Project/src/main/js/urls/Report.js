@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
+import AlertExport from "./Alert";
 import ReactToPdf from 'react-to-pdf';
+import ReactDOM from 'react-dom';
 import jwt from '../utils/JWTPayload';
 import axios from 'axios';
 
@@ -48,7 +50,7 @@ function capitalize(string) {
 
 const Report = (props) => {
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
-    const [status, setStatus] = useState(props.location.state === undefined ? "" : props.location.state.status);
+    const [status, setStatus] = useState(props.location.state === undefined ? "" : {value: 200});
     const config = {
         headers:
           { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
@@ -67,18 +69,15 @@ const Report = (props) => {
                 setStatus({value: error.response.status, text: error.response.data})
             });
     }
-    const [onPrint, setOnPrint] = useState(false);
+    const onPrint = props.onPrint !== undefined;
     const ref = React.useRef();
-    const options = {
+
+    const printReport = () => {
+        const clone = React.cloneElement(<Report onPrint/>, {location: { state: {report: report}}});
+        ReactDOM.render(clone, document.getElementById("print-div"));
+        ref.current = document.getElementById("print-div");
     };
 
-    const issuePrint = () => {
-        setOnPrint(true);
-    };
-
-    const completePrint = () => {
-        setOnPrint(false);
-    };
     return(
     <>
     {
@@ -90,20 +89,23 @@ const Report = (props) => {
     
     <div>
         {processReport(report)}
-        <Container style={{paddingLeft: "0px", marginLeft: "0px"}} fluid ref={ref}>
+        <Container style={{paddingLeft: "0px", marginLeft: "0px"}}>
             <div className="px-4 py-4">
                 <div className="d-flex justify-content-between">
                     <div>
                         <h3>Test.com</h3>
                         <h4><a href={report.targetURL}>{report.targetURL}</a></h4>
                     </div>
-                    <div>
-                    <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
-                        {({toPdf}) =>  (
-                            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
-                        )}
-                    </ReactToPdf>
-                    </div>
+                    {
+                        onPrint ? "" :
+                        <div>
+                        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref}>
+                            {({toPdf}) =>  (
+                                <Button onClick={ () => {printReport();toPdf()}}>Export</Button>
+                            )}
+                        </ReactToPdf>
+                        </div>
+                    }
                 </div>
                 <div className="d-flex justify-content-between px-4">
                     <div style={{textAlign:"center"}}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="danger" >{report.count.high}</Badge></div>High Severities</div>
@@ -140,18 +142,25 @@ const Report = (props) => {
 export const Alert = (props) => {
     const alert = props.alert;
     const [open, setOpen] = useState(false);
-    const ref = React.useRef();
+    const alertRef = React.useRef();
     const onPrint = props.onPrint;
     let history = useHistory();
-    const exportAlert = () => {
+    const viewAlert = () => {
 
         history.push({
             pathname: '/alert',
             state: { alert: alert }
         });
     }
+    
+    const printAlert = () => {
+        const clone = React.cloneElement(<AlertExport onPrint/>, {location: { state: {alert: alert}}});
+        ReactDOM.render(clone, document.getElementById("print-div"));
+        alertRef.current = document.getElementById("print-div");
+    }
+
     return(
-        <div className="my-2 alert-main-div-app">
+        <div ref={ alertRef } className="my-2 alert-main-div-app">
             <Container fluid className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
                     <Badge pill variant={severity[alert.severity].color}
@@ -175,28 +184,25 @@ export const Alert = (props) => {
                 <div style={{visibility: onPrint ? "hidden": "visible"}} 
                            className="d-flex align-items-center justify-content-between">
                     <div>
-                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
+                        <Button className="alert-bottom-app" onClick={viewAlert}>
                             <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                 View
                             </p>
                         </Button>
                     </div>
                     <div>
-                        <Button className="alert-bottom-app" onClick={exportAlert}>
-                            <p className="responsive-font" style={{"--fontsize": "17px"}}>
-                                Export
-                            </p>
-                        </Button>
+                        <ReactToPdf x={"12"} filename={"Report"} targetRef={alertRef}>
+                            {({toPdf}) =>  (
+                            <Button className="alert-bottom-app" onClick={ () => {printAlert();toPdf()}}>
+                                <p className="responsive-font" style={{"--fontsize": "17px"}}>
+                                    Export
+                                </p>
+                            </Button>
+                            )}
+                        </ReactToPdf>
                     </div>
                 </div>
             </Container>
-            <Collapse in={open}>
-                <div ref={ref} className="alert-transition-app">
-                    <br/><br/>
-                    (((Information, more details about the alert)))
-                    <br/><br/>
-                </div>
-            </Collapse>
         </div>
         )
 }
