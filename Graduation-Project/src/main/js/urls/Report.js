@@ -100,7 +100,7 @@ const Report = (props) => {
                     <div>
                     <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
                         {({toPdf}) =>  (
-                            <Button onClick={ () => {issuePrint();toPdf();}}>To PDF</Button>
+                            <Button onClick={ () => {printAlert();toPdf()}}>To PDF</Button>
                         )}
                     </ReactToPdf>
                     </div>
@@ -143,13 +143,18 @@ export const Alert = (props) => {
     const ref = React.useRef();
     const onPrint = props.onPrint;
     let history = useHistory();
-    const exportAlert = () => {
+    const viewAlert = () => {
 
         history.push({
             pathname: '/alert',
             state: { alert: alert }
         });
     }
+    
+    const printAlert = () => {
+
+    }
+
     return(
         <div className="my-2 alert-main-div-app">
             <Container fluid className="d-flex justify-content-between">
@@ -175,14 +180,14 @@ export const Alert = (props) => {
                 <div style={{visibility: onPrint ? "hidden": "visible"}} 
                            className="d-flex align-items-center justify-content-between">
                     <div>
-                        <Button className="alert-bottom-app" onClick={() => setOpen(!open)}>
+                        <Button className="alert-bottom-app" onClick={viewAlert}>
                             <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                 View
                             </p>
                         </Button>
                     </div>
                     <div>
-                        <Button className="alert-bottom-app" onClick={exportAlert}>
+                        <Button className="alert-bottom-app" onClick={printAlert}>
                             <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                 Export
                             </p>
@@ -190,13 +195,6 @@ export const Alert = (props) => {
                     </div>
                 </div>
             </Container>
-            <Collapse in={open}>
-                <div ref={ref} className="alert-transition-app">
-                    <br/><br/>
-                    (((Information, more details about the alert)))
-                    <br/><br/>
-                </div>
-            </Collapse>
         </div>
         )
 }
