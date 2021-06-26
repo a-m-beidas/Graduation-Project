@@ -16,11 +16,12 @@ const Tableau = () => {
 
     return (
         <>
-            <div id="tableau" ref={ref}></div>
-            <script>
+            <div id="tableau" ref={ref} style={{ width: "800px", height: "300px" }}></div>
+            {/* <script>
                 document.getElementById("tableau").style.width = "300px";
                 document.getElementById("tableau").style.height = "300px";
-            </script>
+            </script> */}
+
         </>
     )
 }
