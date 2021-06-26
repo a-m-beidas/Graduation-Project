@@ -92,41 +92,37 @@ export const Dashboard = () => {
     return (
         <div>
             <h2>Dashboard overview</h2>
-            <p>test</p>
             <div className="dashboard-section">
                 {
                     reports.length === 0 ? "" : 
                     <>
                         <div className="card" > 
                             <div>
-                                <SeverityPieChart data={reports[reports.length - 1].count} color={colorSev.high} index={0}/>
+                                <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high}/>
                             </div>
                         </div>
                         <div className="card">
                             <div>
-                                <SeverityPieChart data={reports[reports.length - 1].count} color={colorSev.medium} index={1}/>
+                                <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium}/>
                             </div>
                         </div>
                         <div className="card">
                             <div>
-                                <SeverityPieChart data={reports[reports.length - 1].count} color={colorSev.low} index={2}/>
+                                <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low}/>
                             </div>
                         </div>
                     </>
                 }
             </div >
-            <p>test</p>
+            <br/>
             <div className="dashboard-section">
                 <div className="card left">
-                    <p>test</p>
                 </div>
                 <div className="card right">
                     {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
                 </div>
             </div>
-            <p>test</p>
-            <Tableau />
-            <p>test</p>
+            <br/>
             <h3>Sites Needing Attention</h3>
             { reports.length === 0 ? "" : <TargetList reports={reports} colors='colors'/>}
         </div >
