@@ -22,7 +22,8 @@ const TargetList = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {/* {reports.map(report =>  */}
+                {reports.map(report =>
+                <> 
                 <tr>
                     <td>{report.targetURL}</td>
                     <td>{report.type}</td>
@@ -34,23 +35,10 @@ const TargetList = (props) => {
                         </div>
                     </td>
                     <td>1/5/2021</td>
-                    <td>View</td>
+                    <td><Button href={"/report?id=" + report.id}>View</Button></td>
 
                 </tr>
-                <tr>
-                    <td>example</td>
-                    <td>Production</td>
-                    <td>
-                        <div style={{ display: 'flex' }}>
-                            <SeverityShape color={colors.high} severityValue={45} />
-                            <SeverityShape color={colors.medium} severityValue={10} />
-                            <SeverityShape color={colors.low} severityValue={31} />
-                        </div>
-
-                    </td>
-                    <td>10/5/2021</td>
-                    <td>View</td>
-                </tr>
+                </>)}
             </tbody>
         </Table>
 
