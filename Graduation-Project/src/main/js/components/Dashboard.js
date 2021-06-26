@@ -17,7 +17,7 @@ const donutData = [
     { name: "Low", value: 20 },
 ]
 
-const severity = { 
+const severityCount = { 
     high: [
         { name: "High", value: 50},
         { name: "Total", value: 152}
@@ -36,6 +36,37 @@ const colorSev = {
     low: ["rgba(89, 174, 230, 0.2)", "rgba(89, 174, 230, 1)"]
 }
 
+const severity = {
+    1: {
+        text: "high"
+    },
+    2: {
+        text: "medium"
+    },
+    3: {
+        text: "low"
+    },
+    4: {
+        text: "Secure",
+        text: "secure"
+    }
+}
+
+const processReport = (report) => {
+    console.log(report)
+    if (report.alerts === undefined)
+        return;
+    report.count = { high: 0, medium: 0, low: 0 }
+    report.alerts.map((alert, index) => {
+        alert.date = report.date;
+        if (!alert.path.startsWith(report.targetURL))
+            alert.path = report.targetURL + alert.path
+        ++report.count[severity[alert.severity].text]
+    })
+    console.log(report)
+    return;
+}
+
 
 export const Dashboard = () => {
     
@@ -50,7 +81,7 @@ export const Dashboard = () => {
         axios.get('/api/reports', config)
         .then(response => {
             if (response.status === 200) {
-                console.log(response.data)
+                response.data.map(report => processReport(report));
                 setReports(response.data);
             } else {
                 throw response;
@@ -66,17 +97,17 @@ export const Dashboard = () => {
             <div className="dashboard-section">
                 <div className="card" > 
                     <div>
-                        <SeverityPieChart data={severity.high} color={colorSev.high}/>
+                        <SeverityPieChart data={severityCount.high} color={colorSev.high}/>
                     </div>
                 </div>
                 <div className="card">
                     <div>
-                        <SeverityPieChart data={severity.medium} color={colorSev.medium}/>
+                        <SeverityPieChart data={severityCount.medium} color={colorSev.medium}/>
                     </div>
                 </div>
                 <div className="card">
                     <div>
-                        <SeverityPieChart data={severity.low} color={colorSev.low}/>
+                        <SeverityPieChart data={severityCount.low} color={colorSev.low}/>
                     </div>
                 </div>
             </div >

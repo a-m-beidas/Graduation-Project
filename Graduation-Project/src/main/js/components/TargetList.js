@@ -7,35 +7,6 @@ const colors = {
     high: '#E53935', medium: '#FFBA69', low: "#59AEE6"
 };
 
-const severity = {
-    1: {
-        text: "high"
-    },
-    2: {
-        text: "medium"
-    },
-    3: {
-        text: "low"
-    },
-    4: {
-        text: "Secure",
-        text: "secure"
-    }
-}
-
-const processReport = (report) => {
-    console.log(report)
-    if (report.alerts === undefined)
-        return;
-    report.count = { high: 0, medium: 0, low: 0 }
-    report.alerts.map((alert, index) => {
-        alert.date = report.date;
-        if (!alert.path.startsWith(report.targetURL))
-            alert.path = report.targetURL + alert.path
-        ++report.count[severity[alert.severity].text]
-    })
-    return;
-}
 
 const TargetList = (props) => {
     const [reports, setReports] = useState(props.reports)
@@ -56,7 +27,6 @@ const TargetList = (props) => {
             <tbody>
                 { reports.map(report => 
                 <tr>
-                    {[processReport(report), ]}
                     <td>{report.targetURL}</td>
                     <td>{report.type}</td>
                     <td>
