@@ -14,7 +14,7 @@ const TargetList = () => {
                     <th>Address</th>
                     <th>Description</th>
                     <th>Vulnerabilities</th>
-                    <th>Status</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,12 +28,7 @@ const TargetList = () => {
                             <SeverityShape color={colors.low} severityValue={0} />
                         </div>
                     </td>
-                    <td>
-                        <pre>
-                            completed
-                            1/5/2021
-                        </pre>
-                    </td>
+                    <td>1/5/2021</td>
                     <td>View</td>
 
                 </tr>
@@ -48,12 +43,7 @@ const TargetList = () => {
                         </div>
 
                     </td>
-                    <td>
-                        <pre>
-                            completed
-                            10/5/2021
-                        </pre>
-                    </td>
+                    <td>10/5/2021</td>
                     <td>View</td>
                 </tr>
             </tbody>

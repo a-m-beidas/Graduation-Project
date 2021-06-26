@@ -28,10 +28,11 @@
   }
 }
 
+/* scan page */
 .div-scan {
   text-align: center;
-  background: var(--grey-color);
-  width: 600x;
+  /* background: var(--grey-color); */
+  /* width: 600px; */
 }
 
 .severity-badge {
@@ -48,12 +49,43 @@
   background-color: #cecece;
 }
 
-.grey-control-scan {
-  background-color: #cecece;
+.scan-btn {
+  background-color: var(--primary-color);
+  width: 147px;
+  height: 55px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
 }
 
-.form-control {
-  width: 400px;
+.scan-btn:hover {
+  background-color: var(--primary-color);
+}
+
+.scan-input {
+  width: 709px;
+  height: 61px;
+
+  background: #ffffff;
+  border-radius: 30px;
+}
+
+.scan-div {
+  display: flex;
+  align-items: center;
+}
+
+.scan-label {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #000000;
 }
 
 .form-on-button {
@@ -62,6 +94,14 @@
   font-size: 12px;
   right: 0.6%;
   bottom: 7.3%;
+}
+
+.collapse {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  height: 58px;
+  margin: 0 10px;
 }
 
 .alert-badge-app {
@@ -129,7 +169,7 @@
   font-size: 48px;
   line-height: 56px;
 
-  color: #e53935;
+  color: var(--primary-color);
 }
 
 .export #button {
@@ -246,6 +286,7 @@
   border: 1px solid #000000;
 }
 
+/* Dashbaord */
 .card {
   /* shadowOffset: {
       width: 0,

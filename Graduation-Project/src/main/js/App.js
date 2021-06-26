@@ -35,21 +35,21 @@ const App = () => {
                 </Navbar.Collapse>
             </Navbar>
             <br />
-            <Container className="px-4" fluid>
-                <Switch>
-                    <Route component={Home} path="/" exact />
-                    <Route path="/login" exact render={(props) => (
-                        <LogIn setLogIn={setLogIn} />
-                    )} />
-                    <Route component={Register} path="/register" />
-                    <Route component={Error} path="/error" />
-                    <PrivateRoute component={Scan} path="/scan" />
-                    <PrivateRoute component={Report} path="/report" />
-                    <PrivateRoute component={Report} path="/report:id" />
-                    <PrivateRoute component={Alert} path="/alert" />
-                    <LogoutRoute setLogIn={setLogIn} path="/logout" />
-                </Switch>
-            </Container>
+            {/* <Container className="px-4" fluid> */}
+            <Switch>
+                <Route component={Home} path="/" exact />
+                <Route path="/login" exact render={(props) => (
+                    <LogIn setLogIn={setLogIn} />
+                )} />
+                <Route component={Register} path="/register" />
+                <Route component={Error} path="/error" />
+                <PrivateRoute component={Scan} path="/scan" />
+                <PrivateRoute component={Report} path="/report" />
+                <PrivateRoute component={Report} path="/report:id" />
+                <PrivateRoute component={Alert} path="/alert" />
+                <LogoutRoute setLogIn={setLogIn} path="/logout" />
+            </Switch>
+            {/* </Container> */}
 
         </Router>
     )

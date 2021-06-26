@@ -48,24 +48,27 @@ const Scan = () => {
       })
   }
   return (
+
     <div className="d-flex justify-content-center" style={{ backgroundColor: "#C8C9CB", heigt: '100vp' }}>
-      <div className="px-4 div-scan">
+      <div className="div-scan">
         <div>
           <Image roundedCircle width="250" src="images/astronaut.jpg" />
-        </div><br />
+        </div>
+        <br />
         <Form onSubmit={scan} className="form-app">
-          <Form.Group style={{ position: "relative" }} className="d-flex justify-content-between">
-            <Form.Label>URL</Form.Label>
-            <Form.Control className="rounded-pill form-control" onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL} />
-            <Button className="form-on-button rounded-pill" type="submit">Begin Scan</Button>
+          <Form.Group style={{ position: "relative" }} className="d-flex justify-content-between scan-div">
+            <Form.Label className="scan-label">Target URL</Form.Label>
+            <Form.Control className="rounded-pill form-control scan-input" onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL} />
+            <Button className="form-on-button rounded-pill scan-btn" type="submit">Scan</Button>
           </Form.Group>
 
           {/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
           <Form.Group style={{ backgroundColor: "white" }}>
-            <div className="d-flex px-2 justify-content-between">
+            <div className="d-flex px-2 justify-content-between collapse">
               <h4>Login Credentials</h4>
-              <Switch height={20} width={45} onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops1(!cops1)} checked={cops1} />
+              <Switch height={20} width={45} onColor={"#e53935"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops1(!cops1)} checked={cops1} />
             </div>
+
             <Collapse in={cops1}>
               <div className="py-4">
                 <div className="d-flex px-2 justify-content-between">
@@ -88,9 +91,9 @@ const Scan = () => {
 
           {/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
           <Form.Group style={{ backgroundColor: "white" }}>
-            <div className="d-flex px-2 justify-content-between">
+            <div className="d-flex px-2 justify-content-between collapse">
               <h4>Session ID</h4>
-              <Switch height={20} width={45} onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops2(!cops2)} checked={cops2} />
+              <Switch height={20} width={45} onColor={"#e53935"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops2(!cops2)} checked={cops2} />
             </div>
             <Collapse in={cops2}>
               <div className="py-4">
@@ -103,9 +106,11 @@ const Scan = () => {
 
           {/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
           <Form.Group style={{ backgroundColor: "white" }}>
-            <div className="d-flex px-2 justify-content-between">
+            <div className="d-flex px-2 justify-content-between collapse" style={{
+              hight: "160px"
+            }}>
               <h4>Cookie</h4>
-              <Switch height={20} width={45} onColor={"#007BFF"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops3(!cops3)} checked={cops3} />
+              <Switch height={20} width={45} onColor={"#e53935"} checkedIcon={false} uncheckedIcon={false} onChange={() => setCops3(!cops3)} checked={cops3} />
             </div>
             <Collapse in={cops3}>
               <div className="py-4">
@@ -118,7 +123,7 @@ const Scan = () => {
         </Form>
         {requestMessage}
       </div>
-    </div>
+    </div >
   )
 }
 
