@@ -90,11 +90,12 @@ export const Dashboard = () => {
     }, [])
 
     return (
-        <div style={{ margin: "50px 50px", }}>
-            <h2>Dashboard overview</h2>
-            <div className="dashboard-section">
-                {reports.length !== 0 ?
-                    <>
+        <>
+            {reports.length !== 0 ?
+                <div style={{ margin: "50px 50px", }}>
+                    <h2>Dashboard overview</h2>
+                    <div className="dashboard-section">
+
                         <div className="card" >
                             <div>
                                 <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
@@ -110,22 +111,23 @@ export const Dashboard = () => {
                                 <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
                             </div>
                         </div>
-                    </>
-                    : "Nothing yet"
-                }
-            </div >
-            <br />
-            <div className="dashboard-section">
-                <div className="card left">
-                    {/* <Tableau /> */}
-                </div>
-                <div className="card right">
-                    {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
-                </div>
-            </div>
-            <br />
-            <h3>Sites Needing Attention</h3>
-            {reports.length === 0 ? "" : <TargetList reports={reports} colors='colors' />}
-        </div >
+
+                    </div >
+                    <br />
+                    <div className="dashboard-section">
+                        <div className="card left">
+                            {/* <Tableau /> */}
+                        </div>
+                        <div className="card right">
+                            {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
+                        </div>
+                    </div>
+                    <br />
+                    <h3>Sites Needing Attention</h3>
+                    {reports.length === 0 ? "" : <TargetList reports={reports} colors='colors' />}
+                </div >
+                : <div style={{ margin: "50px 50px", }}><h3>You Need To Log In</h3></div>
+            }
+        </>
     )
 }
