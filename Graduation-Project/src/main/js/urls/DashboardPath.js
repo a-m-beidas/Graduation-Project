@@ -12,7 +12,7 @@ const DashboardPath = () => {
         setUsername(clientName);
     });
     return (
-        <div>
+        <div >
             <h1>
                 Welcome {username}!
             </h1>

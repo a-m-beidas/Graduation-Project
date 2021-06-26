@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home = () => {
     return (
-        <div>
+        <div style={{ margin: "50px 50px", }}>
             <h1>
                 Welcome! Please Sign In
             </h1>

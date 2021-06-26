@@ -17,20 +17,20 @@ const donutData = [
     { name: "Low", value: 20 },
 ]
 
-const severityCount = { 
+const severityCount = {
     high: [
-        { name: "High", value: 50},
-        { name: "Total", value: 152}
+        { name: "High", value: 50 },
+        { name: "Total", value: 152 }
     ], medium: [
-        { name: "Medium", value: 82},
-        { name: "Total", value: 152}
+        { name: "Medium", value: 82 },
+        { name: "Total", value: 152 }
     ], low: [
-        {name: "Low", value: 20},
-        {name: "Total", value: 152}
+        { name: "Low", value: 20 },
+        { name: "Total", value: 152 }
     ]
 }
 
-const colorSev = { 
+const colorSev = {
     high: ["rgba(229, 57, 53, 0.1)", "rgba(229, 57, 53, 1)"],
     medium: ["rgba(255, 186, 105, 0.1)", "rgba(255, 186, 105, 1)"],
     low: ["rgba(89, 174, 230, 0.2)", "rgba(89, 174, 230, 1)"]
@@ -56,7 +56,7 @@ const processReport = (report) => {
     console.log(report)
     if (report.alerts === undefined)
         return;
-    report.count = [{name: "High", value: 0}, {name: "Medium", value: 0}, {name: "Low", value: 0}]
+    report.count = [{ name: "High", value: 0 }, { name: "Medium", value: 0 }, { name: "Low", value: 0 }]
     report.alerts.map((alert, index) => {
         alert.date = report.date;
         if (!alert.path.startsWith(report.targetURL))
@@ -68,53 +68,53 @@ const processReport = (report) => {
 
 
 export const Dashboard = () => {
-    
+
     const [reports, setReports] = useState([]);
 
     useEffect(() => {
         const config = {
             headers:
-              { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
+                { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
         };
-        
+
         axios.get('/api/reports', config)
-        .then(response => {
-            if (response.status === 200) {
-                response.data.map(report => processReport(report));
-                setReports(response.data);
-            } else {
-                throw response;
-            }
-        })
-        .catch(error => console.log(error))
+            .then(response => {
+                if (response.status === 200) {
+                    response.data.map(report => processReport(report));
+                    setReports(response.data);
+                } else {
+                    throw response;
+                }
+            })
+            .catch(error => console.log(error))
     }, [])
 
     return (
-        <div>
+        <div style={{ margin: "50px 50px", }}>
             <h2>Dashboard overview</h2>
             <div className="dashboard-section">
                 {
-                    reports.length === 0 ? "" : 
-                    <>
-                        <div className="card" > 
-                            <div>
-                                <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high}/>
+                    reports.length === 0 ? "" :
+                        <>
+                            <div className="card" >
+                                <div>
+                                    <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="card">
-                            <div>
-                                <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium}/>
+                            <div className="card">
+                                <div>
+                                    <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="card">
-                            <div>
-                                <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low}/>
+                            <div className="card">
+                                <div>
+                                    <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
+                                </div>
                             </div>
-                        </div>
-                    </>
+                        </>
                 }
             </div >
-            <br/>
+            <br />
             <div className="dashboard-section">
                 <div className="card left">
                 </div>
@@ -122,9 +122,9 @@ export const Dashboard = () => {
                     {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
                 </div>
             </div>
-            <br/>
+            <br />
             <h3>Sites Needing Attention</h3>
-            { reports.length === 0 ? "" : <TargetList reports={reports} colors='colors'/>}
+            {reports.length === 0 ? "" : <TargetList reports={reports} colors='colors' />}
         </div >
     )
 }
