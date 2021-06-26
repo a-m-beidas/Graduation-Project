@@ -124,7 +124,7 @@ export const Dashboard = () => {
                     </div>
                     <br />
                     <h3>Sites Needing Attention</h3>
-                    {reports.length === 0 ? "" : <TargetList reports={reports} colors='colors' />}
+                    {reports.length === 0 ? "" : <TargetList className="target-list-table" reports={reports} colors='colors' />}
                 </div >
                 : <div style={{ margin: "50px 50px", }}><h3>You Need To Log In</h3></div>
             }

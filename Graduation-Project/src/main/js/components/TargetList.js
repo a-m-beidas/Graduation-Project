@@ -28,7 +28,7 @@ const TargetList = (props) => {
                             <td>{report.targetURL}</td>
                             <td>{report.type}</td>
                             <td>
-                                <div style={{ display: 'flex' }}>
+                                <div style={{ display: 'flex', justifyContent: "center" }}>
                                     <SeverityShape color={colors.high} severityValue={report.count[2].value} />
                                     <SeverityShape color={colors.medium} severityValue={report.count[1].value} />
                                     <SeverityShape color={colors.low} severityValue={report.count[0].value} />
