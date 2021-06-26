@@ -159,14 +159,21 @@
   height: 56px;
   left: 93px;
   top: 198px;
-  --rate: 2;
-  font-size: calc(34px + var(--rate) * (1vw - 7.78px));
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
   line-height: 56px;
 
   color: var(--primary-color);
+}
+
+.export.html.h1 {
+  --rate: 2;
+  font-size: calc(34px + var(--rate) * (1vw - 7.78px));
+}
+
+.export.print h1 {
+  font-size: 34.8px;
 }
 
 .export #button {
@@ -178,10 +185,6 @@
 /* High */
 .export #severity {
   /* position: absolute; */
-  --rate-width: 2.5;
-  width: calc(140px + var(--rate-width) * (1vw - 7.78px));
-  height: calc(52px + var(--rate-width) * (1vw - 7.78px));
-
   /* left: 157px; */
   /* top: 298px; */
   margin-right: 40px;
@@ -197,50 +200,72 @@
   line-height: 42px;
 }
 
+.export.html #severity {
+  --rate-width: 2.5;
+  width: calc(140px + var(--rate-width) * (1vw - 7.78px));
+  height: calc(52px + var(--rate-width) * (1vw - 7.78px));
+}
+
+.export.print #severity {
+  width: 142px;
+  height: 54px;
+}
+
 .export #severity {
   align-content: center;
   align-items: center;
 }
 
-.export section {
+.export.html section {
   --rate: 2;
-  margin: auto calc(29px + var(--rate) * (1vw - 7.78px));
+  margin: auto calc(29px + var(--rate) * (1vw - 7.78px)) !important;
+}
+
+.export.print section {
+  margin: auto 29.5px;
 }
 
 .export h2 {
-  --rate: 2;
-  font-size: calc(29px + var(--rate) * (1vw - 7.78px));
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   line-height: 56px;
 }
 
+.export.html h2 {
+  --rate: 2;
+  font-size: calc(29px + var(--rate) * (1vw - 7.78px));
+}
+
+.export.print h2 {
+  font-size: 30px;
+}
+
 .export p {
+  color: #000000;
+}
+
+.export.html p {
   --rate: 2;
   font-size: calc(15px + var(--rate) * (1vw - 7.78px));
-  color: #000000;
+}
+
+.export.print p {
+  font-size: 15.85px;
 }
 
 .export a {
+  line-height: 28px;
+  color: #000000;
+}
+
+.export.html a {
   --rate: 2;
-  line-height: 28px;
-  font-size: calc(15px + var(--rate) * (1vw - 7.78px));
-  color: #000000;
+  font-size: calc(15px + var(--rate) * (1vw - 7.78px)) !important;
 }
 
-.export text {
-  font-size: 24px;
-  line-height: 28px;
-
-  color: #000000;
-}
-
-.export pre {
-  font-size: 24px;
-  line-height: 28px;
-
-  color: #000000;
+.export.print a {
+  font-size: 15.85px;
 }
 
 .export #how {

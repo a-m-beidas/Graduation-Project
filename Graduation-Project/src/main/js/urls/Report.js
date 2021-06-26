@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
+import AlertExport from "./Alert";
 import ReactToPdf from 'react-to-pdf';
 import ReactDOM from 'react-dom';
 import jwt from '../utils/JWTPayload';
@@ -153,7 +154,9 @@ export const Alert = (props) => {
     }
     
     const printAlert = () => {
-
+        const clone = React.cloneElement(<AlertExport onPrint/>, {location: { state: {alert: alert}}});
+        ReactDOM.render(clone, document.getElementById("print-div"));
+        ref.current = document.getElementById("print-div");
     }
 
     return(
@@ -188,11 +191,15 @@ export const Alert = (props) => {
                         </Button>
                     </div>
                     <div>
-                        <Button className="alert-bottom-app" onClick={printAlert}>
-                            <p className="responsive-font" style={{"--fontsize": "17px"}}>
-                                Export
-                            </p>
-                        </Button>
+                        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref}>
+                            {({toPdf}) =>  (
+                            <Button className="alert-bottom-app" onClick={ () => {printAlert();}}>
+                                <p className="responsive-font" style={{"--fontsize": "17px"}}>
+                                    Export
+                                </p>
+                            </Button>
+                            )}
+                        </ReactToPdf>
                     </div>
                 </div>
             </Container>
