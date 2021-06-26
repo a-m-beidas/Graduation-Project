@@ -35,7 +35,7 @@ const TargetList = (props) => {
                         </div>
                     </td>
                     <td>1/5/2021</td>
-                    <td><Button href={"/reportid=?" + report.id}>View</Button></td>
+                    <td><Button href={"/report?id=" + report.id}>View</Button></td>
 
                 </tr>
                 </>)}
