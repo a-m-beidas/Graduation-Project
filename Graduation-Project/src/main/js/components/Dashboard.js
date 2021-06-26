@@ -4,6 +4,8 @@ import DonutChart from './DonutChart';
 import SeverityPieChart from './SeverityPieChart';
 import TargetList from './TargetList';
 import Tableau from './Tableau';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const colors = {
     high: '#E53935', medium: '#FFBA69', low: "#59AEE6"
@@ -15,12 +17,12 @@ const donutData = [
     { name: "Low", value: 20 },
 ]
 
-const severity = { 
+const severityCount = { 
     high: [
         { name: "High", value: 50},
         { name: "Total", value: 152}
     ], medium: [
-        { name: "Mediunm", value: 82},
+        { name: "Medium", value: 82},
         { name: "Total", value: 152}
     ], low: [
         {name: "Low", value: 20},
@@ -34,57 +36,95 @@ const colorSev = {
     low: ["rgba(89, 174, 230, 0.2)", "rgba(89, 174, 230, 1)"]
 }
 
+const severity = {
+    1: {
+        text: "high"
+    },
+    2: {
+        text: "medium"
+    },
+    3: {
+        text: "low"
+    },
+    4: {
+        text: "Secure",
+        text: "secure"
+    }
+}
+
+const processReport = (report) => {
+    console.log(report)
+    if (report.alerts === undefined)
+        return;
+    report.count = [{name: "High", value: 0}, {name: "Medium", value: 0}, {name: "Low", value: 0}]
+    report.alerts.map((alert, index) => {
+        alert.date = report.date;
+        if (!alert.path.startsWith(report.targetURL))
+            alert.path = report.targetURL + alert.path;
+        ++report.count[alert.severity - 1].value;
+    })
+    return;
+}
+
 
 export const Dashboard = () => {
+    
+    const [reports, setReports] = useState([]);
+
+    useEffect(() => {
+        const config = {
+            headers:
+              { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
+        };
+        
+        axios.get('/api/reports', config)
+        .then(response => {
+            if (response.status === 200) {
+                response.data.map(report => processReport(report));
+                setReports(response.data);
+            } else {
+                throw response;
+            }
+        })
+        .catch(error => console.log(error))
+    }, [])
+
     return (
         <div>
             <h2>Dashboard overview</h2>
-            <p>test</p>
-
             <div className="dashboard-section">
-                <div className="card" > 
-                    <div>
-                        <SeverityPieChart data={severity.high} color={colorSev.high}/>
-                    </div>
-                </div>
-
-                <div className="card">
-                    <div>
-                        <SeverityPieChart data={severity.medium} color={colorSev.medium}/>
-                    </div>
-                </div>
-
-
-                <div className="card">
-                    <div>
-                        <SeverityPieChart data={severity.low} color={colorSev.low}/>
-                    </div>
-                </div>
-
-
+                {
+                    reports.length === 0 ? "" : 
+                    <>
+                        <div className="card" > 
+                            <div>
+                                <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high}/>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div>
+                                <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium}/>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div>
+                                <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low}/>
+                            </div>
+                        </div>
+                    </>
+                }
             </div >
-
-            <p>test</p>
-
-
+            <br/>
             <div className="dashboard-section">
                 <div className="card left">
-                    <p>test</p>
-
                 </div>
                 <div className="card right">
-                    <DonutChart data={donutData} />
+                    {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
                 </div>
-
             </div>
-            <p>test</p>
-
-            <Tableau />
-
-            <p>test</p>
-
+            <br/>
             <h3>Sites Needing Attention</h3>
-            <TargetList colors='colors' />
+            { reports.length === 0 ? "" : <TargetList reports={reports} colors='colors'/>}
         </div >
     )
 }

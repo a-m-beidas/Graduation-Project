@@ -6,6 +6,7 @@ import net.scanner.backend.security.TokenUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +17,12 @@ public class ReportService {
 
     @Autowired
     ScanRepository scanRepository;
+
+    public List<Scan> getAllScans(String authorizationHeader) throws Exception {
+        int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
+        List<Scan> scans = scanRepository.findByUserId(userId);
+        return scans;
+    }
 
     public Scan getScan(int scanId, String authorizationHeader) throws Exception {
         int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
