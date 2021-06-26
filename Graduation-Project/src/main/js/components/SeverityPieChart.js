@@ -42,7 +42,6 @@ class SeverityPieChart extends Component {
             .value(d => d.value)
         let data_ready = pie(data);
         data_ready.map(data => {data.endAngle = -data.endAngle; data.startAngle = -data.startAngle})
-        console.log(data_ready);    
         let center_ready = pie([data[0]]);
         // Donut partition  
         svg

@@ -39,7 +39,7 @@ const colorSev = {
 
 export const Dashboard = () => {
     
-    const [reports, setReports] = useState({});
+    const [reports, setReports] = useState([]);
 
     useEffect(() => {
         const config = {
@@ -50,11 +50,13 @@ export const Dashboard = () => {
         axios.get('/api/reports', config)
         .then(response => {
             if (response.status === 200) {
-                setReports(response.data)
+                console.log(response.data)
+                setReports(response.data);
             } else {
                 throw response;
             }
         })
+        .catch(error => console.log(error))
     }, [])
 
     return (
@@ -91,7 +93,7 @@ export const Dashboard = () => {
             <Tableau />
             <p>test</p>
             <h3>Sites Needing Attention</h3>
-            <TargetList reports={reports} colors='colors' />
+            { reports.length === 0 ? "" : <TargetList reports={reports} colors='colors'/>}
         </div >
     )
 }
