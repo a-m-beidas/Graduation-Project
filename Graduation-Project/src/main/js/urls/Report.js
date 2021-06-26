@@ -142,7 +142,7 @@ const Report = (props) => {
 export const Alert = (props) => {
     const alert = props.alert;
     const [open, setOpen] = useState(false);
-    const ref = React.useRef();
+    const alertRef = React.useRef();
     const onPrint = props.onPrint;
     let history = useHistory();
     const viewAlert = () => {
@@ -156,11 +156,11 @@ export const Alert = (props) => {
     const printAlert = () => {
         const clone = React.cloneElement(<AlertExport onPrint/>, {location: { state: {alert: alert}}});
         ReactDOM.render(clone, document.getElementById("print-div"));
-        ref.current = document.getElementById("print-div");
+        alertRef.current = document.getElementById("print-div");
     }
 
     return(
-        <div className="my-2 alert-main-div-app">
+        <div ref={ alertRef } className="my-2 alert-main-div-app">
             <Container fluid className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
                     <Badge pill variant={severity[alert.severity].color}
@@ -191,9 +191,9 @@ export const Alert = (props) => {
                         </Button>
                     </div>
                     <div>
-                        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref}>
+                        <ReactToPdf x={"12"} filename={"Report"} targetRef={alertRef}>
                             {({toPdf}) =>  (
-                            <Button className="alert-bottom-app" onClick={ () => {printAlert();}}>
+                            <Button className="alert-bottom-app" onClick={ () => {printAlert();toPdf()}}>
                                 <p className="responsive-font" style={{"--fontsize": "17px"}}>
                                     Export
                                 </p>

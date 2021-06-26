@@ -18,7 +18,7 @@ const severity = {
 const Alert = (props) => {
     console.log(props);
     const [alert, setAlert] = useState(props.location.state.alert);
-    const onPrint = true;
+    const onPrint = props.onPrint !== undefined;
     return (
         <div className={"export " + (onPrint ? "print" : "html")}>
             <section className={(onPrint ? "severity-print" : "") + " header"}>
