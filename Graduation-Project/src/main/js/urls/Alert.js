@@ -20,13 +20,13 @@ const Alert = (props) => {
     const [alert, setAlert] = useState(props.location.state.alert);
     return (
         <div className="export">
-            <section class="header">
+            <section className="header">
                 <h1>{alert.type}</h1>
                 <div id="button" className="py-5">
-                    <p id="severity" style={{"--primary-color": severity[alert.severity].color}} class="rectangle">{severity[alert.severity].text}</p>
+                    <p id="severity" style={{"--primary-color": severity[alert.severity].color}} className="rectangle">{severity[alert.severity].text}</p>
                     <p id="export">Export</p>
                 </div>
-                <section class="info">
+                <section className="info">
                     <table>
                         <tbody>
                             <tr>
@@ -53,18 +53,18 @@ const Alert = (props) => {
                     </table>
                 </section>
             </section>
-            <section class="description">
+            <section className="description">
                 <h2>
                     Description
                 </h2>
                 <hr/>
-                <text>{alert.description.split("\n").map(line => {return <>{line}<br/></>})}</text>
+                <p>{alert.description.split("\n").map(line => {return <>{line}<br/></>})}</p>
             </section>
             <section>
                 <h2>How To Fix IT</h2>
                 <hr/>
                 <div id="how">
-                    <text>{alert.fix.split("\n").map(line => {return <>{line}<br/></>})}</text>
+                    <p>{alert.fix.split("\n").map(line => {return <>{line}<br/></>})}</p>
                 </div>
                 <h2>References</h2>
                 <hr/>

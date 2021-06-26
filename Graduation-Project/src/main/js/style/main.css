@@ -146,12 +146,9 @@
 
 .export {
   --grey-color: #7a7a7a;
+  width: 90%;
 }
 
-.export p {
-  /* font-size: 36px;
-  line-height: 42px; */
-}
 /* Reflected cross site scripting */
 
 .export h1 {
@@ -162,11 +159,11 @@
   height: 56px;
   left: 93px;
   top: 198px;
-
+  --rate: 2;
+  font-size: calc(34px + var(--rate) * (1vw - 7.78px));
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
-  font-size: 48px;
   line-height: 56px;
 
   color: var(--primary-color);
@@ -181,8 +178,9 @@
 /* High */
 .export #severity {
   /* position: absolute; */
-  width: 203px;
-  height: 61px;
+  --rate-width: 2.5;
+  width: calc(140px + var(--rate-width) * (1vw - 7.78px));
+  height: calc(52px + var(--rate-width) * (1vw - 7.78px));
 
   /* left: 157px; */
   /* top: 298px; */
@@ -205,28 +203,29 @@
 }
 
 .export section {
-  margin: auto 65px;
+  --rate: 2;
+  margin: auto calc(29px + var(--rate) * (1vw - 7.78px));
 }
 
 .export h2 {
+  --rate: 2;
+  font-size: calc(29px + var(--rate) * (1vw - 7.78px));
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;
   line-height: 56px;
 }
 
 .export p {
-  font-size: 24px;
-  line-height: 28px;
-
+  --rate: 2;
+  font-size: calc(15px + var(--rate) * (1vw - 7.78px));
   color: #000000;
 }
 
 .export a {
-  font-size: 24px;
+  --rate: 2;
   line-height: 28px;
-
+  font-size: calc(15px + var(--rate) * (1vw - 7.78px));
   color: #000000;
 }
 
