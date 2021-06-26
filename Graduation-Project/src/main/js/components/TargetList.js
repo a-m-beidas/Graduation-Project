@@ -9,11 +9,8 @@ const colors = {
 
 
 const TargetList = (props) => {
-    const [reports, setReports] = useState(props.reports)
-
-    useEffect(() => {
-        console.log(reports)
-    })
+    const [reports, setReports] = useState(props.reports);
+    
     return (
         <Table striped bordered hover>
             <thead>
@@ -31,9 +28,9 @@ const TargetList = (props) => {
                     <td>{report.type}</td>
                     <td>
                         <div style={{ display: 'flex' }}>
-                            <SeverityShape color={colors.high} severityValue={report.count.high} />
-                            <SeverityShape color={colors.medium} severityValue={report.count.medium} />
-                            <SeverityShape color={colors.low} severityValue={report.count.low} />
+                            <SeverityShape color={colors.high} severityValue={report.count[2].value} />
+                            <SeverityShape color={colors.medium} severityValue={report.count[1].value} />
+                            <SeverityShape color={colors.low} severityValue={report.count[0].value} />
                         </div>
                     </td>
                     <td>

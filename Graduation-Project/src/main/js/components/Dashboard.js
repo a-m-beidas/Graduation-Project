@@ -22,7 +22,7 @@ const severityCount = {
         { name: "High", value: 50},
         { name: "Total", value: 152}
     ], medium: [
-        { name: "Mediunm", value: 82},
+        { name: "Medium", value: 82},
         { name: "Total", value: 152}
     ], low: [
         {name: "Low", value: 20},
@@ -56,14 +56,13 @@ const processReport = (report) => {
     console.log(report)
     if (report.alerts === undefined)
         return;
-    report.count = { high: 0, medium: 0, low: 0 }
+    report.count = [{name: "High", value: 0}, {name: "Medium", value: 0}, {name: "Low", value: 0}]
     report.alerts.map((alert, index) => {
         alert.date = report.date;
         if (!alert.path.startsWith(report.targetURL))
-            alert.path = report.targetURL + alert.path
-        ++report.count[severity[alert.severity].text]
+            alert.path = report.targetURL + alert.path;
+        ++report.count[alert.severity - 1].value;
     })
-    console.log(report)
     return;
 }
 
@@ -95,21 +94,26 @@ export const Dashboard = () => {
             <h2>Dashboard overview</h2>
             <p>test</p>
             <div className="dashboard-section">
-                <div className="card" > 
-                    <div>
-                        <SeverityPieChart data={severityCount.high} color={colorSev.high}/>
-                    </div>
-                </div>
-                <div className="card">
-                    <div>
-                        <SeverityPieChart data={severityCount.medium} color={colorSev.medium}/>
-                    </div>
-                </div>
-                <div className="card">
-                    <div>
-                        <SeverityPieChart data={severityCount.low} color={colorSev.low}/>
-                    </div>
-                </div>
+                {
+                    reports.length === 0 ? "" : 
+                    <>
+                        <div className="card" > 
+                            <div>
+                                <SeverityPieChart data={reports[reports.length - 1].count} color={colorSev.high} index={0}/>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div>
+                                <SeverityPieChart data={reports[reports.length - 1].count} color={colorSev.medium} index={1}/>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div>
+                                <SeverityPieChart data={reports[reports.length - 1].count} color={colorSev.low} index={2}/>
+                            </div>
+                        </div>
+                    </>
+                }
             </div >
             <p>test</p>
             <div className="dashboard-section">
@@ -117,7 +121,7 @@ export const Dashboard = () => {
                     <p>test</p>
                 </div>
                 <div className="card right">
-                    <DonutChart data={donutData} />
+                    {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
                 </div>
             </div>
             <p>test</p>
