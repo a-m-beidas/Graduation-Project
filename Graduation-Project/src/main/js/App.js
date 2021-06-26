@@ -16,7 +16,7 @@ const App = () => {
     const [isLoggedIn, setLogIn] = useState(localStorage.getItem("bearer-token") != undefined);
     return (
         <Router>
-            <Navbar bg="light" expand="sm" className="px-4 justify-content-between">
+            <Navbar bg="light" expand="sm" className="px-4 justify-content-between" >
                 <Navbar.Brand href="/">
                     <img src="images/logo.png"
                         height="30"
@@ -34,8 +34,8 @@ const App = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <br />
             {/* <Container className="px-4" fluid> */}
+            {/* <div style={{ marginTop: "10px" }}> */}
             <Switch>
                 <Route component={Home} path="/" exact />
                 <Route path="/login" exact render={(props) => (
@@ -49,6 +49,8 @@ const App = () => {
                 <PrivateRoute component={Alert} path="/alert" />
                 <LogoutRoute setLogIn={setLogIn} path="/logout" />
             </Switch>
+
+            {/* </div> */}
             {/* </Container> */}
 
         </Router>

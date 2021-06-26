@@ -50,17 +50,21 @@ const Scan = () => {
   return (
 
     <div className="d-flex justify-content-center" style={{ backgroundColor: "#C8C9CB", heigt: '100vp' }}>
-      <div className="div-scan">
-        <div>
+      <div className="div-scan" style={{ margin: "40px 0px" }}>
+        <div style={{ margin: "40px 0px" }}>
           <Image roundedCircle width="250" src="images/astronaut.jpg" />
         </div>
-        <br />
+
         <Form onSubmit={scan} className="form-app">
           <Form.Group style={{ position: "relative" }} className="d-flex justify-content-between scan-div">
-            <Form.Label className="scan-label">Target URL</Form.Label>
+            <Form.Label className="scan-label" style={{    paddingRight: "40px"}}>Target URL</Form.Label>
             <Form.Control className="rounded-pill form-control scan-input" onChange={e => setTargetURL(e.target.value)} type="text" name="url" value={targetURL} />
             <Button className="form-on-button rounded-pill scan-btn" type="submit">Scan</Button>
           </Form.Group>
+
+          <div style={{display:"flex" , width:"600px"}}>
+
+          </div>
 
           {/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */}
           <Form.Group style={{ backgroundColor: "white" }}>
