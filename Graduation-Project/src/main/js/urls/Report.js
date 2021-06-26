@@ -67,18 +67,13 @@ const Report = (props) => {
                 setStatus({value: error.response.status, text: error.response.data})
             });
     }
-    const [onPrint, setOnPrint] = useState(false);
+    const onPrint = false;
     const ref = React.useRef();
-    const options = {
+
+    const printReport = () => {
+        
     };
 
-    const issuePrint = () => {
-        setOnPrint(true);
-    };
-
-    const completePrint = () => {
-        setOnPrint(false);
-    };
     return(
     <>
     {
@@ -100,7 +95,7 @@ const Report = (props) => {
                     <div>
                     <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
                         {({toPdf}) =>  (
-                            <Button onClick={ () => {printAlert();toPdf()}}>To PDF</Button>
+                            <Button onClick={ () => {printReport();toPdf()}}>To PDF</Button>
                         )}
                     </ReactToPdf>
                     </div>
