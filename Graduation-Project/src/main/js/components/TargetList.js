@@ -22,7 +22,7 @@ const TargetList = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {reports.map(report => 
+                {/* {reports.map(report =>  */}
                 <tr>
                     <td>{report.targetURL}</td>
                     <td>{report.type}</td>
