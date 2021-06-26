@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
 import { Container, Card, Badge, Button, ListGroup, Collapse } from 'react-bootstrap';
 import ReactToPdf from 'react-to-pdf';
+import ReactDOM from 'react-dom';
 import jwt from '../utils/JWTPayload';
 import axios from 'axios';
 
@@ -48,7 +49,7 @@ function capitalize(string) {
 
 const Report = (props) => {
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
-    const [status, setStatus] = useState(props.location.state === undefined ? "" : props.location.state.status);
+    const [status, setStatus] = useState(props.location.state === undefined ? "" : {value: 200});
     const config = {
         headers:
           { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
@@ -67,11 +68,13 @@ const Report = (props) => {
                 setStatus({value: error.response.status, text: error.response.data})
             });
     }
-    const onPrint = false;
+    const onPrint = props.onPrint !== undefined;
     const ref = React.useRef();
 
     const printReport = () => {
-        
+        const clone = React.cloneElement(<Report onPrint/>, {location: { state: {report: report}}});
+        ReactDOM.render(clone, document.getElementById("print-div"));
+        ref.current = document.getElementById("print-div");
     };
 
     return(
@@ -85,20 +88,23 @@ const Report = (props) => {
     
     <div>
         {processReport(report)}
-        <Container style={{paddingLeft: "0px", marginLeft: "0px"}} fluid ref={ref}>
+        <Container style={{paddingLeft: "0px", marginLeft: "0px"}}>
             <div className="px-4 py-4">
                 <div className="d-flex justify-content-between">
                     <div>
                         <h3>Test.com</h3>
                         <h4><a href={report.targetURL}>{report.targetURL}</a></h4>
                     </div>
-                    <div>
-                    <ReactToPdf x={"12"} filename={"Report"} targetRef={ref} options={options} onComplete={completePrint}>
-                        {({toPdf}) =>  (
-                            <Button onClick={ () => {printReport();toPdf()}}>To PDF</Button>
-                        )}
-                    </ReactToPdf>
-                    </div>
+                    {
+                        onPrint ? "" :
+                        <div>
+                        <ReactToPdf x={"12"} filename={"Report"} targetRef={ref}>
+                            {({toPdf}) =>  (
+                                <Button onClick={ () => {printReport();toPdf()}}>Export</Button>
+                            )}
+                        </ReactToPdf>
+                        </div>
+                    }
                 </div>
                 <div className="d-flex justify-content-between px-4">
                     <div style={{textAlign:"center"}}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="danger" >{report.count.high}</Badge></div>High Severities</div>
