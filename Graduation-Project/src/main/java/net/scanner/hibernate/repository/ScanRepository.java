@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ScanRepository extends JpaRepository<Scan, Integer> {
 
-    @Query(nativeQuery = true, value="insert into transfer_transactions (by_user, to_user, transaction_type, amount, date) value (?,?,?,?,?)")
+    @Query(nativeQuery = true, value="SELECT * FROM scan WHERE user_id = ?")
     List<Scan> findByUserId(int userId);
 }

@@ -4,6 +4,8 @@ import DonutChart from './DonutChart';
 import SeverityPieChart from './SeverityPieChart';
 import TargetList from './TargetList';
 import Tableau from './Tableau';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const colors = {
     high: '#E53935', medium: '#FFBA69', low: "#59AEE6"
@@ -36,6 +38,24 @@ const colorSev = {
 
 
 export const Dashboard = (allReports) => {
+    
+    useEffect(() => {
+        const config = {
+            headers:
+              { Authorization: 'Bearer ' + localStorage.getItem('bearer-token') }
+        };
+        
+        axios.get('/api/reports', config)
+        .then(response => {
+            if (response.status === 200) {
+                console.log(response.data)
+                setStatus({value: response.status});
+            } else {
+                throw response;
+            }
+        })
+    }, [])
+
     return (
         <div>
             <h2>Dashboard overview</h2>

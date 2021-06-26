@@ -43,10 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 // API
                 .antMatchers(HttpMethod.POST,"/api/register", "/api/login", "/api/scan").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/dashboard").authenticated()
+                .antMatchers(HttpMethod.GET,"/api/dashboard", "/api/report", "/api/reports").authenticated()
                 .antMatchers(HttpMethod.HEAD,"/api/check", "/api/logout").authenticated()
                 // Web Application, permitAll
-                .antMatchers(HttpMethod.GET,"/", "/scan", "/api/report", "/api/reports", "/login", "/register", "/logout", "/error").permitAll()
+                .antMatchers(HttpMethod.GET,"/", "/scan", "/login", "/register", "/logout", "/error").permitAll()
                 // Webpack
                 .antMatchers(HttpMethod.GET, "/built/bundle.js", "/built/bundle.js.map").permitAll()
                 // Bootstrap
