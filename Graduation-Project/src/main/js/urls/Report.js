@@ -90,7 +90,8 @@ const Report = (props) => {
 
                         <div>
                             {processReport(report)}
-                            <Container style={{ paddingLeft: "0px", marginLeft: "0px" }}>
+                            <Container >
+                                {/* style={{ paddingLeft: "0px", marginLeft: "0px" }} */}
                                 <div className="px-4 py-4">
                                     <div className="d-flex justify-content-between">
                                         <div>
@@ -113,7 +114,7 @@ const Report = (props) => {
                                                 </div>
                                         }
                                     </div>
-                                    <div className="d-flex justify-content-between px-4">
+                                    <div className="d-flex justify-content-between px-4" style={{ paddingTop: "30px" }}>
                                         <div style={{ textAlign: "center" }}>
                                             <div className="d-flex justify-content-center">
                                                 <Badge className="severity-badge" pill variant="danger" >{report.count.high}</Badge>
