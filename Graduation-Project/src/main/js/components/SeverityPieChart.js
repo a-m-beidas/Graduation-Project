@@ -21,7 +21,7 @@ class SeverityPieChart extends Component {
         const data_raw = this.props.data;
         const colors = this.props.color;
         const { index } = this.props;
-        const data = [{name: data_raw[index].name, value: data_raw[index].value}, { name: "Total", value: data_raw[0].value + data_raw[1].value + data_raw[2].value} ]
+        const data = [{ name: data_raw[index].name, value: data_raw[index].value }, { name: "Total", value: data_raw[0].value + data_raw[1].value + data_raw[2].value }]
 
         let total = 0;
         console.log(data)
@@ -46,7 +46,7 @@ class SeverityPieChart extends Component {
         let pie = d3.pie()
             .value(d => d.value)
         let data_ready = pie(data);
-        data_ready.map(data => {data.endAngle = -data.endAngle; data.startAngle = -data.startAngle})
+        data_ready.map(data => { data.endAngle = -data.endAngle; data.startAngle = -data.startAngle })
         let center_ready = pie([data[0]]);
         // Donut partition  
         svg
@@ -63,18 +63,18 @@ class SeverityPieChart extends Component {
             .style("stroke-width", "0.1")
             .style("opacity", "0.8")
         svg
-            .selectAll("whatever")
-            .data(center_ready)
-            .enter()
-            .append('path')
-            .attr('d', d3.arc()
-                .innerRadius(0)  // This is the size of the donut hole
-                .outerRadius(radius / 1.5)
-            )
-            .attr('fill', colors[0])
-            .attr("stroke", "black")
-            .style("stroke-width", "0.1")
-            .style("opacity", "0.8")
+        // .selectAll("whatever")
+        // .data(center_ready)
+        // .enter()
+        // .append('path')
+        // .attr('d', d3.arc()
+        //     .innerRadius(0)  // This is the size of the donut hole
+        //     .outerRadius(radius / 1.5)
+        // )
+        // .attr('fill', colors[0])
+        // .attr("stroke", "black")
+        // .style("stroke-width", "0.1")
+        // .style("opacity", "0.8")
 
 
         // Legend group and legend name 
@@ -86,11 +86,11 @@ class SeverityPieChart extends Component {
             .attr("transform", d => `translate(${legendPosition.centroid(d)})`)
             .attr("class", 'legend-g')
             .style("user-select", "none")
-        
+
         svg.append("text")
             .attr("text-anchor", "middle")
             .style("font-size", "12px")
-            .text(Math.round((data[0].value/data[1].value) * 100) + "%");
+            .text(Math.round((data[0].value / data[1].value) * 100) + "%");
 
     }
 

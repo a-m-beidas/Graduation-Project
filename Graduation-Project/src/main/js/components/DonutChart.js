@@ -73,14 +73,14 @@ class DonutChart extends Component {
             .style("font-size", 14);
 
         //Label for value
-        svg
-            .selectAll('.legend-g')
-            .append('text')
-            .text((d) => { return d.data.value })
-            .style("fill", '#444')
-            .style("font-size", 12)
-            .style("text-anchor", "middle")
-            .attr("y", 16);
+        // svg
+        //     .selectAll('.legend-g')
+        //     .append('text')
+        //     .text((d) => { return d.data.value })
+        //     .style("fill", '#000')
+        //     .style("font-size", 12)
+        //     .style("text-anchor", "middle")
+        //     .attr("y", 16);
     }
 
 
