@@ -78,7 +78,6 @@ public class Scanner {
         HttpEntity<MultiValueMap> request = new HttpEntity<MultiValueMap>(map, httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(urlObject.getLoginURL(), HttpMethod.POST, request, String.class);
         httpHeaders.put("Cookie", response.getHeaders().get("Set-Cookie"));
-        System.out.println(response.getHeaders().get("Set-Cookie"));
     }
 
     @Bean

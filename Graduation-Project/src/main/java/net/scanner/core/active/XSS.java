@@ -100,7 +100,6 @@ public class XSS implements ActiveScanner {
         }
         HttpEntity<MultiValueMap> request = new HttpEntity<MultiValueMap>(map, httpHeaders);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
-        System.out.println(response.getBody());
         return response.getBody();
     }
 }
