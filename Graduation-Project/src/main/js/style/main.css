@@ -325,8 +325,15 @@ button:active {
 
 .export td {
   display: flex;
-  height: 60px;
   /* max-width: 500px; */
+}
+
+.export.html td {
+  height: 60px;
+}
+
+.export.print td {
+  height: 50px;
 }
 
 .export td p {
