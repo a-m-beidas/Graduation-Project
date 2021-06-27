@@ -6,10 +6,18 @@ import TargetList from './TargetList';
 import Tableau from './Tableau';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import BarChartD3 from './BarChartD3';
 
 const colors = {
     high: '#E53935', medium: '#FFBA69', low: "#59AEE6"
 };
+
+const datas = [
+    [10, 30, 40, 20],
+    [10, 40, 30, 20, 50, 10],
+    [60, 30, 40, 20, 30]
+]
+
 
 const donutData = [
     { name: "High", value: 50 },
@@ -110,7 +118,11 @@ export const Dashboard = () => {
                     <br />
                     <div className="dashboard-section">
                         <div className="card left">
+                            <BarChartD3 data={datas} />
                             {/* <Tableau /> */}
+                            {/* <iframe src="https://public.tableau.com/views/Grad_16225677211890/Dashboard2?:embed=yes&:tabs=yes&:toolbar=yes" width="800" height="600"></iframe> */}
+                            {/* <iframe src="https://public.tableau.com/views/Grad_16225677211890/Dashboard2?:embed=yes" width="800" height="600"></iframe> */}
+
                         </div>
                         <div className="card right">
                             {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}

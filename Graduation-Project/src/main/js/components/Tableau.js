@@ -1,4 +1,6 @@
 import React, { useRef, useEffect } from 'react';
+// import tableau from 'tableau-api';
+
 const { tableau } = window;
 
 const Tableau = () => {
