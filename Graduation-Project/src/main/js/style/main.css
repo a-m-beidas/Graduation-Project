@@ -320,8 +320,7 @@ button:active {
 }
 
 /* Dashbaord */
-.card {
-  /* shadowOffset: {
+/* shadowOffset: {
       width: 0,
       height: 1,
   },
@@ -330,20 +329,20 @@ button:active {
   
   elevation: 3, */
 
-  width: 300px;
-  height: 250px;
-  /* background: #FFFFFF 0% 0% no-repeat padding-box;
+/* background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 6px 8px #000;
   border-radius: 11px;
   opacity: 1; */
-
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
-    0px 2px 4px rgba(0, 0, 0, 0.14);
-  border-radius: 4px;
-
+.card {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 300px;
+  height: 250px;
+
+  /* box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.14);
+  border-radius: 1px; */
 }
 
 .dashboard-section {
