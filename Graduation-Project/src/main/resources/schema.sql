@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2021 at 09:55 PM
+-- Generation Time: Jun 27, 2021 at 08:22 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -27,14 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `alerts`
 --
 SET FOREIGN_KEY_CHECKS=0;
-drop table if exists alerts;
-drop table if exists credentials;
-drop table if exists hibernate_sequence;
-drop table if exists record;
-drop table if exists scan;
-drop table if exists scan_alerts;
-drop table if exists users;
-SET FOREIGN_KEY_CHECKS=1;
+DROP TABLE IF EXISTS `alerts`;
 CREATE TABLE `alerts` (
   `id` int(11) NOT NULL,
   `method` varchar(255) DEFAULT NULL,
@@ -65,6 +58,7 @@ INSERT INTO `alerts` (`id`, `method`, `parameter`, `path`, `severity`, `type`) V
 -- Table structure for table `credentials`
 --
 
+DROP TABLE IF EXISTS `credentials`;
 CREATE TABLE `credentials` (
   `id` int(11) NOT NULL,
   `loginurl` varchar(255) DEFAULT NULL,
@@ -78,6 +72,7 @@ CREATE TABLE `credentials` (
 -- Table structure for table `hibernate_sequence`
 --
 
+DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -87,7 +82,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(36);
+(40);
 
 -- --------------------------------------------------------
 
@@ -95,6 +90,7 @@ INSERT INTO `hibernate_sequence` (`next_val`) VALUES
 -- Table structure for table `record`
 --
 
+DROP TABLE IF EXISTS `record`;
 CREATE TABLE `record` (
   `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -116,6 +112,7 @@ INSERT INTO `record` (`url`) VALUES
 -- Table structure for table `scan`
 --
 
+DROP TABLE IF EXISTS `scan`;
 CREATE TABLE `scan` (
   `id` int(11) NOT NULL,
   `date` date DEFAULT NULL,
@@ -129,8 +126,8 @@ CREATE TABLE `scan` (
 --
 
 INSERT INTO `scan` (`id`, `date`, `targeturl`, `type`, `user_id`) VALUES
-(24, '2021-06-22', 'localhost:8080', 1, 1),
-(30, '2021-06-25', 'localhost:8080', 1, 1);
+(24, '2021-06-22', 'localhost:8080', 1, 36),
+(30, '2021-06-25', 'localhost:8080', 1, 36);
 
 -- --------------------------------------------------------
 
@@ -138,6 +135,7 @@ INSERT INTO `scan` (`id`, `date`, `targeturl`, `type`, `user_id`) VALUES
 -- Table structure for table `scan_alerts`
 --
 
+DROP TABLE IF EXISTS `scan_alerts`;
 CREATE TABLE `scan_alerts` (
   `scan_id` int(11) NOT NULL,
   `alerts_id` int(11) NOT NULL
@@ -164,6 +162,7 @@ INSERT INTO `scan_alerts` (`scan_id`, `alerts_id`) VALUES
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `token_in_database` int(11) DEFAULT NULL,
@@ -176,29 +175,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `token_in_database`, `password`, `username`) VALUES
-(1, 1, '$2a$10$zQn/43m0gIYj.mMtXtXt7uu0N/AHMVRJMLtkzJvJBqAyA5SmJeXd2', 'John'),
-(2, 0, '$2a$10$XjYwyy6neEnQMPej2aQWGODIPJt/NqaYitSNBYkSjsqO1w6QU1xkK', 'Matt'),
-(3, 0, '$2a$10$JggTNqmK6nP.ZcYBAATDYuYQVK2V381IMhH2rmkvPkoXMUXplvgoq', 'Blake'),
-(4, 0, '$2a$10$Ynjwjvufnd36crTNh5WqKuIa3cBGLvY.6sgsRUBoItdaHcAgISWE.', 'Candelaria'),
-(5, 0, '$2a$10$Zxqegsin.HEz2RLiA/UBTeBzhPTSOGVYDT5aZOq/JC7qtv59D9cAS', 'Leonia'),
-(6, 0, '$2a$10$/EnJiP8bNB.aG7zdCMgepOqcJFccJGoDcMIFBh3vfVdUpSHWB4Fom', 'Vanda'),
-(7, 0, '$2a$10$bQHWANkK2qwbIdCRF5ytReEBjFIHBXYP6OTrbA9ectz54EodU4A66', 'Maya'),
-(8, 0, '$2a$10$ImhpX2eEUsJkf59GF8.ZJuu1z.V4lkxBGbKtbVQo7atlpSDBzn9h2', 'Tiera'),
-(9, 0, '$2a$10$KZgSh3nvXuQI5cBvarOFqu/Uz35F3Ko/iYFPnB3B2i8adZoL5c2FC', 'Neil'),
-(10, 0, '$2a$10$121kuMODZSMGPLrwdFTS4.oIX5IbC5yKn.9xeEhWBAUwxJF.qT2b2', 'Providencia'),
-(11, 0, '$2a$10$DhEcVjDB8lozMXav85CchuAGlRmhyFsxEBsa/TlolU/wN6TvODfuS', 'Truman'),
-(12, 0, '$2a$10$Yc6vNf/T3TRiKP8hToyJpeP8Lc.2JX5HZJoXOfbN/rfc725a/gjwy', 'Pamila'),
-(13, 0, '$2a$10$DqLYFrJrSB8jBuDuOeZKW.PJrZ5GhHTfYMTcXLpxEgMuFjce8Ayzq', 'Keshia'),
-(14, 0, '$2a$10$Uz1GI4GWI6tH2PZS5R1.ge7ilikwwMgGiCUaWWIIcd9NnOTWJ2Fny', 'Hermelinda'),
-(15, 0, '$2a$10$fkuQt3UaDxxJ6UqomNPRN.Ay11sZXlk81ELpQtfbUmy3Z1Ha6PZna', 'Milford'),
-(16, 0, '$2a$10$5hR2mwWynUR.P4nIxvrgbulwMpy2XmsP.bYmGwxzWnaxCC1mbbyBK', 'Cristopher'),
-(17, 0, '$2a$10$64qPBaqwm7idUIY26V61eOoFUTyz4axOcuSDlSN2tart.UiZpAfvO', 'Kareem'),
-(18, 0, '$2a$10$FQvUUzVbXEbtxtAruUrW9eM5Ijxs0ax.9FlIObF36KA6Vzz9DtSde', 'Guy'),
-(19, 0, '$2a$10$5PnTXQ9gavdTzHGMqZ3J6uj3..bO7622bVpcOEl7TlonT58mc8UVq', 'Su'),
-(20, 0, '$2a$10$H50GynGs3fTBd9.3xgooO.f9X5P71YJY0erKJQhI4AEzZ1qNAK5.i', 'Mariano'),
-(21, 0, '$2a$10$vKRHPMhLcgdkQNorzJmZ3uoryZwvI2H279Wym7UYbAs3xO3QZqk22', 'Dayle'),
-(22, 0, '$2a$10$iISxg5sWcR6rmfoxX9V8juH4p7XifDxlIhDPQ6kbB4jMdDniil5X6', 'Boyd'),
-(23, 0, '$2a$10$Twf9e.Qo4zj.5sH9uX/iDuTySjW..Vy.EhjkzodVZGCc.GHVbcAqq', 'Janeth');
+(36, 1, '$2a$10$eSrx6l5B4r63Nd63zYfkLOvRbyPtWCPjH03w0Ju4hqTSFl3W1pJoW', 'bWAPP'),
+(37, 0, '$2a$10$YmTz7oopIXuv5VDRvBofyOJrANrRgMoa4wTvE/BJwlFQlpOI1OcTC', 'DVIA'),
+(38, 1, '$2a$10$pW8MxC3guPeznKVqknW3euWrJyU7zcKMUWjqLIV.ITlMvWaBAGd7a', 'John'),
+(39, 0, '$2a$10$dpSirBSzEbhV4whJxJIfIONNLGY5LkL28esA0Ci5cj33tjAcDWtGO', 'Matt');
 
 --
 -- Indexes for dumped tables
