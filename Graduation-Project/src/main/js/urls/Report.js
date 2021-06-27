@@ -95,8 +95,8 @@ const Report = (props) => {
                                 <div className="px-4 py-4">
                                     <div className="d-flex justify-content-between">
                                         <div>
-                                            <h3>Test.com</h3>
-                                            <h4><a href={report.targetURL}>{report.targetURL}</a></h4>
+                                            <h3>{jwt("sub")}</h3>
+                                            <h4><a href={(!report.targetURL.startsWith("http") ? "http://": "") + report.targetURL}>{report.targetURL}</a></h4>
                                         </div>
                                         {
                                             onPrint ? "" :
