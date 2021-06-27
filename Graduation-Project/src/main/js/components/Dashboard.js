@@ -104,13 +104,13 @@ export const Dashboard = () => {
                     <div className="dashboard-section">
 
                         <div className="card">
-                            <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
+                            <SeverityPieChart index={0} data={reports[1].count} color={colorSev.high} />
                         </div>
                         <div className="card">
-                            <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium} />
+                            <SeverityPieChart index={1} data={reports[1].count} color={colorSev.medium} />
                         </div>
                         <div className="card">
-                            <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
+                            <SeverityPieChart index={2} data={reports[1].count} color={colorSev.low} />
                         </div>
 
                     </div >
@@ -124,7 +124,7 @@ export const Dashboard = () => {
 
                         </div>
                         <div className="card right">
-                            {reports.length === 0 ? "" : <DonutChart data={reports[reports.length - 1].count} />}
+                            {reports.length === 0 ? "" : <DonutChart data={reports[1].count} />}
                         </div>
                     </div>
                     <br />
