@@ -23,7 +23,7 @@ const Alert = (props) => {
         <div className={"export " + (onPrint ? "print" : "html")}>
             <section className={(onPrint ? "severity-print" : "") + " header"}>
                 <h1 className={onPrint ? "h1-print" : ""} style={{ "--primary-color": severity[alert.severity].color, marginTop: "30px" }}>{alert.type}</h1>
-                <div id="button" className="py-5">
+                <div id="button" className="py-3">
                     <p className={onPrint ? "severity-print" : ""} id="severity" style={{ "--primary-color": severity[alert.severity].color }} className="rectangle">{severity[alert.severity].text}</p>
                     <p className={onPrint ? "p-print" : ""} id="export">Export
                         <svg width="41" height="36" viewBox="0 0 41 36" fill="none" xmlns="http://www.w3.org/2000/svg">
