@@ -117,11 +117,7 @@ export const Dashboard = () => {
                     <br />
                     <div className="dashboard-section">
                         <div className="card left">
-                            <BarChartD3 data={datas} />
-                            {/* <Tableau /> */}
-                            {/* <iframe src="https://public.tableau.com/views/Grad_16225677211890/Dashboard2?:embed=yes&:tabs=yes&:toolbar=yes" width="800" height="600"></iframe> */}
-                            {/* <iframe src="https://public.tableau.com/views/Grad_16225677211890/Dashboard2?:embed=yes" width="800" height="600"></iframe> */}
-
+                            <img src="images/tableau.jpg"/>
                         </div>
                         <div className="card right">
                             {reports.length === 0 ? "" : <DonutChart data={reports[1].count} />}

@@ -22,7 +22,8 @@ class SeverityPieChart extends Component {
         const colors = this.props.color;
         const { index } = this.props;
         const data = [{ name: data_raw[index].name, value: data_raw[index].value }, { name: "Total", value: data_raw[0].value + data_raw[1].value + data_raw[2].value }]
-        let total = 0;
+        console.log(data)
+        data[1].value -= data[0].value
         const svgContainer = d3.select(this.chRef.current).node();
         const width = svgContainer.getBoundingClientRect().width - 160;
         const height = width;
@@ -46,7 +47,7 @@ class SeverityPieChart extends Component {
         console.log(data);
 
         let data_ready = pie(data);
-        data_ready.map(data => { data.endAngle = -2*data.endAngle; data.startAngle = -2*data.startAngle })
+        data_ready.map(data => { data.endAngle = -data.endAngle; data.startAngle = -data.startAngle })
         // Donut partition  
         svg
             .selectAll('whatever')
@@ -89,7 +90,7 @@ class SeverityPieChart extends Component {
         svg.append("text")
             .attr("text-anchor", "middle")
             .style("font-size", "12px")
-            .text(Math.round((data[0].value / data[1].value) * 100) + "%");
+            .text(Math.round((data[0].value / (data[1].value + data[0].value)) * 100) + "%");
 
     }
 
