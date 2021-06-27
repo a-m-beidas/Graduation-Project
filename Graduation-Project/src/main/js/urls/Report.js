@@ -24,25 +24,26 @@ const processReport = (report) => {
 const severity = {
     1: {
         color: "danger",
-        text: "High",
-        text: "high"
+        text: "High"
+        // text: "high"
     },
     2: {
         color: "warning",
-        text: "Medium",
-        text: "medium"
+        text: "Medium"
+        // text: "medium"
     },
     3: {
         color: "info",
-        text: "Low",
-        text: "low"
+        text: "Low"
+        // text: "low"
     },
     4: {
         color: "success",
-        text: "Secure",
-        text: "secure"
+        text: "Secure"
+        // text: "secure"
     }
 }
+
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
@@ -113,7 +114,12 @@ const Report = (props) => {
                                         }
                                     </div>
                                     <div className="d-flex justify-content-between px-4">
-                                        <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="danger" >{report.count.high}</Badge></div>High Severities</div>
+                                        <div style={{ textAlign: "center" }}>
+                                            <div className="d-flex justify-content-center">
+                                                <Badge className="severity-badge" pill variant="danger" >{report.count.high}</Badge>
+                                            </div>
+                                            High Severities
+                                        </div>
                                         <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="warning" >{report.count.medium}</Badge></div>Medium Severities</div>
                                         <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="info" >{report.count.low}</Badge></div>Low Severities</div>
                                     </div>

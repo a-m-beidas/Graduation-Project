@@ -48,13 +48,28 @@ h3 {
 }
 
 .severity-badge {
-  height: 130px;
-  width: 130px;
+  height: 150px;
+  width: 150px;
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: space-around;
-  font-size: 15px;
+  font-size: 24px;
+}
+
+.badge-danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #ffba69;
+  color: white;
+}
+
+.badge-info {
+  background-color: #59aee6;
+  color: white;
 }
 
 .grey-control-scan {
