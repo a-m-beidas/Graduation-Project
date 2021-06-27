@@ -29,9 +29,9 @@ const TargetList = (props) => {
                             <td>{report.type}</td>
                             <td>
                                 <div style={{ display: 'flex', justifyContent: "center" }}>
-                                    <SeverityShape color={colors.high} severityValue={report.count[2].value} />
+                                    <SeverityShape color={colors.high} severityValue={report.count[0].value} />
                                     <SeverityShape color={colors.medium} severityValue={report.count[1].value} />
-                                    <SeverityShape color={colors.low} severityValue={report.count[0].value} />
+                                    <SeverityShape color={colors.low} severityValue={report.count[2].value} />
                                 </div>
                             </td>
                             <td>1/5/2021</td>
