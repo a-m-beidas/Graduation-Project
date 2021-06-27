@@ -95,8 +95,8 @@ const Report = (props) => {
                                 <div className="px-4 py-4">
                                     <div className="d-flex justify-content-between">
                                         <div>
-                                            <h3>Test.com</h3>
-                                            <h4><a href={report.targetURL}>{report.targetURL}</a></h4>
+                                            <h3>{jwt("sub")}</h3>
+                                            <h4><a href={(!report.targetURL.startsWith("http") ? "http://": "") + report.targetURL}>{report.targetURL}</a></h4>
                                         </div>
                                         {
                                             onPrint ? "" :
@@ -203,7 +203,7 @@ export const Alert = (props) => {
                         </Button>
                     </div>
                     <div>
-                        <ReactToPdf x={"12"} filename={"Report"} targetRef={alertRef}>
+                        <ReactToPdf x={"12"} filename={"Alert"} targetRef={alertRef}>
                             {({ toPdf }) => (
                                 <Button className="alert-bottom-app" onClick={() => { printAlert(); toPdf() }}>
                                     <p className="responsive-font" style={{ "--fontsize": "17px" }}>
