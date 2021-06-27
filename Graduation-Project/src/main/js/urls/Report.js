@@ -90,7 +90,7 @@ const Report = (props) => {
 
                         <div>
                             {processReport(report)}
-                            <Container >
+                            <Container style={onPrint? {paddingLeft: 0, marginLeft: 0}: {}}>
                                 {/* style={{ paddingLeft: "0px", marginLeft: "0px" }} */}
                                 <div className="px-4 py-4">
                                     <div className="d-flex justify-content-between">
@@ -103,7 +103,7 @@ const Report = (props) => {
                                                 <div className="export-btn-div">
                                                     <ReactToPdf x={"12"} filename={"Report"} targetRef={ref}>
                                                         {({ toPdf }) => (
-                                                            <Button className="export-btn" onClick={() => { printReport(); toPdf() }}>Export
+                                                            <Button className="export-btn" onClick={() => { printReport();toPdf() }}>Export
 
                                                                 {/* <svg width="41" height="36" viewBox="0 0 41 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M28.0368 12.885L20.4877 19.755L12.9386 12.885L10.6196 15L20.4877 24L30.3558 15L28.0368 12.885Z" fill="black" />
@@ -205,7 +205,7 @@ export const Alert = (props) => {
                     <div>
                         <ReactToPdf x={"12"} filename={"Alert"} targetRef={alertRef}>
                             {({ toPdf }) => (
-                                <Button className="alert-bottom-app" onClick={() => { printAlert(); toPdf() }}>
+                                <Button className="alert-bottom-app" onClick={() => { printAlert();}}>
                                     <p className="responsive-font" style={{ "--fontsize": "17px" }}>
                                         Export
                                     </p>
