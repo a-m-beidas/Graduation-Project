@@ -183,23 +183,21 @@ button:active {
   width: 607px;
   height: 56px;
   left: 93px;
-  top: 198px;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
-  line-height: 56px;
-
   color: var(--primary-color);
 }
 
 .export.html.h1 {
   --rate: 2;
   font-size: calc(34px + var(--rate) * (1vw - 7.78px));
+  line-height: 56px;
 }
 
 .export.print h1 {
   font-size: 34.8px;
+  line-height: 32px;
 }
 
 .export #button {
@@ -223,18 +221,19 @@ button:active {
   color: #ffffff;
 
   font-size: 36px;
-  line-height: 42px;
 }
 
 .export.html #severity {
   --rate-width: 2.5;
   width: calc(140px + var(--rate-width) * (1vw - 7.78px));
   height: calc(52px + var(--rate-width) * (1vw - 7.78px));
+  line-height: 42px;
 }
 
 .export.print #severity {
   width: 142px;
   height: 54px;
+  line-height: 42px;
 }
 
 .export #severity {
@@ -253,16 +252,18 @@ button:active {
 
 .export h2 {
   font-weight: 500;
-  line-height: 56px;
+  
 }
 
 .export.html h2 {
   --rate: 2;
   font-size: calc(29px + var(--rate) * (1vw - 7.78px));
+  line-height: 56px;
 }
 
 .export.print h2 {
   font-size: 30px;
+  line-height: 20px;
 }
 
 .export p {
@@ -276,20 +277,22 @@ button:active {
 
 .export.print p {
   font-size: 15.85px;
+  line-height: 1.2;
 }
 
 .export a {
-  line-height: 28px;
   color: #000000;
 }
 
 .export.html a {
   --rate: 2;
   font-size: calc(15px + var(--rate) * (1vw - 7.78px)) !important;
+  line-height: 28px;
 }
 
 .export.print a {
   font-size: 15.85px;
+  line-height: 18px;
 }
 
 .export #how {
