@@ -96,20 +96,14 @@ export const Dashboard = () => {
                     <h2>Dashboard overview</h2>
                     <div className="dashboard-section">
 
-                        <div className="card" >
-                            <div>
-                                <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
-                            </div>
+                        <div className="card">
+                            <SeverityPieChart index={0} data={reports[reports.length - 1].count} color={colorSev.high} />
                         </div>
                         <div className="card">
-                            <div>
-                                <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium} />
-                            </div>
+                            <SeverityPieChart index={1} data={reports[reports.length - 1].count} color={colorSev.medium} />
                         </div>
                         <div className="card">
-                            <div>
-                                <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
-                            </div>
+                            <SeverityPieChart index={2} data={reports[reports.length - 1].count} color={colorSev.low} />
                         </div>
 
                     </div >
