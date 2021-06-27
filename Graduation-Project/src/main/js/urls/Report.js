@@ -203,7 +203,7 @@ export const Alert = (props) => {
                         </Button>
                     </div>
                     <div>
-                        <ReactToPdf x={"12"} filename={"Report"} targetRef={alertRef}>
+                        <ReactToPdf x={"12"} filename={"Alert"} targetRef={alertRef}>
                             {({ toPdf }) => (
                                 <Button className="alert-bottom-app" onClick={() => { printAlert(); toPdf() }}>
                                     <p className="responsive-font" style={{ "--fontsize": "17px" }}>
