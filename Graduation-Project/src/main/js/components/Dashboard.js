@@ -61,7 +61,6 @@ const severity = {
 }
 
 const processReport = (report) => {
-    console.log(report)
     if (report.alerts === undefined)
         return;
     report.count = [{ name: "High", value: 0 }, { name: "Medium", value: 0 }, { name: "Low", value: 0 }]

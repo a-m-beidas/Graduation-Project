@@ -18,6 +18,7 @@ class DonutChart extends Component {
     // DrawChart 
     drawChart() {
         const { data } = this.props;
+        console.log(data);
         const svgContainer = d3.select(this.chRef.current).node();
         const width = svgContainer.getBoundingClientRect().width;
         const height = width;
@@ -66,7 +67,7 @@ class DonutChart extends Component {
             .attr("class", 'legend-g')
             .style("user-select", "none")
             .append('text')
-            .text(d => d.data.name)
+            .text(d => {if (d.value > 0) return d.data.name})
             .style("text-anchor", "middle")
             .style("font-weight", 700)
             .style("fill", '#222')
