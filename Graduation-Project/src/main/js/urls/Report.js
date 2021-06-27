@@ -50,6 +50,7 @@ function capitalize(string) {
 }
 
 const Report = (props) => {
+    console.log(props);
     const [report, setReport] = useState(props.location.state === undefined ? {} : props.location.state.report);
     const [status, setStatus] = useState(props.location.state === undefined ? "" : { value: 200 });
     const config = {
@@ -74,7 +75,7 @@ const Report = (props) => {
     const ref = React.useRef();
 
     const printReport = () => {
-        const clone = React.cloneElement(<Report onPrint />, { location: { state: { report: report } } });
+        const clone = React.cloneElement(<Report onPrint/>, { location: { state: { report: report } } });
         ReactDOM.render(clone, document.getElementById("print-div"));
         ref.current = document.getElementById("print-div");
     };
@@ -90,18 +91,21 @@ const Report = (props) => {
 
                         <div>
                             {processReport(report)}
-                            <Container style={onPrint? {paddingLeft: 0, marginLeft: 0}: {}}>
+                            <Container  >
                                 {/* style={{ paddingLeft: "0px", marginLeft: "0px" }} */}
                                 <div className="px-4 py-4">
                                     <div className="d-flex justify-content-between">
                                         <div>
                                             <h3>{jwt("sub")}</h3>
+                                            <br/>
                                             <h4><a href={(!report.targetURL.startsWith("http") ? "http://": "") + report.targetURL}>{report.targetURL}</a></h4>
+                                            <br/>
+                                            <h5>{"Done in " + report.date}</h5>
                                         </div>
                                         {
                                             onPrint ? "" :
                                                 <div className="export-btn-div">
-                                                    <ReactToPdf x={"12"} filename={"Report"} targetRef={ref}>
+                                                    <ReactToPdf filename={"Report"} targetRef={ref}>
                                                         {({ toPdf }) => (
                                                             <Button className="export-btn" onClick={() => { printReport();toPdf() }}>Export
 
