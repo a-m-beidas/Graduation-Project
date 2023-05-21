@@ -1,0 +1,31 @@
+server:
+  port: 81
+jwt:
+  secret: Graduation-Project-Scanner
+logging:
+  level:
+    root: INFO
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      order_inserts: true
+      order_updatest: true
+      jdbc:
+        batch_size: 4
+    properties:
+      hibernate:
+        default_schema: public
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost/crawler
+    username: postgres
+    password: postgres
+    initialization-mode: always
+  data:
+    rest:
+      base-path:
+          /api
+  profiles:
+    active: dev

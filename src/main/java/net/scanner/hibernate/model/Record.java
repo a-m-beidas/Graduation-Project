@@ -1,0 +1,18 @@
+package net.scanner.hibernate.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Record {
+
+    @Id
+    String url;
+
+    public Record() { }
+
+    public Record(String url) {
+        this.url = url;
+    }
+
+}

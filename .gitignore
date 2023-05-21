@@ -1,0 +1,14 @@
+.idea
+.mvn
+.idea.name
+*.iws
+*.iml
+*.ipr
+*.cmd
+*.md
+mvn*
+target
+node
+node_modules
+package-lock.json
+package.json
