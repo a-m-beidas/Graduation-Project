@@ -12,10 +12,15 @@ const severity = {
     3: {
         color: "#59AEE6",
         text: "Low"
+    },
+    4: {
+        color: "#8EE060",
+        text: "Secure"
     }
 }
 
 const Alert = (props) => {
+    console.log(props.location.state.alert)
     const [alert, setAlert] = useState(props.location.state.alert);
     const onPrint = props.onPrint !== undefined;
     return (
@@ -23,7 +28,7 @@ const Alert = (props) => {
             <section className={(onPrint ? "severity-print" : "") + " header"}>
                 <h1 className={onPrint ? "h1-print" : ""} style={{ "--primary-color": severity[alert.severity].color, marginTop: "30px" }}>{alert.type}</h1>
                 <div id="button" className="py-3">
-                    <p className={onPrint ? "severity-print" : ""} id="severity" style={{ "--primary-color": severity[alert.severity].color }} className="rectangle">{severity[alert.severity].text}</p>
+                    <p className={onPrint ? "rectangle severity-print" : ""} id="severity" style={{ "--primary-color": severity[alert.severity].color }}>{severity[alert.severity].text}</p>
                     <p className={onPrint ? "p-print" : ""} id="export">Export
                         <svg width="41" height="36" viewBox="0 0 41 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M27.9567 12.885L20.4076 19.755L12.8585 12.885L10.5396 15L20.4076 24L30.2757 15L27.9567 12.885Z" fill="black" />
@@ -68,12 +73,12 @@ const Alert = (props) => {
                 <h2 className={onPrint ? "h2-print" : ""}>How To Fix IT</h2>
                 <hr />
                 <div id="how">
-                    <p className={onPrint ? "p-print" : ""}>{alert.fix.split("\n").map(line => { return <>{line}<br /></> })}</p>
+                    <p className={onPrint ? "p-print" : ""}>{alert.fix !== null ? alert.fix.split("\n").map(line => { return <>{line}<br /></> }) : ""}</p>
                 </div>
                 <h2 className={onPrint ? "h2-print" : ""}>References</h2>
                 <hr />
                 <ul id="references">
-                    {alert.references.map(ref => { return <li><a className={onPrint ? "a-print" : ""} href={ref}>{ref}</a></li> })}
+                    {alert.references !== null ? alert.references.map(ref => { return <li><a className={onPrint ? "a-print" : ""} href={ref}>{ref}</a></li> }) : ""}
                 </ul>
             </section>
         </div>

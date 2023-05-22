@@ -30,7 +30,7 @@ class DonutChart extends Component {
         const margin = 15;
         let radius = Math.min(width, height) / 2 - margin;
         // legend Position
-        let legendPosition = d3.arc().innerRadius(radius / 1.75).outerRadius(radius);
+        let legendPosition = d3.arc().innerRadius(radius / 2).outerRadius(radius);
 
         // Create SVG
         const svg = d3.select(this.chRef.current)
@@ -76,9 +76,9 @@ class DonutChart extends Component {
             .append('text')
             .text(d => {if (d.value > 0) return d.data.name})
             .style("text-anchor", "middle")
-            .style("font-weight", 700)
+            .style("font-weight", 500)
             .style("fill", '#222')
-            .style("font-size", 14);
+            .style("font-size", "22px");
 
         const legend = d3.select(this.chRef.current)
                 .append("svg")
@@ -100,7 +100,7 @@ class DonutChart extends Component {
         legend.selectAll("svg").append('text')
             .text((d, i) => { return d.data.name})
             .attr("transform", (d, i) => { return "translate(60, " + (i * 0.9 + 10) + ")" })
-            .style("font-size", "9px");
+            .style("font-size", "15px");
 
         // legend.append("text")
         //     .text(function(d){

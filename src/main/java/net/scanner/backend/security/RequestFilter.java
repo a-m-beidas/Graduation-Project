@@ -2,6 +2,7 @@ package net.scanner.backend.security;
 
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 import net.scanner.backend.model.AuthenticationUserDetails;
 import net.scanner.backend.service.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,13 @@ public class RequestFilter extends OncePerRequestFilter {
                 logger.error("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
                 logger.error("JWT Token has expired");
+            } catch (SignatureException e) {
+                logger.error("JWT validity cannot be asserted and should not be trusted");
             }
         } else {
             logger.warn("JWT Token does not begin with Bearer String");
         }
+        System.out.println(username);
         //Validate and add
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             AuthenticationUserDetails userDetails = userDetailsService.loadUserByUsername(username);

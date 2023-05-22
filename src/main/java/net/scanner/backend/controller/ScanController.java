@@ -29,7 +29,6 @@ public class ScanController {
 
     @GetMapping("/report")
     public Scan report(@RequestHeader("Authorization") String authorizationHeader, @RequestParam int id) throws Exception {
-        
         return reportService.getScan(id, authorizationHeader);
     }
 

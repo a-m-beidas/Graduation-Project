@@ -1,5 +1,6 @@
 package net.scanner.hibernate.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,10 +20,10 @@ public class Alert {
 
     private String type;
 
-    @Transient
+    @Column(length=5000)
     private String description;
 
-    @Transient
+    @Column(length=5000)
     private String fix;
 
     private int severity;

@@ -16,6 +16,7 @@ class SeverityPieChart extends Component {
     constructor(props) {
         super(props);
         this.chRef = React.createRef();
+        this.chRefLegend = React.createRef();
     }
     // Chart load after component Mount
     componentDidMount() {
@@ -37,13 +38,13 @@ class SeverityPieChart extends Component {
         const margin = 15;
         let radius = Math.min(width, height) / 2 - margin;
         // legend Position
-        let legendPosition = d3.arc().innerRadius(radius / 1.75).outerRadius(radius);
+        let legendPosition = d3.arc().outerRadius(radius / 1.75).innerRadius(radius * 0.5);
 
         // Create SVG
         const svg = d3.select(this.chRef.current)
             .append('svg')
-            .attr("width", '60%')
-            .attr("height", '60%')
+            .attr("width", '100%')
+            .attr("height", '100%')
             .attr('viewBox', '0 0 ' + width + ' ' + width)
             //.attr('preserveAspectRatio','xMinYMin')
             .append("g")
@@ -61,7 +62,7 @@ class SeverityPieChart extends Component {
             .enter()
             .append('path')
             .attr('d', d3.arc()
-                .innerRadius(radius / 1.2)  // This is the size of the donut hole
+                .innerRadius(radius / 1.5)  // This is the size of the donut hole
                 .outerRadius(radius)
             )
             .attr('fill', (d) => colors[d.index])
@@ -95,13 +96,14 @@ class SeverityPieChart extends Component {
 
         svg.append("text")
             .attr("text-anchor", "middle")
-            .style("font-size", "30px")
+            .style("font-size", "12px")
+            .attr("transform", "translate(0, 3.6)")
             .text(Math.round((data[0].value / (data[1].value + data[0].value)) * 100) + "%");
 
 
-        const legend = d3.select(this.chRef.current)
+        const legend = d3.select(this.chRefLegend.current)
                 .append("svg")
-                .attr("class", "hello")
+                // .attr("class", "hello")
                 .attr("transform", "translate(30, 180)");
 
         legend
@@ -109,17 +111,17 @@ class SeverityPieChart extends Component {
             .data(data_ready)
             .enter()
             .append("svg")
-            .attr("transform", (d, i) => { return "translate(" + 40 + "," + (  i * 20) + ")" })
+            .attr("transform", (d, i) => { return "translate(" + 0 + "," + (  i * 25) + ")" })
             .append("rect")
-            .attr("width", 50)
-            .attr("height", 15)
+            .attr("width", 70)
+            .attr("height", 20)
             .attr("fill", (d, i) => colors[i] )
-            .attr("class", (d, i) => { return "zzzz" + i});
+            // .attr("class", (d, i) => { return "zzzz" + i});
 
         legend.selectAll("svg").append('text')
-            .text((d, i) => { console.log(colors); return d.data.name})
-            .attr("transform", (d, i) => { return "translate(60, " + (i * 0.9 + 10) + ")" })
-            .style("font-size", "9px");
+            .text((d, i) => { return d.data.name})
+            .attr("transform", (d, i) => { return "translate(80, " + (i * 1.2 + 15) + ")" })
+            .style("font-size", "12px");
 
     }
 
@@ -128,8 +130,12 @@ class SeverityPieChart extends Component {
             <div>
                 <h3 className="chart-title-text"><u>{ this.props.title }</u></h3>
                 <br/>
-                <div className="severity-pie-chart" ref={this.chRef}>
+                <div className="severity-pie-chart">
+                    <div className="severity-pie-chart-margin-div"/>
+                    <div className="severity-pie-chart-center" ref={this.chRef}/>
+                    <div className="severity-pie-chart-margin-div" ref={this.chRefLegend}/>
                 </div>
+                
             </div>
         )
     }

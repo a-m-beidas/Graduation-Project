@@ -82,14 +82,29 @@
 }
 
 .card {
-  width: 70%;
+  width: 100%;
   height: 70%;
   padding: 5% 5% 5% 5%;
 }
 
 .severity-pie-chart {
+  width: 100%;
   display: flex;
   justify-content: center;
+}
+
+/* * {
+  font-family: Courier;
+} */
+
+.severity-pie-chart-center {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+.severity-pie-chart-margin-div {
+  width: 20%;
 }
 
 .form-on-button {
