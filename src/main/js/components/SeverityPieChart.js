@@ -104,7 +104,7 @@ class SeverityPieChart extends Component {
         const legend = d3.select(this.chRefLegend.current)
                 .append("svg")
                 // .attr("class", "hello")
-                .attr("transform", "translate(30, 180)");
+                .attr("transform", "translate(30, 30)");
 
         legend
             .selectAll("whatever")
@@ -133,7 +133,10 @@ class SeverityPieChart extends Component {
                 <div className="severity-pie-chart">
                     <div className="severity-pie-chart-margin-div"/>
                     <div className="severity-pie-chart-center" ref={this.chRef}/>
-                    <div className="severity-pie-chart-margin-div" ref={this.chRefLegend}/>
+                    <div className="severity-pie-chart-margin-div">
+                        <div className="severity-pie-chart-mirgin-div-top"/>
+                        <div className="severity-pie-chart-margin-div-bottom" ref={this.chRefLegend}/>
+                    </div>
                 </div>
                 
             </div>

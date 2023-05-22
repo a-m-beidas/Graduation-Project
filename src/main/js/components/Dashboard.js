@@ -123,8 +123,6 @@ export const Dashboard = () => {
                         <div className="card right">
                             <DonutChart title="Threat percentage by Severity" data={pieChartValueCount} />
                         </div>
-                       
-
                     </div >
                     <br />
                 </div >

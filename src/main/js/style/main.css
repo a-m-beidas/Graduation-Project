@@ -107,6 +107,14 @@
   width: 20%;
 }
 
+.severity-pie-chart-mirgin-div-top {
+  height: 70%;
+}
+
+.severity-pie-chart-mirgin-div-bottom {
+  height: 30%;
+}
+
 .form-on-button {
     position: absolute;
     width: 24%;

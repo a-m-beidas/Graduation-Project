@@ -12,6 +12,7 @@ class DonutChart extends Component {
     constructor(props) {
         super(props);
         this.chRef = React.createRef();
+        this.chRefLegend = React.createRef();
     }
 
     // Chart load after component Mount
@@ -78,29 +79,29 @@ class DonutChart extends Component {
             .style("text-anchor", "middle")
             .style("font-weight", 500)
             .style("fill", '#222')
-            .style("font-size", "22px");
+            .style("font-size", "15px");
 
-        const legend = d3.select(this.chRef.current)
+        const legend = d3.select(this.chRefLegend.current)
                 .append("svg")
                 .attr("class", "hello")
-                .attr("transform", "translate(30, 180)");
+                .attr("transform", "translate(30, 30)");
 
         legend
             .selectAll("whatever")
             .data(data_ready)
             .enter()
             .append("svg")
-            .attr("transform", (d, i) => { return "translate(" + 40 + "," + (  i * 20) + ")" })
+            .attr("transform", (d, i) => { return "translate(" + 0 + "," + (  i * 25) + ")" })
             .append("rect")
-            .attr("width", 50)
-            .attr("height", 15)
+            .attr("width", 70)
+            .attr("height", 20)
             .attr("fill", (d, i) => { return colors[i]} )
             .attr("class", (d, i) => { return i});
 
         legend.selectAll("svg").append('text')
             .text((d, i) => { return d.data.name})
-            .attr("transform", (d, i) => { return "translate(60, " + (i * 0.9 + 10) + ")" })
-            .style("font-size", "15px");
+            .attr("transform", (d, i) => { return "translate(80, " + (i * 0.8 + 10) + ")" })
+            .style("font-size", "12px");
 
         // legend.append("text")
         //     .text(function(d){
@@ -126,10 +127,18 @@ class DonutChart extends Component {
 
     render() {
         return (
-        <div>
+            <div>
             <h3 className="chart-title-text"><u>{ this.props.title }</u></h3>
             <br/>
-            <div className="justify-content-between d-flex" ref={this.chRef}></div>
+            <div className="severity-pie-chart">
+                <div className="severity-pie-chart-margin-div"/>
+                <div className="severity-pie-chart-center" ref={this.chRef}/>
+                <div className="severity-pie-chart-margin-div">
+                    <div className="severity-pie-chart-mirgin-div-top"/>
+                    <div className="severity-pie-chart-margin-div-bottom" ref={this.chRefLegend}/>
+                </div>
+            </div>
+            
         </div>
         );
     }
