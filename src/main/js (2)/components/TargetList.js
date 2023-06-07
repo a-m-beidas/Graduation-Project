@@ -24,14 +24,14 @@ const TargetList = (props) => {
             <tbody>
                 {reports.map((report, index) =>
                     <tr key={index}>
-                        <td><a href={report.targetURL}>{report.targetURL}</a></td>
+                        <td>{report.targetURL}</td>
                         <td>{report.type}</td>
                         <td>
                             <div style={{ display: 'flex', justifyContent: "center" }}>
-                                <SeverityShape color={colors.high} severityValue={report.countBySeverity[0].value} />
-                                <SeverityShape color={colors.medium} severityValue={report.countBySeverity[1].value} />
-                                <SeverityShape color={colors.low} severityValue={report.countBySeverity[2].value} />
-                                <SeverityShape color={colors.secure} severityValue={report.countBySeverity[3].value} />
+                                <SeverityShape color={colors.high} severityValue={report.count[0].value} />
+                                <SeverityShape color={colors.medium} severityValue={report.count[1].value} />
+                                <SeverityShape color={colors.low} severityValue={report.count[2].value} />
+                                <SeverityShape color={colors.secure} severityValue={report.count[3].value} />
                             </div>
                         </td>
                         <td>{report.date}</td>

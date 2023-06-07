@@ -12,6 +12,10 @@ import java.util.List;
 @Entity(name = "alerts")
 public class Alert {
 
+    public enum Severity {
+        High, Medium, Low, Secure;
+    }
+
     @Id
     @GeneratedValue
     private int id;
@@ -26,7 +30,7 @@ public class Alert {
     @Column(length=5000)
     private String fix;
 
-    private int severity;
+    private Severity severity;
 
     private String method;
 
@@ -53,14 +57,14 @@ public class Alert {
 
 
     public static Alert createAlert(String path, String method, String parameter) {
-        return new Alert(path, "Reflected cross site scripting", descriptionValue, fixValue, 1, method, cweidValue, wascidValue, parameter, referencesValue);
+        return new Alert(path, "Reflected cross site scripting", descriptionValue, fixValue, Severity.High, method, cweidValue, wascidValue, parameter, referencesValue);
     }
 
     public static Alert createSecureAlert(String path, String method, String parameter) {
-        return new Alert(path, "Secure Alert", "Secure Alert", "Secure Alert", 4, method, 0, "", parameter, null);
+        return new Alert(path, "Secure Alert", "Secure Alert", "Secure Alert", Severity.Secure, method, 0, "", parameter, null);
     }
 
-    public Alert(String path, String type, String description, String fix, int severity, String method, int cweid, String wascid, String parameter, List<String> references) {
+    public Alert(String path, String type, String description, String fix, Severity severity, String method, int cweid, String wascid, String parameter, List<String> references) {
         this.path = path;
         this.type = type;
         this.description = description;
@@ -89,7 +93,7 @@ public class Alert {
         return fix;
     }
 
-    public int getSeverity() {
+    public Severity getSeverity() {
         return severity;
     }
 

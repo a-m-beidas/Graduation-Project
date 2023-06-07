@@ -20,6 +20,7 @@ const severity = {
 }
 
 const Alert = (props) => {
+    console.log(props.location.state.alert)
     const [alert, setAlert] = useState(props.location.state.alert);
     const onPrint = props.onPrint !== undefined;
     return (

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-
 const colors = [
-        'rgb(0, 23, 214)', // blue
-        "#8EE060", // green
-        "rgba(255, 255, 255, 0.05)" //black
+        '#E53935', //red
+        '#FFBA69', //yellow
+        "#59AEE6", //blue
+        "#519E4E" //green
 ];
 
 class DonutChart extends Component {
@@ -24,11 +24,7 @@ class DonutChart extends Component {
     // DrawChart 
     drawChart() {
         var { data } = this.props;
-        data = data.filter(d => { 
-            return d.name !== "Total"
-                //  && 
-                // d.name !== "Secure Alert"
-            });
+        data = [data[0], data[1], data[2], data[3]]
         const svgContainer = d3.select(this.chRef.current).node();
         const width = svgContainer.getBoundingClientRect().width;
         const height = width;
@@ -51,11 +47,8 @@ class DonutChart extends Component {
             .attr("height", "70%")
             .attr("transform", "translate(" + Math.min(width, height) / 2 + "," + Math.min(width, height) / 2 + ")");
         let pie = d3.pie()
-            .value(
-                
-                d => d.value)
-        let data_ready = pie(data).map(d => { return d;})
-        console.log(data_ready);
+            .value(d => d.value)
+        let data_ready = pie(data)
         // Donut partition  
         g
             .selectAll('whatever')
@@ -63,13 +56,13 @@ class DonutChart extends Component {
             .enter()
             .append('path')
             .attr('d', d3.arc()
-                .innerRadius(0)  // This is the size of the donut hole
+                .innerRadius(radius / 1.75)  // This is the size of the donut hole
                 .outerRadius(radius)
             )
             .attr('fill', (d, index) => { return colors[index]} )
             .attr("stroke", "#fff")
-            .style("stroke-width", "8")
-            .style("opacity", "1")
+            .style("stroke-width", "2")
+            .style("opacity", "0.8")
 
 
         // Legend group and legend name 
@@ -82,7 +75,7 @@ class DonutChart extends Component {
             .attr("class", 'legend-g')
             .style("user-select", "none")
             .append('text')
-            .text(d => {if (d.value > 0) return data.name})
+            .text(d => {if (d.value > 0) return d.data.name})
             .style("text-anchor", "middle")
             .style("font-weight", 500)
             .style("fill", '#222')
@@ -91,30 +84,28 @@ class DonutChart extends Component {
         const legend = d3.select(this.chRefLegend.current)
                 .append("svg")
                 .attr("class", "hello")
-                .attr("transform", "translate(-75, 280)")
-                ;
+                .attr("transform", "translate(30, 30)");
 
         legend
             .selectAll("whatever")
             .data(data_ready)
             .enter()
             .append("svg")
-            .attr("transform", (d, i) => { return "translate(" + 0 + "," + ( i * 25 + 15) + ")" })
+            .attr("transform", (d, i) => { return "translate(" + 0 + "," + (  i * 25) + ")" })
             .append("rect")
-            .attr("width", 30)
-            .attr("height", 10)
+            .attr("width", 70)
+            .attr("height", 20)
             .attr("fill", (d, i) => { return colors[i]} )
             .attr("class", (d, i) => { return i});
 
-        legend.selectAll("svg")
-            .append('text')
-            .text((d, i) => { return d.data.name == "Reflected cross site scripting" ? "XSS" : d.data.name})
-            .attr("transform", (d, i) => { return "translate(40, " + ( i * 0.5 + 9 ) + ")" })
+        legend.selectAll("svg").append('text')
+            .text((d, i) => { return d.data.name})
+            .attr("transform", (d, i) => { return "translate(80, " + (i * 0.8 + 10) + ")" })
             .style("font-size", "12px");
 
         // legend.append("text")
         //     .text(function(d){
-        //       return value + "  " + data.name;
+        //       return d.value + "  " + d.data.name;
         //     })
         //     .style("font-size", 12)
         //     .attr("y", 10)
@@ -125,7 +116,7 @@ class DonutChart extends Component {
         // svg
         //     .selectAll('.legend-g')
         //     .append('text')
-        //     .text((d) => { return data.value })
+        //     .text((d) => { return d.data.value })
         //     .style("fill", '#000')
         //     .style("font-size", 12)
         //     .style("text-anchor", "middle")
@@ -137,17 +128,18 @@ class DonutChart extends Component {
     render() {
         return (
             <div>
-                <h3 className="chart-title-text"><u>{ this.props.title }</u></h3>
-                <br/>
-                <div className="severity-pie-chart card">
-                    <div className="severity-pie-chart-margin-div"/>
-                    <div className="severity-pie-chart-center" ref={this.chRef}/>
-                    <div className="severity-pie-chart-margin-div">
-                        <div className="severity-pie-chart-margin-div-top"/>
-                        <div className="severity-pie-chart-margin-div-bottom" ref={this.chRefLegend}/>
-                    </div>
+            <h3 className="chart-title-text"><u>{ this.props.title }</u></h3>
+            <br/>
+            <div className="severity-pie-chart">
+                <div className="severity-pie-chart-margin-div"/>
+                <div className="severity-pie-chart-center" ref={this.chRef}/>
+                <div className="severity-pie-chart-margin-div">
+                    <div className="severity-pie-chart-mirgin-div-top"/>
+                    <div className="severity-pie-chart-margin-div-bottom" ref={this.chRefLegend}/>
                 </div>
             </div>
+            
+        </div>
         );
     }
 }

@@ -11,12 +11,12 @@ import axios from 'axios';
 const processReport = (report) => {
     if (report.alerts === undefined)
         return;
-    report.countBySeverity = [{ name: "High", value: 0 }, { name: "Medium", value: 0 }, { name: "Low", value: 0 }, {name: "Secure",}];
+    report.count = [{ name: "High", value: 0 }, { name: "Medium", value: 0 }, { name: "Low", value: 0 }, {name: "Secure",}];
     report.alerts.map((alert, index) => {
         alert.date = report.date;
         if (!alert.path.startsWith(report.targetURL))
             alert.path = report.targetURL + alert.path;
-        ++report.countBySeverity[alert.severity - 1].value;
+        ++report.count[alert.severity - 1].value;
     })
     return;
 }
@@ -120,12 +120,12 @@ const Report = (props) => {
                                     <div className="d-flex justify-content-between px-4" style={{ paddingTop: "30px" }}>
                                         <div style={{ textAlign: "center" }}>
                                             <div className="d-flex justify-content-center">
-                                                <Badge className="severity-badge" pill variant="danger" >{report.countBySeverity[0].value}</Badge>
+                                                <Badge className="severity-badge" pill variant="danger" >{report.count[0].value}</Badge>
                                             </div>
                                             High Severities
                                         </div>
-                                        <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="warning" >{report.countBySeverity[1].value}</Badge></div>Medium Severities</div>
-                                        <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="info" >{report.countBySeverity[2].value}</Badge></div>Low Severities</div>
+                                        <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="warning" >{report.count[1].value}</Badge></div>Medium Severities</div>
+                                        <div style={{ textAlign: "center" }}><div className="d-flex justify-content-center"><Badge className="severity-badge" pill variant="info" >{report.count[2].value}</Badge></div>Low Severities</div>
                                     </div>
                                 </div>
                                 {/* <ListGroup variant="flush">

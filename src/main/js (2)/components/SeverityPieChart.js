@@ -33,7 +33,7 @@ class SeverityPieChart extends Component {
         // const data = [{ name: data_raw[index].name, value: data_raw[index].value }, { name: "Total", value: data_raw[0].value + data_raw[1].value + data_raw[2].value }]
         data[1].value -= data[0].value
         const svgContainer = d3.select(this.chRef.current).node();
-        const width = svgContainer.getBoundingClientRect().width;
+        const width = svgContainer.getBoundingClientRect().width - 300;
         const height = width;
         const margin = 15;
         let radius = Math.min(width, height) / 2 - margin;
@@ -103,26 +103,24 @@ class SeverityPieChart extends Component {
 
         const legend = d3.select(this.chRefLegend.current)
                 .append("svg")
-                .style("position", "absolute")
-                .style("bottom", "0px")
                 // .attr("class", "hello")
-                .attr("transform", "translate(-60, 100)");
+                .attr("transform", "translate(30, 30)");
 
         legend
             .selectAll("whatever")
             .data(data_ready)
             .enter()
             .append("svg")
-            .attr("transform", (d, i) => { return "translate(" + 0 + "," + ( i * 25) + ")" })
+            .attr("transform", (d, i) => { return "translate(" + 0 + "," + (  i * 25) + ")" })
             .append("rect")
-            .attr("width", 40)
-            .attr("height", 12)
+            .attr("width", 70)
+            .attr("height", 20)
             .attr("fill", (d, i) => colors[i] )
             // .attr("class", (d, i) => { return "zzzz" + i});
 
         legend.selectAll("svg").append('text')
             .text((d, i) => { return d.data.name})
-            .attr("transform", (d, i) => { return "translate(50, " + (i * 1.2 + 10) + ")" })
+            .attr("transform", (d, i) => { return "translate(80, " + (i * 1.2 + 15) + ")" })
             .style("font-size", "12px");
 
     }
@@ -132,16 +130,15 @@ class SeverityPieChart extends Component {
             <div>
                 <h3 className="chart-title-text"><u>{ this.props.title }</u></h3>
                 <br/>
-                <div>
-                    <div className="severity-pie-chart card">
-                        <div className="severity-pie-chart-margin-div"/>
-                        <div className="severity-pie-chart-center" ref={this.chRef}/>
-                        <div className="severity-pie-chart-margin-div">
-                            <div className="severity-pie-chart-margin-div-top"/>
-                            <div className="severity-pie-chart-margin-div-bottom" ref={this.chRefLegend}/>
-                        </div>
+                <div className="severity-pie-chart">
+                    <div className="severity-pie-chart-margin-div"/>
+                    <div className="severity-pie-chart-center" ref={this.chRef}/>
+                    <div className="severity-pie-chart-margin-div">
+                        <div className="severity-pie-chart-mirgin-div-top"/>
+                        <div className="severity-pie-chart-margin-div-bottom" ref={this.chRefLegend}/>
                     </div>
-                    </div>
+                </div>
+                
             </div>
         )
     }
