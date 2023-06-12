@@ -34,9 +34,9 @@ class DonutChart extends Component {
         const height = width;
         const margin = 15;
         let radius = Math.min(width, height) / 2 - margin;
+        console.log(radius);
         // legend Position
         let legendPosition = d3.arc().innerRadius(radius / 2).outerRadius(radius);
-
         // Create SVG
         const svg = d3.select(this.chRef.current)
             .append('svg')
@@ -44,7 +44,7 @@ class DonutChart extends Component {
             .attr("height", '100%')
             .attr('viewBox', '0 0 ' + width + ' ' + width);
             //.attr('preserveAspectRatio','xMinYMin')
-        
+
         const g = svg
             .append("g")
             .attr("width", "70%")
@@ -52,10 +52,8 @@ class DonutChart extends Component {
             .attr("transform", "translate(" + Math.min(width, height) / 2 + "," + Math.min(width, height) / 2 + ")");
         let pie = d3.pie()
             .value(
-                
-                d => d.value)
+                    d => d.value)
         let data_ready = pie(data).map(d => { return d;})
-        console.log(data_ready);
         // Donut partition  
         g
             .selectAll('whatever')
@@ -70,9 +68,26 @@ class DonutChart extends Component {
             .attr("stroke", "#fff")
             .style("stroke-width", "8")
             .style("opacity", "1")
+            .on("mouseover", (d, i) => {
+                var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius + 10)
+                    .startAngle(i.startAngle)
+                    .endAngle(i.endAngle);
+                d3.select(d.target).transition().duration(300).ease(d3.easeBounce).attr("d", arc())
+            })
+            .on("mouseout", (d, i) => {
+                var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius)
+                    .startAngle(i.startAngle)
+                    .endAngle(i.endAngle);
+                d3.select(d.target).transition().duration(300).ease(d3.easeBounce).attr("d", arc())
+            });
 
 
-        // Legend group and legend name 
+
+        // Legend group and legend name
         g
             .selectAll('mySlices')
             .data(data_ready)
